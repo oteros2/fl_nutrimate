@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'screens/screens.dart';
 
+//#00B894
 void main() {
   runApp(const MyApp());
 }
@@ -10,20 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'NutriMate',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 70, 196, 156)),
-        useMaterial3: true,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('NutriMate'),
-        ),
-        body: const Center(
-          child: Text('Bienvenido a NutriMate!'),
-        ),
-      )
-    );
+        title: 'Nutrimate - Guillermo',
+        initialRoute: 'receta-diaria',
+        routes: {
+          'receta-diaria': (context) => const RecetaDiariaScreen(),
+          'recetas-semanales': (context) => const RecetasSemanalesScreen(),
+        });
   }
 }
