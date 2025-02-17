@@ -13,6 +13,7 @@ class _RecetaDiariaScreenState extends State<RecetaDiariaScreen> {
     {"nombre": "Huevos", "seleccionado": false},
     {"nombre": "Leche", "seleccionado": false},
     {"nombre": "Azúcar", "seleccionado": false},
+    {"nombre": "anchoas", "seleccionado": false}
   ];
 
   @override
