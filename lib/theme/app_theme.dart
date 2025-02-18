@@ -18,16 +18,16 @@ class AppTheme {
     inputDecorationTheme: InputDecorationTheme(
       floatingLabelStyle: const TextStyle(color: primary),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(5),
         borderSide:  const BorderSide(color: primary)
       ),
       focusedBorder: OutlineInputBorder(
         borderSide: const BorderSide(color: primary),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(5),
         ),
 
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10)
+        borderRadius: BorderRadius.circular(5)
       )
     )
   );
