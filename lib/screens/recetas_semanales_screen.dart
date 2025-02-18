@@ -150,10 +150,30 @@ class _SwiperFoodState extends State<SwiperFood> {
               itemBuilder: (BuildContext context, int index) {
                 return ClipRRect(
                   borderRadius: BorderRadius.circular(25),
-                  child: FadeInImage(
-                    placeholder: const AssetImage('assets/loading.gif'),
-                    image: NetworkImage(widget.meals[index].imageUrl),
-                    fit: BoxFit.cover,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Positioned.fill(
+                        child: FadeInImage(
+                          placeholder: const AssetImage('assets/loading.gif'),
+                          image: NetworkImage(widget.meals[index].imageUrl),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Positioned(
+                        top: 8,
+                        right: 8,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.black54,
+                          radius: 18,
+                          child: IconButton(
+                            icon: const Icon(Icons.edit,
+                                color: Colors.white, size: 18),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 );
               },

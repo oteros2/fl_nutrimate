@@ -65,10 +65,13 @@ class ClientesScreen extends StatelessWidget {
         itemCount: clientes.length,
         separatorBuilder: (context, index) => const Divider(),
         itemBuilder: (context, index) {
-          return ListTile(
-            leading: clientes[index].avatar,
-            title:
-                Text('${clientes[index].nombre} ${clientes[index].apellidos}'),
+          return InkWell(
+            onTap: () {},
+            child: ListTile(
+              leading: clientes[index].avatar,
+              title: Text(
+                  '${clientes[index].nombre} ${clientes[index].apellidos}'),
+            ),
           );
         },
       ),
