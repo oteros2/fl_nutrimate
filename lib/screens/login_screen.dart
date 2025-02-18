@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:NutriMate/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:sign_in_button/sign_in_button.dart';
-import '../widgets/widgets.dart';
+
+import 'screens.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -16,74 +17,84 @@ class LoginScreen extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Center(
+          child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/images/logo.png', width: screenWidth / 1.5),
+            Image.asset(
+              'assets/images/logo.png',
+              width: screenWidth / 1.5,
+            ),
             Form(
-              key: myFormKey,
-              child: Container(
-                width: screenWidth / 1.2,
                 child: Column(
-                  children: [
-                    CustomTextFormField(
+              children: [
+                Container(
+                  width: screenWidth / 1.2,
+                  child: Column(
+                    children: [
+                      CustomTextFormField(
                         hintText: 'Usuario',
                         labelText: 'Usuario',
                         obscureText: false,
                         formProperty: 'usuario',
-                        formValues: formValues),
-                    SizedBox(height: 15),
-                    CustomTextFormField(
+                        formValues: formValues,
+                      ),
+                      const SizedBox(height: 15),
+                      CustomTextFormField(
                         hintText: 'Contraseña',
                         labelText: 'Contraseña',
                         obscureText: true,
                         formProperty: 'contraseña',
-                        formValues: formValues),
-                    SizedBox(height: 15),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.6,
-                      child: ElevatedButton(
-                        child: Text('Acceder'),
-                        onPressed: () {},
+                        formValues: formValues,
                       ),
-                    ),
-                    SizedBox(height: 5),
-                    const Divider(),
-                    Container(
-                      width: double.infinity,
-                      child: SignInButton(
-                        Buttons.google,
-                        text: "Iniciar sesión con Google",
-                        onPressed: () {},
-                      ),
-                    ),
-                    SizedBox(height: 15),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(children: [
-                          Text('¿No tienes cuenta?'),
-                          TextButton(
-                            child: Text('Registrarse'),
-                            onPressed: () {},
-                          )
-                        ]),
-                        TextButton(
-                          child: Text('Olvide mi contraseña'),
-                          onPressed: () {},
-                        )
-                      ],
-                    )
-                  ],
+                    ],
+                  ),
                 ),
+              ],
+            )),
+            SizedBox(height: 15),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.6,
+              child: ElevatedButton(
+                child: const Text('Acceder'),
+                onPressed: () {},
               ),
             ),
-            SizedBox(height: 50),
-            Image.asset('assets/images/huella.png', width: screenWidth / 6),
+            const SizedBox(height: 5),
+            const Divider(),
+            SizedBox(
+              width: screenWidth / 1.2,
+              child: SignInButton(
+                Buttons.google,
+                text: "Iniciar sesión con Google",
+                onPressed: () {},
+              ),
+            ),
+            const SizedBox(height: 15),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  const Text('¿No tienes cuenta?'),
+                  TextButton(
+                    child: const Text('Registrarse'),
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RegisterScreen())),
+                  )
+                ]),
+                TextButton(
+                  child: const Text('Olvide mi contraseña'),
+                  onPressed: () {},
+                )
+              ],
+            ),
           ],
         ),
-      ),
+      )),
     );
   }
 }
