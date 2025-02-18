@@ -169,10 +169,6 @@ class _SwiperFoodState extends State<SwiperFood> {
         ),
         Text(
           widget.meals[currentIndex].dinner,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
         ),
       ],
     );
