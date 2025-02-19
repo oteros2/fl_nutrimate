@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../widgets/widgets.dart';
+import 'screens.dart';
 
 class RecoveryScreen extends StatelessWidget {
   const RecoveryScreen({Key? key}) : super(key: key);
@@ -61,9 +61,11 @@ class RecoveryScreen extends StatelessWidget {
                 SizedBox(
                   width: screenWidth * 0.6,
                   child: ElevatedButton(
-                    child: const Text('Recuperar contraseña'),
-                    onPressed: () {},
-                  ),
+                      child: const Text('Recuperar contraseña'),
+                      onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginScreen()))),
                 ),
               ])),
             ],
