@@ -11,7 +11,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final myFormKey = GlobalKey<FormState>();
     final Map<String, String> formValues = {
-      'usuario': 'usuario',
+      'email': 'email',
       'contraseña': 'contraseña'
     };
     double screenWidth = MediaQuery.of(context).size.width;
@@ -25,7 +25,7 @@ class LoginScreen extends StatelessWidget {
           children: [
             Image.asset(
               'assets/images/logo.png',
-              width: screenWidth / 1.5,
+              width: screenWidth / 1.6,
             ),
             Form(
                 child: Column(
@@ -35,10 +35,11 @@ class LoginScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       CustomTextFormField(
-                        hintText: 'Usuario',
-                        labelText: 'Usuario',
+                        hintText: 'Email',
+                        labelText: 'Email',
+                        keyboardType: TextInputType.emailAddress,
                         obscureText: false,
-                        formProperty: 'usuario',
+                        formProperty: 'email',
                         formValues: formValues,
                       ),
                       const SizedBox(height: 15),
@@ -56,14 +57,15 @@ class LoginScreen extends StatelessWidget {
             )),
             SizedBox(height: 15),
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.6,
+              width: screenWidth * 0.6,
               child: ElevatedButton(
                 child: const Text('Acceder'),
                 onPressed: () {},
               ),
             ),
-            const SizedBox(height: 5),
-            const Divider(),
+            const SizedBox(height: 15),
+            Container(width: screenWidth / 1.2, child: const Divider()),
+            const SizedBox(height: 15),
             SizedBox(
               width: screenWidth / 1.2,
               child: SignInButton(

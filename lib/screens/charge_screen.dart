@@ -13,7 +13,6 @@ class _ChargeScreenState extends State<ChargeScreen> {
   @override
   void initState() {
     super.initState();
-    // Esperar 3 segundos y navegar al Login
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
