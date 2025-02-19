@@ -1,7 +1,7 @@
+import 'package:NutriMate/screens/recovery_screen.dart';
 import 'package:NutriMate/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:sign_in_button/sign_in_button.dart';
-
 import 'screens.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -90,7 +90,11 @@ class LoginScreen extends StatelessWidget {
                 ]),
                 TextButton(
                   child: const Text('Olvide mi contraseña'),
-                  onPressed: () {},
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const RecoveryScreen()),
+                  ),
                 )
               ],
             ),
