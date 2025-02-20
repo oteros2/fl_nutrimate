@@ -1,4 +1,5 @@
 import 'package:NutriMate/screens/loading_screen.dart';
+import 'package:NutriMate/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:NutriMate/theme/app_theme.dart';
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'NutriMate',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: LoadingScreen(),
+      home: const LoadingScreen(),
     );
   }
 }
