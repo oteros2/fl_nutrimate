@@ -1,7 +1,9 @@
 import 'package:NutriMate/screens/charge_screen.dart';
+import 'package:NutriMate/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:NutriMate/theme/app_theme.dart';
 
+import 'models/user.dart';
 import 'screens/settings_screen.dart';
 
 void main() {
@@ -17,7 +19,16 @@ class MyApp extends StatelessWidget {
       title: 'NutriMate',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: const SettingsScreen(),
+      home: HomeScreen(
+        user: User(
+          email: 'juan.perez@example.com',
+          password: 'password123',
+          name: 'Juan',
+          lastName: 'Pérez',
+          weight: 70.5,
+          phone: '555-123-4567',
+        ),
+      ),
     );
   }
 }

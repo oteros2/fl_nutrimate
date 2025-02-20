@@ -36,7 +36,7 @@ class CardUser extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const CircleAvatar(
-                  child: Text("A16"),
+                  child: Text("JP"),
                   backgroundColor: AppTheme.primary,
                   radius: 50,
                 ),

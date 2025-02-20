@@ -21,13 +21,13 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: AppTheme.primary.withAlpha(100),
-          title: const Text('Settings Screen'),
+          title: const Text('Configuración'),
           actions: const [
             Padding(
               padding: EdgeInsets.all(5.0),
               child: CircleAvatar(
                 backgroundColor: AppTheme.primary,
-                child: Text("A16"),
+                child: Text("JP"),
               ),
             )
           ],
