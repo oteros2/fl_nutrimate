@@ -1,3 +1,5 @@
+import 'package:fl_nutrimate/Screens/Chart_Screen.dart';
+import 'package:fl_nutrimate/widgets/circlechart_widget.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,14 +18,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 70, 196, 156)),
         useMaterial3: true,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('NutriMate'),
-        ),
-        body: const Center(
-          child: Text('Bienvenido a NutriMate!'),
-        ),
-      )
+    
+      home: WidgetScreen()
     );
   }
 }
