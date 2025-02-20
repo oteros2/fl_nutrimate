@@ -14,7 +14,9 @@ class Indicator extends StatelessWidget {
   final bool isSquare;
   final double size;
   final Color? textColor;
-
+/**
+ * Widget que me permite reutilizar los datos de la esquina inferior derecha, con su altura, ancho, color, texto...
+ */
   @override
   Widget build(BuildContext context) {
     return Row(
