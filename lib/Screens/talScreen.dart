@@ -13,9 +13,8 @@ class TalScreen extends StatelessWidget {
 
   List<Widget> _buildScreens() {
     return [
-      const ChartScreen(),
-      const ChartScreen(),
-       TalScreen()
+      Placeholder(), // Si llamo a esta misma screen explota (Por experiencia)
+    const ChartScreen(),
     ];
   }
 
@@ -28,11 +27,6 @@ class TalScreen extends StatelessWidget {
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.home_max),
         title: "Inicio",
-        activeColorPrimary: Colors.teal,
-        inactiveColorPrimary: Colors.grey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(Icons.settings),
         activeColorPrimary: Colors.teal,
         inactiveColorPrimary: Colors.grey,
       ),
@@ -60,11 +54,11 @@ class TalScreen extends StatelessWidget {
       isVisible: true,
       animationSettings: const NavBarAnimationSettings(
         navBarItemAnimation: ItemAnimationSettings(
-          duration: Duration(milliseconds: 1250),
+          duration: Duration(milliseconds: 750),
           curve: Curves.ease,
         )
       ),
-      navBarStyle: NavBarStyle.style15,
+      navBarStyle: NavBarStyle.style7,
       );
   }
   
