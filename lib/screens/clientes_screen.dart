@@ -1,3 +1,4 @@
+import 'package:fl_nutrimate/screens/recetas_semanales_screen.dart';
 import 'package:flutter/material.dart';
 
 class ClientesScreen extends StatelessWidget {
@@ -66,7 +67,14 @@ class ClientesScreen extends StatelessWidget {
         separatorBuilder: (context, index) => const Divider(),
         itemBuilder: (context, index) {
           return InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const RecetasSemanalesScreen(),
+                ),
+              );
+            },
             child: ListTile(
               leading: clientes[index].avatar,
               title: Text(

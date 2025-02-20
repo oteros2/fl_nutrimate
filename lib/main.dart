@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Nutrimate - Guillermo',
-        initialRoute: 'receta-diaria',
+        initialRoute: 'clientes',
         debugShowCheckedModeBanner: false,
         routes: {
           'receta-diaria': (context) => const RecetaDiariaScreen(),

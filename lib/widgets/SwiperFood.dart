@@ -1,4 +1,5 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:fl_nutrimate/screens/receta_diaria_screen.dart';
 import 'package:flutter/material.dart';
 
 enum MealType { desayuno, almuerzo, cena }
@@ -64,10 +65,21 @@ class _SwiperFoodState extends State<SwiperFood> {
                     fit: StackFit.expand,
                     children: [
                       Positioned.fill(
-                        child: FadeInImage(
-                          placeholder: const AssetImage('assets/loading.gif'),
-                          image: NetworkImage(widget.meals[index].imageUrl),
-                          fit: BoxFit.cover,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const RecetaDiariaScreen(),
+                              ),
+                            );
+                          },
+                          child: FadeInImage(
+                            placeholder: const AssetImage('assets/loading.gif'),
+                            image: NetworkImage(widget.meals[index].imageUrl),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       Positioned(
