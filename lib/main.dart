@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'NutriMate',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: const ChargeScreen(),
-      );
+      home: ChargeScreen(),
+    );
   }
 }

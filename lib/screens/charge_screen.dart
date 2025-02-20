@@ -24,11 +24,19 @@ class _ChargeScreenState extends State<ChargeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SvgPicture.asset(
-          'assets/images/logo.svg',
-          height: double.infinity,
-        ),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: SvgPicture.asset(
+              'assets/images/fondo.svg',
+              fit: BoxFit.cover,
+            ),
+          ),
+          Center(
+            child: SvgPicture.asset('assets/images/logo.svg',
+                height: double.infinity),
+          ),
+        ],
       ),
     );
   }
