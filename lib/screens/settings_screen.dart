@@ -32,17 +32,38 @@ class SettingsScreen extends StatelessWidget {
             )
           ],
         ),
-        body: CustomScrollView(slivers: [
-          CardUser(
-            user: User(
-              email: 'juan.perez@example.com',
-              password: 'password123',
-              name: 'Juan',
-              lastName: 'Pérez',
-              weight: 70.5,
-              phone: '555-123-4567',
-            ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              CardUser(
+                user: User(
+                  email: 'juan.perez@example.com',
+                  password: 'password123',
+                  name: 'Juan',
+                  lastName: 'Pérez',
+                  weight: 70.5,
+                  phone: '555-123-4567',
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {},
+                      child: ListTile(
+                        leading: const Icon(Icons.account_circle),
+                        title: Text(settings[index]),
+                      ),
+                    );
+                  },
+                  separatorBuilder: (context, index) => const Divider(),
+                  itemCount: settings.length),
+            ],
           ),
-        ]));
+        ));
   }
 }

@@ -27,17 +27,17 @@ class CardUser extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(25),
         child: Container(
-          color: const Color(0xFFF8F1C0).withAlpha(100),
+          color: const Color.fromARGB(255, 245, 242, 220).withAlpha(100),
           width: double.infinity,
           height: 475,
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(5),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const CircleAvatar(
                   child: Text("A16"),
-                  backgroundColor: Colors.green,
+                  backgroundColor: AppTheme.primary,
                   radius: 50,
                 ),
                 const SizedBox(height: 15),
