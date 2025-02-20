@@ -1,4 +1,4 @@
-import 'package:NutriMate/widgets/custom_text_form_field.dart';
+import 'package:NutriMate/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sign_in_button/sign_in_button.dart';
@@ -41,24 +41,22 @@ class RegisterScreen extends StatelessWidget {
                       CustomTextFormField(
                           labelText: 'Nombre y apellidos',
                           hintText: 'Nombre y apellidos',
-                          obscureText: false,
                           formProperty: 'nombre',
                           formValues: formValues),
                       const SizedBox(height: 15),
-                      CustomTextFormField(
+                      CustomEmailFormField(
                           labelText: 'Email',
                           hintText: 'Email',
                           keyboardType: TextInputType.emailAddress,
-                          obscureText: false,
                           formProperty: 'email',
                           formValues: formValues),
                       const SizedBox(height: 15),
-                      CustomTextFormField(
-                          labelText: 'Contraseña',
-                          hintText: 'Contraseña',
-                          obscureText: true,
-                          formProperty: 'contraseña',
-                          formValues: formValues),
+                      CustomPasswordFormField(
+                        labelText: 'Contraseña',
+                        hintText: 'Contraseña',
+                        formProperty: 'contraseña',
+                        formValues: formValues,
+                      ),
                       const SizedBox(height: 15),
                       SizedBox(
                         width: screenWidth * 0.6,

@@ -1,4 +1,3 @@
-import 'package:NutriMate/screens/recovery_screen.dart';
 import 'package:NutriMate/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -42,19 +41,17 @@ class LoginScreen extends StatelessWidget {
                     width: screenWidth / 1.2,
                     child: Column(
                       children: [
-                        CustomTextFormField(
+                        CustomEmailFormField(
                           hintText: 'Email',
                           labelText: 'Email',
                           keyboardType: TextInputType.emailAddress,
-                          obscureText: false,
                           formProperty: 'email',
                           formValues: formValues,
                         ),
                         const SizedBox(height: 15),
-                        CustomTextFormField(
+                        CustomPasswordFormField(
                           hintText: 'Contraseña',
                           labelText: 'Contraseña',
-                          obscureText: true,
                           formProperty: 'contraseña',
                           formValues: formValues,
                         ),

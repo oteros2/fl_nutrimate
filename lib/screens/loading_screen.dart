@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'screens.dart';
 
-class ChargeScreen extends StatefulWidget {
-  const ChargeScreen({super.key});
+class LoadingScreen extends StatefulWidget {
+  const LoadingScreen({super.key});
 
   @override
-  State<ChargeScreen> createState() => _ChargeScreenState();
+  State<LoadingScreen> createState() => _LoadingScreenState();
 }
 
-class _ChargeScreenState extends State<ChargeScreen> {
+class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();

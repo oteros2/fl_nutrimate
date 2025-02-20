@@ -53,11 +53,10 @@ class RecoveryScreen extends StatelessWidget {
                   SizedBox(height: 15),
                   Container(
                     width: screenWidth / 1.2,
-                    child: CustomTextFormField(
+                    child: CustomEmailFormField(
                       hintText: 'Email',
                       labelText: 'Email',
                       keyboardType: TextInputType.emailAddress,
-                      obscureText: false,
                       formProperty: 'email',
                       formValues: formValues,
                     ),
