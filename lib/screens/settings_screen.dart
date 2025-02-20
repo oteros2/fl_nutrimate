@@ -1,6 +1,7 @@
 import 'package:NutriMate/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:NutriMate/widgets/widgets.dart';
+import '../models/user.dart';
 import 'screens.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -18,19 +19,30 @@ class SettingsScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppTheme.primary.withAlpha(100),
-        title: const Text('Settings Screen'),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.all(5.0),
-            child: CircleAvatar(
-              backgroundColor: AppTheme.primary,
-              child: Text("A16"),
+        appBar: AppBar(
+          backgroundColor: AppTheme.primary.withAlpha(100),
+          title: const Text('Settings Screen'),
+          actions: const [
+            Padding(
+              padding: EdgeInsets.all(5.0),
+              child: CircleAvatar(
+                backgroundColor: AppTheme.primary,
+                child: Text("A16"),
+              ),
+            )
+          ],
+        ),
+        body: CustomScrollView(slivers: [
+          CardUser(
+            user: User(
+              email: 'juan.perez@example.com',
+              password: 'password123',
+              name: 'Juan',
+              lastName: 'Pérez',
+              weight: 70.5,
+              phone: '555-123-4567',
             ),
-          )
-        ],
-      ),
-    );
+          ),
+        ]));
   }
 }

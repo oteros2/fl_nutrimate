@@ -2,6 +2,8 @@ import 'package:NutriMate/screens/charge_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:NutriMate/theme/app_theme.dart';
 
+import 'screens/settings_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'NutriMate',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: const ChargeScreen(),
-      );
+      home: const SettingsScreen(),
+    );
   }
 }
