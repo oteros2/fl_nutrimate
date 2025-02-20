@@ -1,5 +1,5 @@
 import 'package:fl_nutrimate/Screens/Chart_Screen.dart';
-import 'package:fl_nutrimate/Screens/talScreen.dart';
+import 'package:fl_nutrimate/Screens/tabScreen.dart';
 import 'package:flutter/material.dart';
 
 import 'Screens/Chart_Screen.dart';
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
     
-      home: TalScreen()
+      home: TabScreen()
     );
   }
 }
