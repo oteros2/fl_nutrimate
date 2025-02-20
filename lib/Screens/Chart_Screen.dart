@@ -15,6 +15,19 @@ class _WidgetScreenState extends State<ChartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF00B894).withAlpha(100),
+        title: const Text('receta.nombre'),
+        actions: const [
+          Padding(
+            padding: EdgeInsets.all(5.0),
+            child: CircleAvatar(
+              child: Text("A16"),
+              backgroundColor: Colors.green,
+            ),
+          )
+        ],
+      ),
       backgroundColor: const Color(0xFFF7F7F7),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
