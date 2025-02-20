@@ -6,3 +6,5 @@ export 'package:NutriMate/screens/receta_diaria_screen.dart';
 export 'package:NutriMate/screens/recetas_semanales_screen.dart';
 export 'package:NutriMate/screens/clientes_screen.dart';
 export 'package:NutriMate/screens/cambio_receta_screen.dart';
+export 'package:NutriMate/screens/chart_screen.dart';
+export 'package:NutriMate/screens/tab_screen.dart';
