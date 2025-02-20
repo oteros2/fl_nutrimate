@@ -1,3 +1,4 @@
+import 'package:fl_nutrimate/screens/settings-screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/screens.dart';
 
@@ -13,13 +14,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Nutrimate - Guillermo',
-        initialRoute: 'clientes',
+        initialRoute: 'settings',
         debugShowCheckedModeBanner: false,
         routes: {
           'receta-diaria': (context) => const RecetaDiariaScreen(),
           'recetas-semanales': (context) => const RecetasSemanalesScreen(),
           'clientes': (context) => const ClientesScreen(),
           'cambio-receta': (context) => const CambioRecetaScreen(),
+          'settings': (context) => const SettingsScreen(),
         });
   }
 }
