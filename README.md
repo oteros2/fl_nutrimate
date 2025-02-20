@@ -1,16 +1,10 @@
 # fl_nutrimate
+### Developers
 
-A new Flutter project.
+
+## DEPENDENCIES
+For charts implementations i use fl_chart
 
 ## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The charts to use are the rounded chart, bar chart, and analytics chart.
+This charts will get week(Days) information and month(Weeks) information.
