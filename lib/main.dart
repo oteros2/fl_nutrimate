@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 import 'package:NutriMate/screens/home_screen.dart';
+=======
+import 'package:NutriMate/screens/loading_screen.dart';
+import 'package:NutriMate/screens/screens.dart';
+>>>>>>> master
 import 'package:flutter/material.dart';
 import 'package:NutriMate/theme/app_theme.dart';
 
@@ -18,6 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'NutriMate',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
+<<<<<<< HEAD
       home: HomeScreen(
         user: User(
           email: 'juan.perez@example.com',
@@ -28,6 +34,9 @@ class MyApp extends StatelessWidget {
           phone: '555-123-4567',
         ),
       ),
+=======
+      home: const LoadingScreen(),
+>>>>>>> master
     );
   }
 }
