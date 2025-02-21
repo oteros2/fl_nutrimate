@@ -1,37 +1,4 @@
-import 'package:NutriMate/widgets/food_carousel.dart';
-import 'package:NutriMate/widgets/workfine.dart';
 import 'package:flutter/material.dart';
-import '../widgets/custom_appbar.dart';
-import '../models/user.dart';
-
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key, required this.user});
-
-  final User user;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          CustomAppbar(
-              title: 'Inicio',
-              user: user), // Asegúrate de que este sea un SliverAppBar
-        ],
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              DialogFb1(),
-              HorizontalCategoriesView(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 class Category {
   final String title;
@@ -114,43 +81,6 @@ class _CategoryCardState extends State<CategoryCard> {
                   color: widget.category.isSelected
                       ? Colors.black
                       : Colors.grey))),
-    );
-  }
-}
-
-class food extends StatelessWidget {
-  const food({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 300,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ListView(
-            scrollDirection: Axis.horizontal,
-            children: [
-              Container(
-                width: 300,
-                height: 300,
-                color: Colors.red,
-              ),
-              Container(
-                width: 300,
-                height: 300,
-                color: Colors.yellow,
-              ),
-              Container(
-                width: 300,
-                height: 300,
-                color: Colors.green,
-              ),
-            ],
-          )
-        ],
-      ),
     );
   }
 }

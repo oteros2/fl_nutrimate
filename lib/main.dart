@@ -1,4 +1,3 @@
-import 'package:NutriMate/screens/charge_screen.dart';
 import 'package:NutriMate/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:NutriMate/theme/app_theme.dart';
