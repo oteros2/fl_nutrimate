@@ -1,6 +1,4 @@
 import 'package:NutriMate/models/user.dart';
-import 'package:NutriMate/screens/chart_screen.dart';
-import 'package:NutriMate/screens/home_screen.dart';
 import 'package:NutriMate/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
@@ -16,19 +14,27 @@ class TabScreen extends StatelessWidget {
 
   List<Widget> _buildScreens() {
     return [
-    HomeScreen(user: User(email: "isca@gmail.com", password: 'isca', name: 'isma', lastName: 'Maq', weight: 12, phone: '675327142'),), // Si llamo a esta misma screen explota (Por experiencia) por lo que reemplazad esto por la main screen
-    RecetaDiariaScreen(),
-    const ChartScreen(),
-    SettingsScreen(),
-    //aquí iría el config screen
+      HomeScreen(
+        user: User(
+            email: "isca@gmail.com",
+            password: 'isca',
+            name: 'isma',
+            lastName: 'Maq',
+            weight: 12,
+            phone: '675327142'),
+      ), // Si llamo a esta misma screen explota (Por experiencia) por lo que reemplazad esto por la main screen
+      RecetasSemanalesScreen(),
+      const ChartScreen(),
+      SettingsScreen(),
+      //aquí iría el config screen
     ];
   }
 
   ///
   ///* En esta lista vamos a guardar los items de la tabbar, aquí vamos a tener el nombre, color titulo etc de los botones
- ///* de la tabbar
- ///
-  List<PersistentBottomNavBarItem> _navBarItems(){
+  ///* de la tabbar
+  ///
+  List<PersistentBottomNavBarItem> _navBarItems() {
     return [
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.home_max),
@@ -44,7 +50,7 @@ class TabScreen extends StatelessWidget {
         activeColorSecondary: Colors.black,
         inactiveColorPrimary: Colors.black,
       ),
-       PersistentBottomNavBarItem(
+      PersistentBottomNavBarItem(
         icon: const Icon(Icons.add_chart),
         title: "Progreso",
         activeColorPrimary: const Color(0xFF00B894),
@@ -65,7 +71,7 @@ class TabScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PersistentTabView(
       context,
-      controller: _controller, 
+      controller: _controller,
       screens: _buildScreens(), // y aquí metemos las listas
       items: _navBarItems(),
       handleAndroidBackButtonPress: false,
@@ -75,14 +81,11 @@ class TabScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       isVisible: true,
       animationSettings: const NavBarAnimationSettings(
-        navBarItemAnimation: ItemAnimationSettings(
-          duration: Duration(milliseconds: 750),
-          curve: Curves.ease,
-        )
-      ),
+          navBarItemAnimation: ItemAnimationSettings(
+        duration: Duration(milliseconds: 750),
+        curve: Curves.ease,
+      )),
       navBarStyle: NavBarStyle.style9,
-      );
+    );
   }
-  
-  
 }

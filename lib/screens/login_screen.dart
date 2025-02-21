@@ -64,8 +64,13 @@ class LoginScreen extends StatelessWidget {
               SizedBox(
                 width: screenWidth * 0.6,
                 child: ElevatedButton(
-                  child: const Text('Acceder'),
-                  onPressed: () {},
+                  child: const Text('Iniciar sesion'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => TabScreen()),
+                    );
+                  },
                 ),
               ),
               const SizedBox(height: 15),
@@ -76,11 +81,10 @@ class LoginScreen extends StatelessWidget {
                 child: SignInButton(
                   Buttons.google,
                   text: "Iniciar sesión con Google",
-                  onPressed: ()  => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => TabScreen()),
-                    ),
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TabScreen()),
+                  ),
                 ),
               ),
               const SizedBox(height: 15),

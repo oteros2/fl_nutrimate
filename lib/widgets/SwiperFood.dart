@@ -76,7 +76,8 @@ class _SwiperFoodState extends State<SwiperFood> {
                             );
                           },
                           child: FadeInImage(
-                            placeholder: const AssetImage('assets/loading.gif'),
+                            placeholder:
+                                const AssetImage('assets/images/loading.gif'),
                             image: NetworkImage(widget.meals[index].imageUrl),
                             fit: BoxFit.cover,
                           ),

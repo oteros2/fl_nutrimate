@@ -3,6 +3,7 @@ import 'package:NutriMate/widgets/workfine.dart';
 import 'package:flutter/material.dart';
 import '../widgets/custom_appbar.dart';
 import '../models/user.dart';
+import '../widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key, required this.user});
@@ -57,26 +58,30 @@ class HorizontalCategoriesView extends StatefulWidget {
 class _HorizontalCategoriesViewState extends State<HorizontalCategoriesView> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 45,
-      width: MediaQuery.of(context).size.width,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: categoryList.length,
-        itemBuilder: (context, index) {
-          return CategoryCard(
-            category: categoryList[index],
-            onPressed: (b) {
-              categoryList.forEach((category) {
-                category.isSelected = false;
-              });
-              setState(() {
-                categoryList[index].isSelected = true;
-              });
+    return Column(
+      children: [
+        SizedBox(
+          height: 45,
+          width: MediaQuery.of(context).size.width,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: categoryList.length,
+            itemBuilder: (context, index) {
+              return CategoryCard(
+                category: categoryList[index],
+                onPressed: (b) {
+                  categoryList.forEach((category) {
+                    category.isSelected = false;
+                  });
+                  setState(() {
+                    categoryList[index].isSelected = true;
+                  });
+                },
+              );
             },
-          );
-        },
-      ),
+          ),
+        ),
+      ],
     );
   }
 }
