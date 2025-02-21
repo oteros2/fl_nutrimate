@@ -17,7 +17,7 @@ class _WidgetScreenState extends State<ChartScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF00B894).withAlpha(100),
-        title: const Text('receta.nombre'),
+        title: const Text('Estadísticas'),
         actions: const [
           Padding(
             padding: EdgeInsets.all(5.0),
