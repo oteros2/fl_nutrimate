@@ -5,7 +5,9 @@ import '../models/user.dart';
 import 'screens.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+  const SettingsScreen({super.key, required this.user});
+
+  final User user;
 
   @override
   Widget build(BuildContext context) {
@@ -22,26 +24,12 @@ class SettingsScreen extends StatelessWidget {
       body: CustomScrollView(slivers: [
         CustomAppbar(
           title: 'Inicio',
-          user: User(
-            email: 'juan.perez@example.com',
-            password: 'password123',
-            name: 'Juan',
-            lastName: 'Pérez',
-            weight: 70.5,
-            phone: '555-123-4567',
-          ),
+          user: user,
         ),
         SliverList(
             delegate: SliverChildListDelegate([
           CardUser(
-            user: User(
-              email: 'juan.perez@example.com',
-              password: 'password123',
-              name: 'Juan',
-              lastName: 'Pérez',
-              weight: 70.5,
-              phone: '555-123-4567',
-            ),
+            user: user,
           ),
           const SizedBox(
             width: 10,
