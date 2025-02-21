@@ -76,7 +76,11 @@ class LoginScreen extends StatelessWidget {
                 child: SignInButton(
                   Buttons.google,
                   text: "Iniciar sesión con Google",
-                  onPressed: () {},
+                  onPressed: ()  => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TabScreen()),
+                    ),
                 ),
               ),
               const SizedBox(height: 15),

@@ -1,4 +1,6 @@
+import 'package:NutriMate/models/user.dart';
 import 'package:NutriMate/screens/chart_screen.dart';
+import 'package:NutriMate/screens/home_screen.dart';
 import 'package:NutriMate/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
@@ -14,9 +16,10 @@ class TabScreen extends StatelessWidget {
 
   List<Widget> _buildScreens() {
     return [
-    ClientesScreen(), // Si llamo a esta misma screen explota (Por experiencia) por lo que reemplazad esto por la main screen
+    HomeScreen(user: User(email: "isca@gmail.com", password: 'isca', name: 'isma', lastName: 'Maq', weight: 12, phone: '675327142'),), // Si llamo a esta misma screen explota (Por experiencia) por lo que reemplazad esto por la main screen
     RecetaDiariaScreen(),
     const ChartScreen(),
+    SettingsScreen(),
     //aquí iría el config screen
     ];
   }
@@ -30,21 +33,28 @@ class TabScreen extends StatelessWidget {
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.home_max),
         title: "Inicio",
-        activeColorPrimary: Colors.teal,
+        activeColorPrimary: const Color(0xFF00B894),
         activeColorSecondary: Colors.black,
         inactiveColorPrimary: const Color.fromARGB(255, 40, 38, 38),
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.calendar_month),
         title: "Recetas",
-        activeColorPrimary: Colors.teal,
+        activeColorPrimary: const Color(0xFF00B894),
+        activeColorSecondary: Colors.black,
+        inactiveColorPrimary: Colors.black,
+      ),
+       PersistentBottomNavBarItem(
+        icon: const Icon(Icons.add_chart),
+        title: "Progreso",
+        activeColorPrimary: const Color(0xFF00B894),
         activeColorSecondary: Colors.black,
         inactiveColorPrimary: const Color.fromARGB(255, 40, 38, 38),
       ),
-       PersistentBottomNavBarItem(
+      PersistentBottomNavBarItem(
         icon: const Icon(Icons.settings),
-        title: "Progreso",
-        activeColorPrimary: Colors.teal,
+        title: "Ajustes",
+        activeColorPrimary: const Color(0xFF00B894),
         activeColorSecondary: Colors.black,
         inactiveColorPrimary: const Color.fromARGB(255, 40, 38, 38),
       ),
@@ -62,7 +72,7 @@ class TabScreen extends StatelessWidget {
       resizeToAvoidBottomInset: true,
       stateManagement: true,
       hideNavigationBarWhenKeyboardAppears: true,
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.white,
       isVisible: true,
       animationSettings: const NavBarAnimationSettings(
         navBarItemAnimation: ItemAnimationSettings(

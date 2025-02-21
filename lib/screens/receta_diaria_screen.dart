@@ -111,7 +111,7 @@ class _FoodImage extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(25),
         child: const FadeInImage(
-          placeholder: AssetImage('assets/loading.gif'),
+          placeholder: AssetImage('assets/images/loading.gif'),
           image: NetworkImage(
               'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbuenprovecho.hn%2Fwp-content%2Fuploads%2F2022%2F03%2FSalsa-BBQ-Hunt%25C2%25B4s-2.png&f=1&nofb=1&ipt=0665fff2f033993c951704f3bc57c8826a2e2291b3f2ba98e1cc5f68c426ec75&ipo=images'),
           width: double.infinity,
