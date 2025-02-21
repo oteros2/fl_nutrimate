@@ -1,4 +1,3 @@
-import 'package:NutriMate/widgets/food_carousel.dart';
 import 'package:NutriMate/widgets/workfine.dart';
 import 'package:flutter/material.dart';
 import '../widgets/custom_appbar.dart';
@@ -25,6 +24,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               DialogFb1(),
               HorizontalCategoriesView(),
+              Food(),
             ],
           ),
         ),
@@ -104,7 +104,7 @@ class _CategoryCardState extends State<CategoryCard> {
               widget.category.isSelected ? Colors.white : Colors.transparent),
       child: TextButton(
           style: ButtonStyle(
-            overlayColor: WidgetStateProperty.all(Colors.transparent),
+            overlayColor: MaterialStateProperty.all(Colors.transparent),
           ),
           onPressed: () {
             widget.onPressed(true);
@@ -118,38 +118,49 @@ class _CategoryCardState extends State<CategoryCard> {
   }
 }
 
-class food extends StatelessWidget {
-  const food({super.key});
+class Food extends StatelessWidget {
+  const Food({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final List<String> imagePaths = [
+      'assets/images/cocktel.png',
+      'assets/images/ensalada.png',
+      'assets/images/spaguetis.png',
+      'assets/images/tarta.png',
+    ];
+
+    return SizedBox(
       width: double.infinity,
-      height: 300,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ListView(
-            scrollDirection: Axis.horizontal,
-            children: [
-              Container(
-                width: 300,
-                height: 300,
-                color: Colors.red,
+      height: 100,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: imagePaths.length,
+        itemBuilder: (context, index) {
+          return Container(
+            width: 100,
+            height: 100,
+            margin: const EdgeInsets.symmetric(horizontal: 8.0), // Espaciado
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15), // Bordes redondeados
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 5,
+                  spreadRadius: 2,
+                  offset: Offset(2, 2),
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15), // Bordes en la imagen
+              child: Image.asset(
+                imagePaths[index],
+                fit: BoxFit.cover, // Ajusta la imagen
               ),
-              Container(
-                width: 300,
-                height: 300,
-                color: Colors.yellow,
-              ),
-              Container(
-                width: 300,
-                height: 300,
-                color: Colors.green,
-              ),
-            ],
-          )
-        ],
+            ),
+          );
+        },
       ),
     );
   }

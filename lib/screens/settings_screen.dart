@@ -23,7 +23,7 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(slivers: [
         CustomAppbar(
-          title: 'Inicio',
+          title: 'Configuración',
           user: user,
         ),
         SliverList(
