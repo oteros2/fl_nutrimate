@@ -35,32 +35,31 @@ class LoginScreen extends StatelessWidget {
                 width: screenWidth / 1.6,
               ),
               Form(
-                  key: myFormKey,
                   child: Column(
-                    children: [
-                      Container(
-                        width: screenWidth / 1.2,
-                        child: Column(
-                          children: [
-                            CustomEmailFormField(
-                              hintText: 'Email',
-                              labelText: 'Email',
-                              keyboardType: TextInputType.emailAddress,
-                              formProperty: 'email',
-                              formValues: formValues,
-                            ),
-                            const SizedBox(height: 15),
-                            CustomPasswordFormField(
-                              hintText: 'Contraseña',
-                              labelText: 'Contraseña',
-                              formProperty: 'contraseña',
-                              formValues: formValues,
-                            ),
-                          ],
+                children: [
+                  Container(
+                    width: screenWidth / 1.2,
+                    child: Column(
+                      children: [
+                        CustomEmailFormField(
+                          hintText: 'Email',
+                          labelText: 'Email',
+                          keyboardType: TextInputType.emailAddress,
+                          formProperty: 'email',
+                          formValues: formValues,
                         ),
-                      ),
-                    ],
-                  )),
+                        const SizedBox(height: 15),
+                        CustomPasswordFormField(
+                          hintText: 'Contraseña',
+                          labelText: 'Contraseña',
+                          formProperty: 'contraseña',
+                          formValues: formValues,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )),
               SizedBox(height: 15),
               SizedBox(
                 width: screenWidth * 0.6,
@@ -97,7 +96,7 @@ class LoginScreen extends StatelessWidget {
                       onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const RegisterScreen())),
+                              builder: (context) => RegisterScreen())),
                     )
                   ]),
                   TextButton(

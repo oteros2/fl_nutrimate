@@ -59,30 +59,29 @@ class RecoveryScreen extends StatelessWidget {
                 ),
               ),
               Form(
-                  key: myFormKey,
                   child: Column(children: [
-                    SizedBox(height: 15),
-                    Container(
-                      width: screenWidth / 1.2,
-                      child: CustomEmailFormField(
-                        hintText: 'Email',
-                        labelText: 'Email',
-                        keyboardType: TextInputType.emailAddress,
-                        formProperty: 'email',
-                        formValues: formValues,
-                      ),
-                    ),
-                    SizedBox(height: 15),
-                    SizedBox(
-                      width: screenWidth * 0.6,
-                      child: ElevatedButton(
-                          child: const Text('Recuperar contraseña'),
-                          onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const LoginScreen()))),
-                    ),
-                  ])),
+                SizedBox(height: 15),
+                Container(
+                  width: screenWidth / 1.2,
+                  child: CustomEmailFormField(
+                    hintText: 'Email',
+                    labelText: 'Email',
+                    keyboardType: TextInputType.emailAddress,
+                    formProperty: 'email',
+                    formValues: formValues,
+                  ),
+                ),
+                SizedBox(height: 15),
+                SizedBox(
+                  width: screenWidth * 0.6,
+                  child: ElevatedButton(
+                      child: const Text('Recuperar contraseña'),
+                      onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginScreen()))),
+                ),
+              ])),
             ],
           ),
         ),

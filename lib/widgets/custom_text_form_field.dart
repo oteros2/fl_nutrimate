@@ -25,6 +25,10 @@ class CustomTextFormField extends StatelessWidget {
       keyboardType: keyboardType,
       onChanged: (value) => formValues[formProperty] = value,
       validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Este campo es obligatorio';
+        }
+
         if (value!.length < 3) {
           return 'Mínimo 3 caracteres';
         }

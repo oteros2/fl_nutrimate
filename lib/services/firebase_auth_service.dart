@@ -1,10 +1,11 @@
 import 'package:NutriMate/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:NutriMate/services/services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<String?> registerUser({
     required String nombre,
@@ -13,6 +14,7 @@ class AuthService {
     required String password,
     required BuildContext context,
   }) async {
+    FocusScope.of(context).unfocus();
     try {
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
@@ -22,25 +24,53 @@ class AuthService {
 
       String uid = userCredential.user!.uid;
 
-      await insertUser(uid, nombre, apellidos, email);
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Registro exitoso!"),
-          duration: const Duration(seconds: 2),
-        ),
-      );
-
-      Future.delayed(Duration(seconds: 2), () {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const LoginScreen()));
+      await _firestore.collection('usuarios').doc(uid).set({
+        'nombre': nombre,
+        'apellidos': apellidos,
+        'email': email,
       });
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Éxito"),
+            content: Text("Usuario registrado con éxito!"),
+            actions: [
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()),
+                  );
+                },
+              ),
+            ],
+          );
+        },
+      );
 
       return null;
     } on FirebaseAuthException catch (e) {
-      print("Error: ${e.message}");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.message ?? "Error al registrar usuario")),
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Erro al registrar usuario"),
+            content: Text(e.message ?? "Error al registrar usuario"),
+            actions: [
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
       );
       return e.message;
     }

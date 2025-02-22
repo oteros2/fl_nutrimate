@@ -21,7 +21,6 @@ class CustomEmailFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      textCapitalization: TextCapitalization.words,
       keyboardType: keyboardType,
       onChanged: (value) => formValues[formProperty] = value,
       validator: (value) {
