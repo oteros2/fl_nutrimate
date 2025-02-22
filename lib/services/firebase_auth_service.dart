@@ -14,22 +14,27 @@ class AuthService {
     required String password,
     required BuildContext context,
   }) async {
+    //Cierra el teclado una vez que se envian los datos
     FocusScope.of(context).unfocus();
     try {
+      //Crea las credenciales de acceso del usuario con email y password
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
+      //Obtiene el UID del usuario
       String uid = userCredential.user!.uid;
 
+      //Guarda los datos del usuario en la base de datos
       await _firestore.collection('usuarios').doc(uid).set({
         'nombre': nombre,
         'apellidos': apellidos,
         'email': email,
       });
 
+      //Muestra una ventana si todo ha salido correctamente en el registro
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -54,12 +59,14 @@ class AuthService {
       );
 
       return null;
-    } on FirebaseAuthException catch (e) {
+    }
+    //Si se da alguna excepcion a la hora de registrar el usuario se muestra una ventana con el error.
+    on FirebaseAuthException catch (e) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Erro al registrar usuario"),
+            title: Text("Error al registrar usuario"),
             content: Text(e.message ?? "Error al registrar usuario"),
             actions: [
               TextButton(

@@ -98,20 +98,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 if (_formKey.currentState?.validate() ??
                                     false) {
                                   _formKey.currentState?.save();
-                                  final errorMessage =
-                                      await authService.registerUser(
+                                  await authService.registerUser(
                                     nombre: formValues['nombre']!,
                                     apellidos: formValues['apellidos']!,
                                     email: formValues['email']!,
                                     password: formValues['contraseña']!,
                                     context: context,
                                   );
-
-                                  if (errorMessage != null) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text(errorMessage)),
-                                    );
-                                  }
                                 }
                               },
                             ),
