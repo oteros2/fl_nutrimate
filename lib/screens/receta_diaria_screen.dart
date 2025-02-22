@@ -78,9 +78,7 @@ class _RecetaDiariaScreenState extends State<RecetaDiariaScreen> {
 }
 
 class _RecipePreparation extends StatelessWidget {
-  const _RecipePreparation({
-    super.key,
-  });
+  const _RecipePreparation();
 
   @override
   Widget build(BuildContext context) {
@@ -100,9 +98,7 @@ class _RecipePreparation extends StatelessWidget {
 }
 
 class _FoodImage extends StatelessWidget {
-  const _FoodImage({
-    super.key,
-  });
+  const _FoodImage();
 
   @override
   Widget build(BuildContext context) {

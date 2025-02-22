@@ -31,7 +31,6 @@ class _CustomPasswordFormFieldState extends State<CustomPasswordFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      textCapitalization: TextCapitalization.words,
       keyboardType: widget.keyboardType,
       obscureText: _obscureText,
       onChanged: (value) => widget.formValues[widget.formProperty] = value,
@@ -40,7 +39,7 @@ class _CustomPasswordFormFieldState extends State<CustomPasswordFormField> {
           return 'Este campo es obligatorio';
         }
 
-        if (value!.length < 8) {
+        if (value.length < 8) {
           return 'Mínimo 8 caracteres';
         }
         return null;

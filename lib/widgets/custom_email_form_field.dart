@@ -33,7 +33,7 @@ class CustomEmailFormField extends StatelessWidget {
           return 'Por favor, ingresa un email válido';
         }
 
-        if (value!.length < 3) {
+        if (value.length < 3) {
           return 'Mínimo 3 caracteres';
         }
 

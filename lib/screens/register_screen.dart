@@ -11,6 +11,7 @@ class RegisterScreen extends StatelessWidget {
     final myFormKey = GlobalKey<FormState>();
     final Map<String, String> formValues = {
       'nombre': 'nombre',
+      'apellidos': 'apellidos',
       'email': 'email',
       'contraseña': 'contraseña'
     };
@@ -34,15 +35,35 @@ class RegisterScreen extends StatelessWidget {
                 width: screenWidth / 1.6,
               ),
               Form(
+                key: myFormKey,
                 child: Container(
                   width: screenWidth / 1.2,
                   child: Column(
                     children: [
-                      CustomTextFormField(
-                          labelText: 'Nombre y apellidos',
-                          hintText: 'Nombre y apellidos',
-                          formProperty: 'nombre',
-                          formValues: formValues),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(right: 8),
+                              child: CustomTextFormField(
+                                  labelText: 'Nombre',
+                                  hintText: 'Nombre',
+                                  formProperty: 'nombre',
+                                  formValues: formValues),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 8),
+                              child: CustomTextFormField(
+                                  labelText: 'Apellidos',
+                                  hintText: 'Apellidos',
+                                  formProperty: 'apellidos',
+                                  formValues: formValues),
+                            ),
+                          ),
+                        ],
+                      ),
                       const SizedBox(height: 15),
                       CustomEmailFormField(
                           labelText: 'Email',
@@ -61,9 +82,7 @@ class RegisterScreen extends StatelessWidget {
                       SizedBox(
                         width: screenWidth * 0.6,
                         child: ElevatedButton(
-                          child: const Text('Registrarse'),
-                          onPressed: () {},
-                        ),
+                            child: const Text('Registrarse'), onPressed: () {}),
                       ),
                     ],
                   ),

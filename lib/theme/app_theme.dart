@@ -15,10 +15,15 @@ class AppTheme {
       )),
       // inputDecorationTheme
       inputDecorationTheme: InputDecorationTheme(
-        floatingLabelStyle: const TextStyle(
-          color: primary,
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
+        filled: true,
+        fillColor: Colors.white.withValues(alpha: 0.5),
+        floatingLabelStyle: WidgetStateTextStyle.resolveWith(
+          (Set<WidgetState> states) => TextStyle(
+            color:
+                states.contains(WidgetState.error) ? Colors.redAccent : primary,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

@@ -1,7 +1,4 @@
-import 'package:NutriMate/widgets/food_carousel.dart';
-import 'package:NutriMate/widgets/workfine.dart';
 import 'package:flutter/material.dart';
-import '../widgets/custom_appbar.dart';
 import '../models/user.dart';
 import '../widgets/widgets.dart';
 

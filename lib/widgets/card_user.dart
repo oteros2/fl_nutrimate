@@ -11,16 +11,6 @@ class CardUser extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    if (this.user == null) {
-      return Container(
-        width: double.infinity,
-        height: size.height * 0.5,
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    }
-
     return Container(
       width: double.infinity,
       height: size.height * 0.5,
@@ -77,9 +67,7 @@ class CardUser extends StatelessWidget {
 }
 
 class _UpdateWeightButton extends StatelessWidget {
-  const _UpdateWeightButton({
-    super.key,
-  });
+  const _UpdateWeightButton();
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +91,6 @@ class _WeightCard extends StatelessWidget {
   final String text;
   final double weight;
   const _WeightCard({
-    super.key,
     required this.text,
     required this.weight,
   });

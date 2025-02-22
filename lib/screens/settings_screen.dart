@@ -1,8 +1,6 @@
-import 'package:NutriMate/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:NutriMate/widgets/widgets.dart';
 import '../models/user.dart';
-import 'screens.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});

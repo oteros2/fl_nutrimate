@@ -49,7 +49,7 @@ class _WidgetScreenState extends State<ChartScreen> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 8,
             spreadRadius: 2,
           ),
@@ -80,7 +80,8 @@ class _WidgetScreenState extends State<ChartScreen> {
                         setState(() {
                           touchedIndex = (event.isInterestedForInteractions &&
                                   pieTouchResponse?.touchedSection != null)
-                              ? pieTouchResponse!.touchedSection!.touchedSectionIndex
+                              ? pieTouchResponse!
+                                  .touchedSection!.touchedSectionIndex
                               : -1;
                         });
                       },
@@ -100,6 +101,7 @@ class _WidgetScreenState extends State<ChartScreen> {
       ],
     );
   }
+
 /**
  * Un widget que devuelve una lista con texto y colores que corresponden al diagrama de torta
  */
@@ -119,11 +121,13 @@ class _WidgetScreenState extends State<ChartScreen> {
       children: textoItems
           .map((item) => Padding(
                 padding: const EdgeInsets.only(bottom: 4),
-                child: Indicator(color: item['color'], text: item['text'], isSquare: true),
+                child: Indicator(
+                    color: item['color'], text: item['text'], isSquare: true),
               ))
           .toList(),
     );
   }
+
 /**
  *  Creamos las propiedades del diagrama de torta, usando List como nos recomienda en la doc
  * posteriormente creamos una variable lista de tipo map String el cual no servirá para mapear su contenido(valores del diagrama)
@@ -141,23 +145,32 @@ class _WidgetScreenState extends State<ChartScreen> {
     ];
 
     return List.generate(sections.length, (i) {
-  // Verifica si la sección actual está siendo tocada
-  final isTouched = i == touchedIndex;
+      // Verifica si la sección actual está siendo tocada
+      final isTouched = i == touchedIndex;
 
-  return PieChartSectionData(
-    color: sections[i]['color'], // obtiene el color de la sección de la list sections que hemos creado
-    value: sections[i]['value'].toDouble(), // El valor del pieChart es el que está en section pero hay que pasarlo a double
-    title: sections[i]['label'], // Coge el titulo del chart
-    radius: isTouched ? 60.0 : 50.0, // Si se detecta que el índice que está tocando el usuario es correcto, el radio aumenta a 60
-    titleStyle: TextStyle(
-      fontSize: isTouched ? 22.0 : 16.0, // si el usuario está tocando aumenta el tamaño
-      fontWeight: FontWeight.bold, // Hace el texto en negrita para mejor visibilidad
-      color: Colors.white, // Color del texto en blanco para contraste con los colores de la gráfica
-      shadows: const [Shadow(color: Colors.black, blurRadius: 2)], // Agrega una sombra negra para mejorar la legibilidad
-    ),
-  );
-});
-
+      return PieChartSectionData(
+        color: sections[i][
+            'color'], // obtiene el color de la sección de la list sections que hemos creado
+        value: sections[i]['value']
+            .toDouble(), // El valor del pieChart es el que está en section pero hay que pasarlo a double
+        title: sections[i]['label'], // Coge el titulo del chart
+        radius: isTouched
+            ? 60.0
+            : 50.0, // Si se detecta que el índice que está tocando el usuario es correcto, el radio aumenta a 60
+        titleStyle: TextStyle(
+          fontSize: isTouched
+              ? 22.0
+              : 16.0, // si el usuario está tocando aumenta el tamaño
+          fontWeight: FontWeight
+              .bold, // Hace el texto en negrita para mejor visibilidad
+          color: Colors
+              .white, // Color del texto en blanco para contraste con los colores de la gráfica
+          shadows: const [
+            Shadow(color: Colors.black, blurRadius: 2)
+          ], // Agrega una sombra negra para mejorar la legibilidad
+        ),
+      );
+    });
   }
 
 // Widget del diagrama de barras
@@ -171,7 +184,8 @@ class _WidgetScreenState extends State<ChartScreen> {
         const SizedBox(height: 16),
         SizedBox(
           height: 200,
-          child: BarChart( // construcción del diagrama de barras, bordes, titulos, colores etc...
+          child: BarChart(
+            // construcción del diagrama de barras, bordes, titulos, colores etc...
             BarChartData(
               barGroups: _showingBarGroups(),
               borderData: FlBorderData(
@@ -181,14 +195,16 @@ class _WidgetScreenState extends State<ChartScreen> {
                   left: BorderSide(color: Colors.grey[300]!),
                 ),
               ),
-              titlesData: FlTitlesData( // configuración y estilizado de los títulos
+              titlesData: FlTitlesData(
+                // configuración y estilizado de los títulos
                 leftTitles: AxisTitles(
                   sideTitles: SideTitles(showTitles: false, reservedSize: 10),
                 ),
                 bottomTitles: AxisTitles(
                   sideTitles: SideTitles(
                     showTitles: true,
-                    getTitlesWidget: _bottomTitles, // parámetro para obtener el widget a parte de los titulos
+                    getTitlesWidget:
+                        _bottomTitles, // parámetro para obtener el widget a parte de los titulos
                   ),
                 ),
               ),
@@ -202,6 +218,7 @@ class _WidgetScreenState extends State<ChartScreen> {
       ],
     );
   }
+
 /**
  * Para empezar el paquete nos dice que para añadir datos a las tablas lo más óptimo es realizar un list en una función a parte
  * , después meterlos en un map posteriormente mapear y sacar sus valores e insertarlos en el chart que vamos a crear
@@ -217,7 +234,12 @@ class _WidgetScreenState extends State<ChartScreen> {
     return bars
         .map((bar) => BarChartGroupData(
               x: bar['x'],
-              barRods: [BarChartRodData(toY: bar['value'].toDouble(), color: bar['color'], width: 15)],
+              barRods: [
+                BarChartRodData(
+                    toY: bar['value'].toDouble(),
+                    color: bar['color'],
+                    width: 15)
+              ],
             ))
         .toList();
   }
@@ -225,15 +247,14 @@ class _WidgetScreenState extends State<ChartScreen> {
 /**
  * Widget que pone los textos inferiores del chart de barras.
  */
-Widget _bottomTitles(double value, TitleMeta meta) {
-  const style = TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
-  final Map<int, String> days = {
-    1: 'Semana 1',
-    2: 'Semana 2',
-    3: 'Semana 3',
-    4: 'Semana 4',
-
-  };
+  Widget _bottomTitles(double value, TitleMeta meta) {
+    const style = TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
+    final Map<int, String> days = {
+      1: 'Semana 1',
+      2: 'Semana 2',
+      3: 'Semana 3',
+      4: 'Semana 4',
+    };
     return Text(days[value.toInt()] ?? '', style: style);
   }
 }

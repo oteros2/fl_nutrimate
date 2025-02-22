@@ -28,6 +28,7 @@ class CustomTextFormField extends StatelessWidget {
         if (value!.length < 3) {
           return 'Mínimo 3 caracteres';
         }
+        return null;
       },
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
