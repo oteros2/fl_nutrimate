@@ -9,15 +9,14 @@ import 'screens.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
-
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  static final _loginFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final myFormKey = GlobalKey<FormState>();
     final Map<String, String> formValues = {
       'email': 'email',
       'contraseña': 'contraseña'
@@ -44,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: screenWidth / 1.6,
               ),
               Form(
-                  key: myFormKey,
+                  key: _loginFormKey,
                   child: Column(
                     children: [
                       Container(
@@ -74,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: ElevatedButton(
                           child: const Text('Iniciar sesion'),
                           onPressed: () async {
-                            if (myFormKey.currentState!.validate()) {
+                            if (_loginFormKey.currentState!.validate()) {
                               User? user = await _authService.signIn(
                                 formValues['email']!,
                                 formValues['contraseña']!,
