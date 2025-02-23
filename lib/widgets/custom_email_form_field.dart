@@ -7,16 +7,17 @@ class CustomEmailFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final String formProperty;
   final Map<String, String> formValues;
+  final FocusNode? focusNode;
 
-  const CustomEmailFormField({
-    super.key,
-    this.hintText,
-    this.helperText,
-    this.labelText,
-    this.keyboardType,
-    required this.formProperty,
-    required this.formValues,
-  });
+  const CustomEmailFormField(
+      {super.key,
+      this.hintText,
+      this.helperText,
+      this.labelText,
+      this.keyboardType,
+      required this.formProperty,
+      required this.formValues,
+      this.focusNode});
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +32,6 @@ class CustomEmailFormField extends StatelessWidget {
         if (formProperty == 'email' && !value.contains('@')) {
           return 'Por favor, ingresa un email válido';
         }
-
-        if (value.length < 3) {
-          return 'Mínimo 3 caracteres';
-        }
-
         return null;
       },
       autovalidateMode: AutovalidateMode.onUserInteraction,

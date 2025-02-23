@@ -1,11 +1,11 @@
-import 'package:NutriMate/models/user.dart';
+import 'package:NutriMate/models/usuario.dart';
 import 'package:NutriMate/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class CardUser extends StatelessWidget {
   const CardUser({super.key, required this.user});
 
-  final User user;
+  final Usuario user;
 
   @override
   Widget build(BuildContext context) {

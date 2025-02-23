@@ -1,4 +1,4 @@
-class User {
+class Usuario {
   final String email;
   final String password;
   final String name;
@@ -6,7 +6,7 @@ class User {
   final double weight;
   final String phone;
 
-  User({
+  Usuario({
     required this.email,
     required this.password,
     required this.name,

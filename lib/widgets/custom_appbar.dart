@@ -1,11 +1,11 @@
 import 'package:NutriMate/theme/app_theme.dart';
 import 'package:flutter/material.dart';
-import '../models/user.dart';
+import '../models/usuario.dart';
 
 class CustomAppbar extends StatelessWidget {
   const CustomAppbar({super.key, required this.title, required this.user});
 
-  final User user;
+  final Usuario user;
   final String title;
 
   @override

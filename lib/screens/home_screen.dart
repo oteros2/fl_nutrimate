@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../models/user.dart';
+import '../models/usuario.dart';
 import '../widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key, required this.user});
 
-  final User user;
+  final Usuario user;
 
   @override
   Widget build(BuildContext context) {

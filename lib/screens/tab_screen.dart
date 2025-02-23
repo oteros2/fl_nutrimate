@@ -1,4 +1,4 @@
-import 'package:NutriMate/models/user.dart';
+import 'package:NutriMate/models/usuario.dart';
 import 'package:NutriMate/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
@@ -15,7 +15,7 @@ class TabScreen extends StatelessWidget {
   List<Widget> _buildScreens() {
     return [
       HomeScreen(
-        user: User(
+        user: Usuario(
             email: "isca@gmail.com",
             password: 'isca',
             name: 'isma',

@@ -2,7 +2,6 @@ import 'package:NutriMate/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sign_in_button/sign_in_button.dart';
-
 import '../services/services.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -19,6 +18,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     'email': '',
     'contraseña': ''
   };
+  bool _isRegistering = false;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             children: [
                               Expanded(
                                 child: Padding(
-                                  padding: EdgeInsets.only(right: 8),
+                                  padding: EdgeInsets.only(right: 4),
                                   child: CustomTextFormField(
                                     labelText: 'Nombre',
                                     hintText: 'Nombre',
@@ -63,7 +63,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               Expanded(
                                 child: Padding(
-                                  padding: EdgeInsets.only(left: 8),
+                                  padding: EdgeInsets.only(left: 4),
                                   child: CustomTextFormField(
                                     labelText: 'Apellidos',
                                     hintText: 'Apellidos',
@@ -94,19 +94,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             width: screenWidth * 0.6,
                             child: ElevatedButton(
                               child: const Text('Registrarse'),
-                              onPressed: () async {
-                                if (_formKey.currentState?.validate() ??
-                                    false) {
-                                  _formKey.currentState?.save();
-                                  await authService.registerUser(
-                                    nombre: formValues['nombre']!,
-                                    apellidos: formValues['apellidos']!,
-                                    email: formValues['email']!,
-                                    password: formValues['contraseña']!,
-                                    context: context,
-                                  );
-                                }
-                              },
+                              onPressed: _isRegistering
+                                  ? null
+                                  : () async {
+                                      if (_formKey.currentState?.validate() ??
+                                          false) {
+                                        setState(() {
+                                          _isRegistering = true;
+                                        });
+                                        _formKey.currentState?.save();
+                                        await authService.registerUser(
+                                          nombre: formValues['nombre']!,
+                                          apellidos: formValues['apellidos']!,
+                                          email: formValues['email']!,
+                                          password: formValues['contraseña']!,
+                                          context: context,
+                                        );
+                                        setState(() {
+                                          _isRegistering = false;
+                                        });
+                                      }
+                                    },
                             ),
                           ),
                         ],
