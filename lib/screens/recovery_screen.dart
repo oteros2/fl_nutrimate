@@ -4,11 +4,11 @@ import '../widgets/widgets.dart';
 import 'screens.dart';
 
 class RecoveryScreen extends StatelessWidget {
-  const RecoveryScreen({Key? key}) : super(key: key);
+  RecoveryScreen({Key? key}) : super(key: key);
+  final _recoveryFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final myFormKey = GlobalKey<FormState>();
     final Map<String, String> formValues = {
       'email': 'email',
     };
@@ -59,29 +59,30 @@ class RecoveryScreen extends StatelessWidget {
                 ),
               ),
               Form(
+                  key: _recoveryFormKey,
                   child: Column(children: [
-                SizedBox(height: 15),
-                Container(
-                  width: screenWidth / 1.2,
-                  child: CustomEmailFormField(
-                    hintText: 'Email',
-                    labelText: 'Email',
-                    keyboardType: TextInputType.emailAddress,
-                    formProperty: 'email',
-                    formValues: formValues,
-                  ),
-                ),
-                SizedBox(height: 15),
-                SizedBox(
-                  width: screenWidth * 0.6,
-                  child: ElevatedButton(
-                      child: const Text('Recuperar contraseña'),
-                      onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const LoginScreen()))),
-                ),
-              ])),
+                    SizedBox(height: 15),
+                    Container(
+                      width: screenWidth / 1.2,
+                      child: CustomEmailFormField(
+                        hintText: 'Email',
+                        labelText: 'Email',
+                        keyboardType: TextInputType.emailAddress,
+                        formProperty: 'email',
+                        formValues: formValues,
+                      ),
+                    ),
+                    SizedBox(height: 15),
+                    SizedBox(
+                      width: screenWidth * 0.6,
+                      child: ElevatedButton(
+                          child: const Text('Recuperar contraseña'),
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginScreen()))),
+                    ),
+                  ])),
             ],
           ),
         ),

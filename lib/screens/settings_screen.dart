@@ -3,7 +3,9 @@ import 'package:NutriMate/widgets/widgets.dart';
 import '../models/usuario.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+  const SettingsScreen({super.key, required this.user});
+
+  final Usuario user;
 
   @override
   Widget build(BuildContext context) {
@@ -20,26 +22,12 @@ class SettingsScreen extends StatelessWidget {
       body: CustomScrollView(slivers: [
         CustomAppbar(
           title: 'Inicio',
-          user: Usuario(
-            email: 'juan.perez@example.com',
-            password: 'password123',
-            name: 'Juan',
-            lastName: 'Pérez',
-            weight: 70.5,
-            phone: '555-123-4567',
-          ),
+          user: user,
         ),
         SliverList(
             delegate: SliverChildListDelegate([
           CardUser(
-            user: Usuario(
-              email: 'juan.perez@example.com',
-              password: 'password123',
-              name: 'Juan',
-              lastName: 'Pérez',
-              weight: 70.5,
-              phone: '555-123-4567',
-            ),
+            user: user,
           ),
           const SizedBox(
             width: 10,

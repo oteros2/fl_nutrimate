@@ -11,12 +11,12 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final AuthService authService = AuthService();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _registerFormKey = GlobalKey<FormState>();
   final Map<String, String> formValues = {
-    'nombre': '',
-    'apellidos': '',
-    'email': '',
-    'contraseña': ''
+    'nombre': 'nombre',
+    'apellidos': 'apellidos',
+    'email': 'email',
+    'password': 'password'
   };
   bool _isRegistering = false;
 
@@ -43,7 +43,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     width: screenWidth / 1.6,
                   ),
                   Form(
-                    key: _formKey,
+                    key: _registerFormKey,
                     child: Container(
                       width: screenWidth / 1.2,
                       child: Column(
@@ -86,7 +86,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           CustomPasswordFormField(
                             labelText: 'Contraseña',
                             hintText: 'Contraseña',
-                            formProperty: 'contraseña',
+                            formProperty: 'password',
                             formValues: formValues,
                           ),
                           const SizedBox(height: 15),
@@ -97,17 +97,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               onPressed: _isRegistering
                                   ? null
                                   : () async {
-                                      if (_formKey.currentState?.validate() ??
+                                      if (_registerFormKey.currentState
+                                              ?.validate() ??
                                           false) {
                                         setState(() {
                                           _isRegistering = true;
                                         });
-                                        _formKey.currentState?.save();
+                                        _registerFormKey.currentState?.save();
                                         await authService.registerUser(
-                                          nombre: formValues['nombre']!,
-                                          apellidos: formValues['apellidos']!,
-                                          email: formValues['email']!,
-                                          password: formValues['contraseña']!,
+                                          nombre: formValues['nombre']!.trim(),
+                                          apellidos:
+                                              formValues['apellidos']!.trim(),
+                                          email: formValues['email']!.trim(),
+                                          password:
+                                              formValues['password']!.trim(),
                                           context: context,
                                         );
                                         setState(() {

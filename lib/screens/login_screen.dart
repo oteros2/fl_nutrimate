@@ -14,15 +14,16 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  static final _loginFormKey = GlobalKey<FormState>();
+  final _loginFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final Map<String, String> formValues = {
       'email': 'email',
-      'contraseña': 'contraseña'
+      'password': 'password'
     };
     double screenWidth = MediaQuery.of(context).size.width;
     final AuthService _authService = AuthService();
+    //Usuario user;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -61,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             CustomPasswordFormField(
                               hintText: 'Contraseña',
                               labelText: 'Contraseña',
-                              formProperty: 'contraseña',
+                              formProperty: 'password',
                               formValues: formValues,
                             ),
                           ],
@@ -75,8 +76,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () async {
                             if (_loginFormKey.currentState!.validate()) {
                               User? user = await _authService.signIn(
-                                formValues['email']!,
-                                formValues['contraseña']!,
+                                formValues['email']!.trim(),
+                                formValues['password']!.trim(),
                                 context,
                               );
                               if (user != null) {
@@ -125,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const RecoveryScreen()),
+                              builder: (context) => RecoveryScreen()),
                         );
                       })
                 ],

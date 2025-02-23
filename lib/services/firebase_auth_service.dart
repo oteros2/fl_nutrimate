@@ -98,50 +98,17 @@ class AuthService {
   }
 
   // Iniciar sesión con email y contraseña
+
   Future<User?> signIn(
       String email, String password, BuildContext context) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: email.trim(),
+        password: password.trim(),
+      );
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        QuickAlert.show(
-          context: context,
-          type: QuickAlertType.error,
-          title: "Error al iniciar sesión",
-          text: "El usuario no existe",
-          confirmBtnText: "OK",
-          confirmBtnColor: Theme.of(context).primaryColor,
-          onConfirmBtnTap: () {
-            Navigator.of(context).pop();
-          },
-        );
-      } else if (e.code == 'wrong-password') {
-        QuickAlert.show(
-          context: context,
-          type: QuickAlertType.error,
-          title: "Error al iniciar sesión",
-          text: "La contraseña es incorrecta",
-          confirmBtnText: "OK",
-          confirmBtnColor: Theme.of(context).primaryColor,
-          onConfirmBtnTap: () {
-            Navigator.of(context).pop();
-          },
-        );
-      } else {
-        QuickAlert.show(
-          context: context,
-          type: QuickAlertType.error,
-          title: "Error al iniciar sesión",
-          text: "Ocurrió un error inesperado: ${e.message}",
-          confirmBtnText: "OK",
-          confirmBtnColor: Theme.of(context).primaryColor,
-          onConfirmBtnTap: () {
-            Navigator.of(context).pop();
-          },
-        );
-      }
+      print(e.message);
     }
     return null;
   }

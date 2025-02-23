@@ -29,7 +29,7 @@ class CustomTextFormField extends StatelessWidget {
           return 'Este campo es obligatorio';
         }
 
-        if (value!.length < 3) {
+        if (value.length < 3) {
           return 'Mínimo 3 caracteres';
         }
         return null;

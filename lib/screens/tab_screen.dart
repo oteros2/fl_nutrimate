@@ -7,6 +7,13 @@ class TabScreen extends StatelessWidget {
   final PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
 
+  Usuario user = Usuario(
+    email: "isca@gmail.com",
+    name: 'isma',
+    lastName: 'Maq',
+    weight: 12,
+  );
+
   TabScreen({super.key});
 
   /// Para un código más legible, las listas las estoy definiendo por separado, en este caso screens pide una lista de Widgets
@@ -15,17 +22,11 @@ class TabScreen extends StatelessWidget {
   List<Widget> _buildScreens() {
     return [
       HomeScreen(
-        user: Usuario(
-            email: "isca@gmail.com",
-            password: 'isca',
-            name: 'isma',
-            lastName: 'Maq',
-            weight: 12,
-            phone: '675327142'),
-      ), // Si llamo a esta misma screen explota (Por experiencia) por lo que reemplazad esto por la main screen
+          user:
+              user), // Si llamo a esta misma screen explota (Por experiencia) por lo que reemplazad esto por la main screen
       RecetasSemanalesScreen(),
       const ChartScreen(),
-      SettingsScreen(),
+      SettingsScreen(user: user),
       //aquí iría el config screen
     ];
   }
