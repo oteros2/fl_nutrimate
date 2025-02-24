@@ -18,14 +18,12 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _loginFormKey = GlobalKey<FormState>();
+  final AuthService _authService = AuthService();
+  final Map<String, String> formValues = {'email': '', 'password': ''};
+
   @override
   Widget build(BuildContext context) {
-    final Map<String, String> formValues = {
-      'email': 'email',
-      'password': 'password'
-    };
     double screenWidth = MediaQuery.of(context).size.width;
-    final AuthService _authService = AuthService();
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -37,19 +35,19 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
         Center(
-            child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/images/logo.png',
-                width: screenWidth / 1.6,
-              ),
-              Form(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/images/logo.png',
+                  width: screenWidth / 1.6,
+                ),
+                Form(
                   key: _loginFormKey,
                   child: Column(
                     children: [
-                      Container(
+                      SizedBox(
                         width: screenWidth / 1.2,
                         child: Column(
                           children: [
@@ -70,11 +68,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       SizedBox(
                         width: screenWidth * 0.6,
                         child: ElevatedButton(
-                          child: const Text('Iniciar sesion'),
+                          child: const Text('Iniciar sesión'),
                           onPressed: () async {
                             if (_loginFormKey.currentState!.validate()) {
                               User? user = await _authService.logIn(
@@ -88,19 +86,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                   type: QuickAlertType.error,
                                   title: 'Error',
                                   text:
-                                      'El correo o la contraseña son incorrectos.',
+                                      'El correo o la contraseña son incorrectos.',
                                   confirmBtnText: 'Aceptar',
                                   confirmBtnColor: AppTheme.primary,
-                                  onConfirmBtnTap: () {
-                                    Navigator.pop(context);
-                                  },
                                 );
-                              }
-                              if (user != null) {
-                                Navigator.of(context).pushAndRemoveUntil(
+                              } else {
+                                Navigator.pushReplacement(
+                                  context,
                                   MaterialPageRoute(
                                       builder: (context) => TabScreen()),
-                                  (route) => false,
                                 );
                               }
                             }
@@ -108,48 +102,49 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ],
-                  )),
-              const SizedBox(height: 15),
-              Container(width: screenWidth / 1.2, child: const Divider()),
-              const SizedBox(height: 15),
-              SizedBox(
-                width: screenWidth / 1.2,
-                child: SignInButton(Buttons.google,
+                  ),
+                ),
+                const SizedBox(height: 15),
+                Container(width: screenWidth / 1.2, child: const Divider()),
+                const SizedBox(height: 15),
+                SizedBox(
+                  width: screenWidth / 1.2,
+                  child: SignInButton(
+                    Buttons.google,
                     text: "Iniciar sesión con Google",
-                    onPressed: () => Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (context) => TabScreen()),
-                          (route) => false,
-                        )),
-              ),
-              const SizedBox(height: 15),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    const Text('¿No tienes cuenta?'),
-                    TextButton(
-                        child: const Text('Registrarse'),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RegisterScreen()));
-                        })
-                  ]),
+                    onPressed: () => Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => TabScreen()),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 15),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  const Text('¿No tienes cuenta?'),
                   TextButton(
-                      child: const Text('Olvide mi contraseña'),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => RecoveryScreen()),
-                        );
-                      })
-                ],
-              ),
-            ],
+                    child: const Text('Registrarse'),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RegisterScreen()),
+                      );
+                    },
+                  )
+                ]),
+                TextButton(
+                  child: const Text('Olvidé mi contraseña'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => RecoveryScreen()),
+                    );
+                  },
+                )
+              ],
+            ),
           ),
-        )),
+        ),
       ]),
     );
   }

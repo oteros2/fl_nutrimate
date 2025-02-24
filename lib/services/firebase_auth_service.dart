@@ -111,5 +111,6 @@ class AuthService {
     } on FirebaseAuthException catch (e) {
       print(e.message);
     }
+    return null;
   }
 }

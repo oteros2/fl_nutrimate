@@ -10,7 +10,7 @@ class RecoveryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map<String, String> formValues = {
-      'email': 'email',
+      'email': '',
     };
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(

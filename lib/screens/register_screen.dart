@@ -13,10 +13,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final AuthService authService = AuthService();
   final _registerFormKey = GlobalKey<FormState>();
   final Map<String, String> formValues = {
-    'nombre': 'nombre',
-    'apellidos': 'apellidos',
-    'email': 'email',
-    'password': 'password'
+    'nombre': '',
+    'apellidos': '',
+    'email': '',
+    'password': ''
   };
   bool _isRegistering = false;
 
