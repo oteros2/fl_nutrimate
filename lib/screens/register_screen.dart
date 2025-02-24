@@ -10,7 +10,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final AuthService authService = AuthService();
+  final AuthService _authService = AuthService();
   final _registerFormKey = GlobalKey<FormState>();
   final Map<String, String> formValues = {
     'nombre': '',
@@ -115,7 +115,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           _isRegistering = true;
                                         });
                                         _registerFormKey.currentState?.save();
-                                        await authService.registerUser(
+                                        await _authService.registerUser(
                                           nombre: formValues['nombre']!.trim(),
                                           apellidos:
                                               formValues['apellidos']!.trim(),
@@ -143,7 +143,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: SignInButton(
                       Buttons.google,
                       text: "Iniciar sesión con Google",
-                      onPressed: () {},
+                      onPressed: () {
+                        _authService.signInWithGoogle(context);
+                      },
                     ),
                   ),
                 ],

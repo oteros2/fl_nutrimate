@@ -1,8 +1,8 @@
-import 'package:NutriMate/screens/login_screen.dart';
 import 'package:NutriMate/theme/app_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 
@@ -11,6 +11,7 @@ import '../screens/screens.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
 //Traduce los mensajes de error por defecto de firebase
   String _getErrorMessage(String errorCode) {
@@ -112,5 +113,66 @@ class AuthService {
       print(e.message);
     }
     return null;
+  }
+
+  //Iniciar sesión con Google
+  Future<void> signInWithGoogle(BuildContext context) async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) {
+        return;
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
+      User? user = userCredential.user;
+
+//Si el usuario no existe en la base de datos lo crea
+      if (user != null) {
+        DocumentSnapshot userDoc =
+            await _firestore.collection('usuarios').doc(user.uid).get();
+        if (!userDoc.exists) {
+          await _firestore.collection('usuarios').doc(user.uid).set({
+            'nombre': user.displayName ?? 'Usuario',
+            'email': user.email,
+            'photoURL': user.photoURL,
+          });
+        }
+
+        if (context.mounted) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => TabScreen()),
+          );
+        }
+      }
+    } catch (e) {
+      if (context.mounted) {
+        QuickAlert.show(
+          context: context,
+          type: QuickAlertType.error,
+          title: "Error al iniciar sesión con Google",
+          text: e.toString(),
+          confirmBtnText: "OK",
+          confirmBtnColor: AppTheme.primary,
+          onConfirmBtnTap: () {
+            Navigator.of(context).pop();
+          },
+        );
+      }
+    }
+  }
+
+//Cerrar sesion
+  Future<void> signOut() async {
+    await _auth.signOut();
+    await _googleSignIn.signOut();
   }
 }

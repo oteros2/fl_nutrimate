@@ -112,10 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: SignInButton(
                     Buttons.google,
                     text: "Iniciar sesión con Google",
-                    onPressed: () => Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => TabScreen()),
-                    ),
+                    onPressed: () => _authService.signInWithGoogle(context),
                   ),
                 ),
                 const SizedBox(height: 15),
