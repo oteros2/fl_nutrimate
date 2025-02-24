@@ -22,6 +22,8 @@ class CustomEmailFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final RegExp emailRegex =
+        RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
     return TextFormField(
       keyboardType: keyboardType,
       onChanged: (value) => formValues[formProperty] = value,
@@ -30,7 +32,7 @@ class CustomEmailFormField extends StatelessWidget {
           return 'Este campo es obligatorio';
         }
 
-        if (formProperty == 'email' && !value.contains('@')) {
+        if (formProperty == 'email' && !emailRegex.hasMatch(value)) {
           return 'Por favor, ingresa un email válido';
         }
         return null;
