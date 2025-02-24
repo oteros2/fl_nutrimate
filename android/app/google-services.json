@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1003511952703-0l0jngpdkqnlb4he7qu7hf672vfu8tbo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fl_nutrimate",
+            "certificate_hash": "45caffa057a797299cd338b91b8025a6b0d0de63"
+          }
+        },
+        {
           "client_id": "1003511952703-ismrletbrcdep3r18bir3vp29e4fl0dk.apps.googleusercontent.com",
           "client_type": 3
         }
