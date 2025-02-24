@@ -49,26 +49,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Column(
                         children: [
                           Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsets.only(right: 4),
-                                  child: CustomTextFormField(
-                                    labelText: 'Nombre',
-                                    hintText: 'Nombre',
-                                    formProperty: 'nombre',
-                                    formValues: formValues,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      CustomTextFormField(
+                                        labelText: 'Nombre',
+                                        hintText: 'Nombre',
+                                        formProperty: 'nombre',
+                                        formValues: formValues,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 4),
-                                  child: CustomTextFormField(
-                                    labelText: 'Apellidos',
-                                    hintText: 'Apellidos',
-                                    formProperty: 'apellidos',
-                                    formValues: formValues,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      CustomTextFormField(
+                                        labelText: 'Apellidos',
+                                        hintText: 'Apellidos',
+                                        formProperty: 'apellidos',
+                                        formValues: formValues,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),

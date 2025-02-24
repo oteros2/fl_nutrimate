@@ -23,7 +23,6 @@ class _LoginScreenState extends State<LoginScreen> {
     };
     double screenWidth = MediaQuery.of(context).size.width;
     final AuthService _authService = AuthService();
-    //Usuario user;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -75,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: const Text('Iniciar sesion'),
                           onPressed: () async {
                             if (_loginFormKey.currentState!.validate()) {
-                              User? user = await _authService.signIn(
+                              User? user = await _authService.logIn(
                                 formValues['email']!.trim(),
                                 formValues['password']!.trim(),
                                 context,

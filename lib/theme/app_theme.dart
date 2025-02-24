@@ -5,6 +5,12 @@ class AppTheme {
   static const Color secondary = Colors.white;
 
   static final ThemeData lightTheme = ThemeData.light().copyWith(
+    // textFormFileTheme
+    textSelectionTheme: const TextSelectionThemeData(
+      cursorColor: primary,
+      selectionColor: primary,
+      selectionHandleColor: primary,
+    ),
     // elevatedButtonTheme
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -16,7 +22,7 @@ class AppTheme {
     // inputDecorationTheme
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: Colors.white.withValues(alpha: 0.5),
+      fillColor: Colors.white.withValues(alpha: 0.6),
       floatingLabelStyle: WidgetStateTextStyle.resolveWith(
         (Set<WidgetState> states) => TextStyle(
           color:
@@ -36,7 +42,7 @@ class AppTheme {
         borderRadius: BorderRadius.circular(10),
         borderSide: const BorderSide(
           color: primary,
-          width: 2,
+          width: 2.5,
         ),
       ),
       focusedErrorBorder: OutlineInputBorder(
@@ -56,10 +62,6 @@ class AppTheme {
       contentPadding: const EdgeInsets.symmetric(
         vertical: 16,
         horizontal: 20,
-      ),
-      labelStyle: const TextStyle(
-        color: primary,
-        fontSize: 14,
       ),
     ),
     // textButtonTheme

@@ -98,8 +98,7 @@ class AuthService {
   }
 
   // Iniciar sesión con email y contraseña
-
-  Future<User?> signIn(
+  Future<User?> logIn(
       String email, String password, BuildContext context) async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
