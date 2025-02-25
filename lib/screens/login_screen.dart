@@ -1,11 +1,7 @@
 import 'package:NutriMate/services/firebase_auth_service.dart';
-import 'package:NutriMate/theme/app_theme.dart';
 import 'package:NutriMate/widgets/widgets.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:quickalert/models/quickalert_type.dart';
-import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import '../services/services.dart';
 import 'screens.dart';
@@ -75,28 +71,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: const Text('Iniciar sesión'),
                           onPressed: () async {
                             if (_loginFormKey.currentState!.validate()) {
-                              User? user = await _authService.logIn(
-                                formValues['email']!.trim(),
-                                formValues['password']!.trim(),
-                                context,
-                              );
-                              if (user == null) {
-                                QuickAlert.show(
-                                  context: context,
-                                  type: QuickAlertType.error,
-                                  title: 'Error',
-                                  text:
-                                      'El correo o la contraseña son incorrectos.',
-                                  confirmBtnText: 'Aceptar',
-                                  confirmBtnColor: AppTheme.primary,
-                                );
-                              } else {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => TabScreen()),
-                                );
-                              }
+                              _authService.logIn(formValues['email']!.trim(),
+                                  formValues['password']!.trim(), context);
                             }
                           },
                         ),

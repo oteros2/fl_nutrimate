@@ -7,7 +7,6 @@ class SettingsScreen extends StatelessWidget {
   SettingsScreen({super.key, required this.user});
 
   final Usuario user;
-  final AuthService _aut = AuthService();
 
   @override
   Widget build(BuildContext context) {

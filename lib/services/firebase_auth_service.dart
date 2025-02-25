@@ -5,7 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
-
 import '../screens/screens.dart';
 
 class AuthService {
@@ -13,25 +12,15 @@ class AuthService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-//Traduce los mensajes de error por defecto de firebase
-  String _getErrorMessage(String errorCode) {
-    switch (errorCode) {
-      case 'weak-password':
-        return 'La contraseña es demasiado débil.';
+// Traduce los codigos de error de firebase a español
+  String _getTranslatedErrorMessage(String code) {
+    switch (code) {
       case 'email-already-in-use':
-        return 'El correo electrónico ya está en uso.';
-      case 'invalid-email':
-        return 'El correo electrónico no es válido.';
-      case 'operation-not-allowed':
-        return 'La operación no está permitida.';
-      case 'user-disabled':
-        return 'El usuario ha sido deshabilitado.';
-      case 'user-not-found':
-        return 'Usuario no existe';
-      case 'wrong-password':
-        return 'La contraseña es incorrecta.';
+        return 'El correo electrónico ya está registrado en otra cuenta';
+      case 'invalid-credential':
+        return 'Usuario o contraseña incorrectos';
       default:
-        return 'Ha ocurrido un error inesperado.';
+        return 'Se ha producido un error inesperado';
     }
   }
 
@@ -84,12 +73,12 @@ class AuthService {
     }
     //Si se da alguna excepcion a la hora de registrar el usuario se muestra una ventana con el error.
     on FirebaseAuthException catch (e) {
-      String errorMessage = _getErrorMessage(e.code);
+      String message = _getTranslatedErrorMessage(e.code);
       QuickAlert.show(
         context: context,
         type: QuickAlertType.error,
-        title: "Error al registrar el usuario",
-        text: errorMessage,
+        title: "Error al registrar usuario",
+        text: message,
         confirmBtnText: "OK",
         confirmBtnColor: AppTheme.primary,
         onConfirmBtnTap: () {
@@ -101,18 +90,37 @@ class AuthService {
   }
 
   // Iniciar sesión con email y contraseña
-  Future<User?> logIn(
+  Future<void> logIn(
       String email, String password, BuildContext context) async {
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-        email: email.trim(),
-        password: password.trim(),
-      );
-      return userCredential.user;
+      await _auth
+          .signInWithEmailAndPassword(
+            email: email.trim(),
+            password: password.trim(),
+          )
+          .then((value) => {
+                if (value.user != null && context.mounted)
+                  {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => TabScreen()),
+                    )
+                  }
+              });
     } on FirebaseAuthException catch (e) {
-      print(e.message);
+      String message = _getTranslatedErrorMessage(e.code);
+      QuickAlert.show(
+        context: context,
+        type: QuickAlertType.error,
+        title: "Error al iniciar sesión",
+        text: message,
+        confirmBtnText: "OK",
+        confirmBtnColor: AppTheme.primary,
+        onConfirmBtnTap: () {
+          Navigator.of(context).pop();
+        },
+      );
     }
-    return null;
   }
 
   //Iniciar sesión con Google
@@ -159,7 +167,6 @@ class AuthService {
           context: context,
           type: QuickAlertType.error,
           title: "Error al iniciar sesión con Google",
-          text: e.toString(),
           confirmBtnText: "OK",
           confirmBtnColor: AppTheme.primary,
           onConfirmBtnTap: () {
