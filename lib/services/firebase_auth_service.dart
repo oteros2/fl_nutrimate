@@ -2,6 +2,7 @@ import 'package:NutriMate/theme/app_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
@@ -101,9 +102,9 @@ class AuthService {
           .then((value) => {
                 if (value.user != null && context.mounted)
                   {
-                    Navigator.pushReplacement(
-                      context,
+                    Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) => TabScreen()),
+                      (route) => false,
                     )
                   }
               });
@@ -155,9 +156,9 @@ class AuthService {
         }
 
         if (context.mounted) {
-          Navigator.pushReplacement(
-            context,
+          Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => TabScreen()),
+            (route) => false,
           );
         }
       }
@@ -183,7 +184,7 @@ class AuthService {
     await _googleSignIn.signOut();
     if (context.mounted) {
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => LoginScreen()),
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
         (route) => false,
       );
     }

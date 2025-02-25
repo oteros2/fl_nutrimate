@@ -31,20 +31,4 @@ class SessionManager {
       );
     }
   }
-
-  //Escucha cambios en el estado de autenticación del usuario.
-  Stream<User?> authStateChanges() {
-    return _auth.authStateChanges();
-  }
-}
-
-//Configura un listener para detectar cambios en la autenticación
-void setupAuthStateListener() {
-  SessionManager().authStateChanges().listen((User? user) {
-    if (user == null) {
-      print('User is signed out');
-    } else {
-      print('User is signed in: ${user.email}');
-    }
-  });
 }
