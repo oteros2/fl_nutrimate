@@ -5,7 +5,7 @@ import '../models/usuario.dart';
 
 class SettingsScreen extends StatelessWidget {
   SettingsScreen({super.key, required this.user});
-
+  final AuthService _auth = AuthService();
   final Usuario user;
 
   @override
@@ -49,6 +49,14 @@ class SettingsScreen extends StatelessWidget {
               itemCount: settings.length),
         ])),
       ]),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(
+          Icons.logout,
+          color: Colors.white,
+        ),
+        backgroundColor: Colors.red,
+        onPressed: () async => await _auth.signOut(context),
+      ),
     );
   }
 }
