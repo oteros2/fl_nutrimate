@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static const Color primary = Color(0xff00B894);
   static const Color secondary = Colors.white;
+  static const Color error = Color.fromARGB(255, 205, 108, 108);
 
   static final ThemeData lightTheme = ThemeData.light().copyWith(
     // textFormFileTheme
@@ -25,20 +26,14 @@ class AppTheme {
     // inputDecorationTheme
     inputDecorationTheme: InputDecorationTheme(
       prefixIconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) =>
-          states.contains(WidgetState.error)
-              ? const Color.fromARGB(255, 205, 108, 108)
-              : primary),
+          states.contains(WidgetState.error) ? error : primary),
       suffixIconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) =>
-          states.contains(WidgetState.error)
-              ? const Color.fromARGB(255, 205, 108, 108)
-              : primary),
+          states.contains(WidgetState.error) ? error : primary),
       filled: true,
       fillColor: Colors.white.withValues(alpha: 0.7),
       floatingLabelStyle: WidgetStateTextStyle.resolveWith(
         (Set<WidgetState> states) => TextStyle(
-          color: states.contains(WidgetState.error)
-              ? const Color.fromARGB(255, 205, 108, 108)
-              : primary,
+          color: states.contains(WidgetState.error) ? error : primary,
           fontSize: 16,
           fontWeight: FontWeight.bold,
         ),
@@ -60,7 +55,7 @@ class AppTheme {
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(6),
         borderSide: const BorderSide(
-          color: const Color.fromARGB(255, 205, 108, 108),
+          color: error,
           width: 2,
         ),
       ),

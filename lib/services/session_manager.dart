@@ -10,11 +10,6 @@ class SessionManager {
     return _auth.currentUser != null;
   }
 
-  //Devuelve el usuario actualmente autenticado en Firebase, si existe.
-  User? getCurrentUser() {
-    return _auth.currentUser;
-  }
-
   //Verifica si el usuario está autenticado y lo redirige a la pantalla que corresponda.
   void checkAuthAndRedirect(BuildContext context) {
     if (isLoggedIn()) {

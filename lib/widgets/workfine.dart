@@ -38,7 +38,7 @@ class DialogFb1 extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            const Text("Que tal lo estas haciendo?",
+            const Text("Hola " + "Que tal lo estas haciendo?",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 18,

@@ -22,7 +22,6 @@ class _LoginScreenState extends State<LoginScreen> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       body: Stack(children: [
         Positioned.fill(
           child: SvgPicture.asset(

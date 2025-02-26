@@ -31,6 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^2.0.9
+  table_calendar: ^3.0.9
   sign_in_button: ^3.0.0
   card_swiper: ^3.0.1
   fl_chart: ^0.70.2

@@ -1,4 +1,7 @@
+import 'package:NutriMate/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../models/entities.dart';
 import '../models/usuario.dart';
 import '../widgets/widgets.dart';
 
@@ -9,20 +12,30 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userData = Provider.of<UserProvider>(context).userData;
+    String nombre = userData?['nombre'];
+    String apellidos = userData?['apellidos'];
+
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           CustomAppbar(
-              title: 'Inicio',
+              title: "Hola " + " " + nombre + " " + apellidos,
               user: user), // Asegúrate de que este sea un SliverAppBar
         ],
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        body: SingleChildScrollView(
+          child: Wrap(
             children: [
-              DialogFb1(),
-              HorizontalCategoriesView(),
+              const SwiperFoodLabel(day: 'Lunes', label: "Dieta del día"),
+              SwiperFood(recipes: recipes, icon: Icons.edit),
+              Container(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  height: 200,
+                  child: Column(
+                    children: [
+                      CalendarioWidget(),
+                    ],
+                  ))
             ],
           ),
         ),

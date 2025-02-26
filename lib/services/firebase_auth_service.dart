@@ -1,9 +1,11 @@
 import 'package:NutriMate/main.dart';
+import 'package:NutriMate/providers/user_provider.dart';
 import 'package:NutriMate/theme/app_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 import '../screens/screens.dart';
@@ -102,10 +104,14 @@ class AuthService {
           .then((value) => {
                 if (value.user != null && context.mounted)
                   {
-                    Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => TabScreen()),
-                      (route) => false,
-                    )
+                    Provider.of<UserProvider>(context, listen: false)
+                        .loadUser()
+                        .then((_) {
+                      Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (context) => TabScreen()),
+                        (route) => false,
+                      );
+                    })
                   }
               });
     } on FirebaseAuthException catch (e) {
@@ -149,17 +155,22 @@ class AuthService {
             await _firestore.collection('usuarios').doc(user.uid).get();
         if (!userDoc.exists) {
           await _firestore.collection('usuarios').doc(user.uid).set({
-            'nombre': user.displayName ?? 'Usuario',
+            'nombre': user.displayName?.split(" ").first,
+            'apellidos': user.displayName?.split(" ")[1],
             'email': user.email,
             'photoURL': user.photoURL,
           });
         }
 
         if (context.mounted) {
-          Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => TabScreen()),
-            (route) => false,
-          );
+          await Provider.of<UserProvider>(context, listen: false)
+              .loadUser()
+              .then((_) {
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => TabScreen()),
+              (route) => false,
+            );
+          });
         }
       }
     } catch (e) {
