@@ -14,7 +14,6 @@ class SwiperFoodLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Divider(),
         Container(
           color: const Color(0xFF00B894).withAlpha(50),
           child: ListTile(

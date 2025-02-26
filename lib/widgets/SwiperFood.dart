@@ -1,27 +1,14 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import '../models/entities.dart';
 import '../screens/screens.dart';
 
-enum MealType { desayuno, almuerzo, cena }
-
-class MealData {
-  final String imageUrl;
-  final MealType? type;
-  final String dinner;
-
-  MealData({
-    required this.imageUrl,
-    this.type,
-    required this.dinner,
-  });
-}
-
 class SwiperFood extends StatefulWidget {
-  final List<MealData> meals;
+  final List<Recipe> recipes;
   final IconData icon;
   const SwiperFood({
     super.key,
-    required this.meals,
+    required this.recipes,
     required this.icon,
   });
 
@@ -39,7 +26,7 @@ class _SwiperFoodState extends State<SwiperFood> {
         Padding(
           padding: const EdgeInsets.only(top: 16.0),
           child: Text(
-            widget.meals[currentIndex].type?.name.toUpperCase() ?? '',
+            widget.recipes[currentIndex].type.name.toUpperCase(),
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -52,7 +39,7 @@ class _SwiperFoodState extends State<SwiperFood> {
           child: SizedBox(
             height: 200,
             child: Swiper(
-              itemCount: widget.meals.length,
+              itemCount: widget.recipes.length,
               onIndexChanged: (index) {
                 setState(() {
                   currentIndex = index;
@@ -70,16 +57,19 @@ class _SwiperFoodState extends State<SwiperFood> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    const RecetaDiariaScreen(),
+                                builder: (context) => RecetaDiariaScreen(
+                                    receta: widget.recipes[index]),
                               ),
                             );
                           },
-                          child: FadeInImage(
-                            placeholder:
-                                const AssetImage('assets/images/loading.gif'),
-                            image: NetworkImage(widget.meals[index].imageUrl),
-                            fit: BoxFit.cover,
+                          child: Container(
+                            child: FadeInImage(
+                              placeholder:
+                                  const AssetImage('assets/images/loading.gif'),
+                              image:
+                                  NetworkImage(widget.recipes[index].imageUrl),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),
@@ -111,8 +101,9 @@ class _SwiperFoodState extends State<SwiperFood> {
           ),
         ),
         Text(
-          widget.meals[currentIndex].dinner,
+          widget.recipes[currentIndex].name,
         ),
+        const Divider(),
       ],
     );
   }
