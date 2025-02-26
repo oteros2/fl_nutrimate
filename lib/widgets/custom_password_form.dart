@@ -49,6 +49,7 @@ class _CustomPasswordFormFieldState extends State<CustomPasswordFormField> {
         hintText: widget.hintText,
         labelText: widget.labelText,
         helperText: widget.helperText,
+        prefixIcon: const Icon(Icons.lock_outline_rounded),
         suffixIcon: IconButton(
           icon: Icon(
             _obscureText

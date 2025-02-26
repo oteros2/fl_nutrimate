@@ -39,6 +39,7 @@ class CustomTextFormField extends StatelessWidget {
         hintText: hintText,
         labelText: labelText,
         helperText: helperText,
+        prefixIcon: const Icon(Icons.person_add_alt_outlined),
       ),
     );
   }

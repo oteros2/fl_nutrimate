@@ -41,6 +41,7 @@ class CustomEmailFormField extends StatelessWidget {
         hintText: hintText,
         labelText: labelText,
         helperText: helperText,
+        prefixIcon: const Icon(Icons.email_outlined),
       ),
     );
   }
