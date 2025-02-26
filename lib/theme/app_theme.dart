@@ -14,19 +14,31 @@ class AppTheme {
     // elevatedButtonTheme
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-      backgroundColor: primary,
-      foregroundColor: secondary,
-      shape: const StadiumBorder(),
-      elevation: 8,
-    )),
+            backgroundColor: primary,
+            foregroundColor: secondary,
+            shape: const StadiumBorder(),
+            elevation: 8,
+            textStyle: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ))),
     // inputDecorationTheme
     inputDecorationTheme: InputDecorationTheme(
+      prefixIconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) =>
+          states.contains(WidgetState.error)
+              ? const Color.fromARGB(255, 205, 108, 108)
+              : primary),
+      suffixIconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) =>
+          states.contains(WidgetState.error)
+              ? const Color.fromARGB(255, 205, 108, 108)
+              : primary),
       filled: true,
-      fillColor: Colors.white.withValues(alpha: 0.6),
+      fillColor: Colors.white.withValues(alpha: 0.7),
       floatingLabelStyle: WidgetStateTextStyle.resolveWith(
         (Set<WidgetState> states) => TextStyle(
-          color:
-              states.contains(WidgetState.error) ? Colors.redAccent : primary,
+          color: states.contains(WidgetState.error)
+              ? const Color.fromARGB(255, 205, 108, 108)
+              : primary,
           fontSize: 16,
           fontWeight: FontWeight.bold,
         ),
@@ -48,7 +60,7 @@ class AppTheme {
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(6),
         borderSide: const BorderSide(
-          color: Colors.redAccent,
+          color: const Color.fromARGB(255, 205, 108, 108),
           width: 2,
         ),
       ),

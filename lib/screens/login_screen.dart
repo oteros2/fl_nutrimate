@@ -61,6 +61,19 @@ class _LoginScreenState extends State<LoginScreen> {
                               formProperty: 'password',
                               formValues: formValues,
                             ),
+                            Container(
+                              alignment: Alignment.centerRight,
+                              child: TextButton(
+                                child: const Text('Olvidé mi contraseña'),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => RecoveryScreen()),
+                                  );
+                                },
+                              ),
+                            )
                           ],
                         ),
                       ),
@@ -87,6 +100,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: screenWidth / 1.2,
                   child: SignInButton(
                     Buttons.google,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6),
+                    ),
                     text: "Iniciar sesión con Google",
                     onPressed: () => _authService.signInWithGoogle(context),
                   ),
@@ -105,15 +121,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   )
                 ]),
-                TextButton(
-                  child: const Text('Olvidé mi contraseña'),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => RecoveryScreen()),
-                    );
-                  },
-                )
               ],
             ),
           ),
