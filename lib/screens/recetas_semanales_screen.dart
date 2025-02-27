@@ -16,7 +16,7 @@ class RecetasSemanalesScreen extends StatelessWidget {
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           CustomAppbar(
-              title: "Hola" + " " + nombre + " " + apellido, user: usuario),
+              title: 'Recetas semanales', user: usuario),
         ],
         body: SingleChildScrollView(
           child: Column(
