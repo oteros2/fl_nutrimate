@@ -104,14 +104,26 @@ class AuthService {
           .then((value) => {
                 if (value.user != null && context.mounted)
                   {
-                    Provider.of<UserProvider>(context, listen: false)
-                        .loadUser()
-                        .then((_) {
-                      Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => TabScreen()),
-                        (route) => false,
-                      );
-                    })
+                    if (value.user?.email == "admin@nutrimate.com")
+                      {
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (context) => ClientesScreen()),
+                          (route) => false,
+                        )
+                      }
+                    else
+                      {
+                        Provider.of<UserProvider>(context, listen: false)
+                            .loadUser()
+                            .then((_) {
+                          Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => TabScreen()),
+                            (route) => false,
+                          );
+                        })
+                      }
                   }
               });
     } on FirebaseAuthException catch (e) {

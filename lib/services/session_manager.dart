@@ -12,7 +12,13 @@ class SessionManager {
 
   //Verifica si el usuario está autenticado y lo redirige a la pantalla que corresponda.
   void checkAuthAndRedirect(BuildContext context) {
-    if (isLoggedIn()) {
+    //Si el usuario está autenticado y es la cuenta de administrador lo lleva al apartado de administracion.
+    if (isLoggedIn() && _auth.currentUser!.email == "admin@nutrimate.com") {
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => ClientesScreen()),
+        (route) => false,
+      );
+    } else if (isLoggedIn()) {
       // Si el usuario está autenticado, lo lleva a la pantalla principal TabScreen
       Navigator.pushReplacement(
         context,

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import '../services/services.dart';
 import 'screens.dart';
 
 class ClientesScreen extends StatelessWidget {
-  const ClientesScreen({super.key});
+  ClientesScreen({super.key});
+  final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +84,14 @@ class ClientesScreen extends StatelessWidget {
             ),
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(
+          Icons.logout,
+          color: Colors.white,
+        ),
+        backgroundColor: Colors.red,
+        onPressed: () async => await _auth.signOut(context),
       ),
     );
   }
