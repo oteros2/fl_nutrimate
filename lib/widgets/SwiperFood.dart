@@ -8,7 +8,7 @@ class SwiperFood extends StatefulWidget {
   final IconData icon;
   final bool isSelectionMode;
   final Function(Recipe)? onRecipeSelect;
-  
+
   const SwiperFood({
     super.key,
     required this.recipes,
@@ -72,8 +72,15 @@ class _SwiperFoodState extends State<SwiperFood> {
         ),
         Text(
           widget.recipes[currentIndex].name,
+          style: TextStyle(
+            fontSize: 18,
+            letterSpacing: 1.2,
+          ),
+          textAlign: TextAlign.center,
+          maxLines: 3,
+          overflow: TextOverflow.ellipsis,
         ),
-        const Divider(),
+        SizedBox(height: 50, width: 330, child: const Divider()),
       ],
     );
   }
@@ -108,7 +115,7 @@ class _SwiperImage extends StatelessWidget {
   final Function(Recipe) onRecipeChanged;
   final bool isSelectionMode;
   final Function(Recipe)? onRecipeSelect;
-  
+
   const _SwiperImage({
     super.key,
     required this.widget,
@@ -183,10 +190,10 @@ class _SwiperIcon extends StatelessWidget {
       top: 8,
       right: 8,
       child: CircleAvatar(
-        backgroundColor: Colors.black54,
+        backgroundColor: Colors.white,
         radius: 18,
         child: IconButton(
-          icon: Icon(widget.icon, color: Colors.white, size: 18),
+          icon: Icon(widget.icon, color: Color(0xFF00B894), size: 18),
           onPressed: () async {
             if (isSelectionMode && onRecipeSelect != null) {
               onRecipeSelect!(receta);
