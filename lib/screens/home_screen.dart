@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           CustomAppbar(
               title: "Hola" + " " + nombre + " " + apellido,
-              user: usuario), // Asegúrate de que este sea un SliverAppBar
+              user: usuario),
         ],
         body: SingleChildScrollView(
           child: Wrap(
