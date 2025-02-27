@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import '../services/firebase_auth_service.dart';
 import '../widgets/widgets.dart';
-import 'screens.dart';
 
 class RecoveryScreen extends StatelessWidget {
   RecoveryScreen({Key? key}) : super(key: key);
   final _recoveryFormKey = GlobalKey<FormState>();
+  final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -77,10 +78,12 @@ class RecoveryScreen extends StatelessWidget {
                       width: screenWidth * 0.6,
                       child: ElevatedButton(
                           child: const Text('Recuperar contraseña'),
-                          onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const LoginScreen()))),
+                          onPressed: () {
+                            if (_recoveryFormKey.currentState!.validate()) {
+                              _auth.resetPassword(
+                                  formValues['email']!, context);
+                            }
+                          }),
                     ),
                   ])),
             ],

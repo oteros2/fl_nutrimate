@@ -22,6 +22,8 @@ class AuthService {
         return 'El correo electrónico ya está registrado en otra cuenta';
       case 'invalid-credential':
         return 'Usuario o contraseña incorrectos';
+      case 'network-request-failed':
+        return 'Error de conexion';
       default:
         return 'Se ha producido un error inesperado';
     }
@@ -95,6 +97,7 @@ class AuthService {
   // Iniciar sesión con email y contraseña
   Future<void> logIn(
       String email, String password, BuildContext context) async {
+    FocusScope.of(context).unfocus();
     try {
       await _auth
           .signInWithEmailAndPassword(
@@ -217,5 +220,43 @@ class AuthService {
   String capitalizeFirstLetter(String text) {
     if (text.isEmpty) return text;
     return text[0].toUpperCase() + text.substring(1);
+  }
+
+// Recuperar contraeña
+  void resetPassword(String email, BuildContext context) async {
+    FocusScope.of(context).unfocus();
+    try {
+      //Envia un correo de reestablecimiento de contraseña al email introducido
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      QuickAlert.show(
+        context: context,
+        type: QuickAlertType.success,
+        title: "Email enviado correctamente",
+        text: "Revisa tu bandeja de entrada para restablecer tu contraseña.",
+        confirmBtnText: "OK",
+        confirmBtnColor: AppTheme.primary,
+        onConfirmBtnTap: () {
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => LoginScreen()),
+            (route) => false,
+          );
+        },
+      );
+    } catch (e) {
+      QuickAlert.show(
+        context: context,
+        type: QuickAlertType.error,
+        title: "Error al enviar el correo",
+        text: "Ocurrió un error. Inténtalo nuevamente.",
+        confirmBtnText: "OK",
+        confirmBtnColor: AppTheme.primary,
+        onConfirmBtnTap: () {
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => LoginScreen()),
+            (route) => false,
+          );
+        },
+      );
+    }
   }
 }
