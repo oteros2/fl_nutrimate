@@ -1,16 +1,10 @@
-# fl_nutrimate
+# NUTRIMATE
 
-A new Flutter project.
+# DEPENDENCIES
 
-## Getting Started
+- For chart usage: fl_chart: ^0.70.2
+- For tabBar: persistent_bottom_nav_bar: any
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# DOCS:
+- tabBar docs: https://pub.dev/packages/persistent_bottom_nav_bar
+- chart docs: https://pub.dev/documentation/fl_chart/latest/

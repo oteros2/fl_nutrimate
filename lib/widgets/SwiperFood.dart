@@ -1,8 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
-import 'package:fl_nutrimate/entities/entities.dart';
-import 'package:fl_nutrimate/screens/cambio_receta_screen.dart';
-import 'package:fl_nutrimate/screens/receta_diaria_screen.dart';
 import 'package:flutter/material.dart';
+import '../models/entities.dart';
+import '../screens/screens.dart';
 
 class SwiperFood extends StatefulWidget {
   final List<Recipe> recipes;
@@ -140,7 +139,7 @@ class _SwiperImage extends StatelessWidget {
                 );
               },
               child: FadeInImage(
-                placeholder: const AssetImage('assets/loading.gif'),
+                placeholder: const AssetImage('assets/images/loading.gif'),
                 image: NetworkImage(receta.imageUrl),
                 fit: BoxFit.cover,
               ),

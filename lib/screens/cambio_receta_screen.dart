@@ -1,14 +1,12 @@
-import 'package:fl_nutrimate/widgets/widgets.dart';
+import 'package:NutriMate/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import '../entities/entities.dart';
+
+import '../models/entities.dart';
 
 class CambioRecetaScreen extends StatelessWidget {
   final Recipe recetaOriginal;
-  
-  const CambioRecetaScreen({
-    super.key, 
-    required this.recetaOriginal
-  });
+
+  const CambioRecetaScreen({super.key, required this.recetaOriginal});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +29,7 @@ class CambioRecetaScreen extends StatelessWidget {
           children: [
             const SwiperFoodLabel(day: 'Equilibrado'),
             SwiperFood(
-              recipes: recipes, 
+              recipes: recipes,
               icon: Icons.add,
               isSelectionMode: true,
               onRecipeSelect: (recipe) {
@@ -40,7 +38,7 @@ class CambioRecetaScreen extends StatelessWidget {
             ),
             const SwiperFoodLabel(day: 'Bajo en calorías'),
             SwiperFood(
-              recipes: recipes, 
+              recipes: recipes,
               icon: Icons.add,
               isSelectionMode: true,
               onRecipeSelect: (recipe) {
@@ -49,7 +47,7 @@ class CambioRecetaScreen extends StatelessWidget {
             ),
             const SwiperFoodLabel(day: 'Alto en proteínas'),
             SwiperFood(
-              recipes: recipes, 
+              recipes: recipes,
               icon: Icons.add,
               isSelectionMode: true,
               onRecipeSelect: (recipe) {
@@ -58,7 +56,7 @@ class CambioRecetaScreen extends StatelessWidget {
             ),
             const SwiperFoodLabel(day: 'Bajo en grasas'),
             SwiperFood(
-              recipes: recipes, 
+              recipes: recipes,
               icon: Icons.add,
               isSelectionMode: true,
               onRecipeSelect: (recipe) {

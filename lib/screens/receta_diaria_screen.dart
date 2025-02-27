@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../entities/entities.dart';
+import '../models/entities.dart';
 
 class RecetaDiariaScreen extends StatefulWidget {
   const RecetaDiariaScreen({super.key, required this.receta});
