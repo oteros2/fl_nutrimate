@@ -7,10 +7,15 @@ import 'package:flutter/material.dart';
 class SwiperFood extends StatefulWidget {
   final List<Recipe> recipes;
   final IconData icon;
+  final bool isSelectionMode;
+  final Function(Recipe)? onRecipeSelect;
+  
   const SwiperFood({
     super.key,
     required this.recipes,
     required this.icon,
+    this.isSelectionMode = false,
+    this.onRecipeSelect,
   });
 
   @override
@@ -19,6 +24,12 @@ class SwiperFood extends StatefulWidget {
 
 class _SwiperFoodState extends State<SwiperFood> {
   int currentIndex = 0;
+
+  void updateRecipe(Recipe newRecipe) {
+    setState(() {
+      widget.recipes[currentIndex] = newRecipe;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +55,10 @@ class _SwiperFoodState extends State<SwiperFood> {
                 return _SwiperImage(
                   widget: widget,
                   receta: widget.recipes[index],
+                  index: index,
+                  onRecipeChanged: updateRecipe,
+                  isSelectionMode: widget.isSelectionMode,
+                  onRecipeSelect: widget.onRecipeSelect,
                 );
               },
               pagination: SwiperPagination(
@@ -90,10 +105,19 @@ class _SwiperTimeFoodLabel extends StatelessWidget {
 
 class _SwiperImage extends StatelessWidget {
   final Recipe receta;
+  final int index;
+  final Function(Recipe) onRecipeChanged;
+  final bool isSelectionMode;
+  final Function(Recipe)? onRecipeSelect;
+  
   const _SwiperImage({
     super.key,
     required this.widget,
     required this.receta,
+    required this.index,
+    required this.onRecipeChanged,
+    this.isSelectionMode = false,
+    this.onRecipeSelect,
   });
 
   final SwiperFood widget;
@@ -122,7 +146,14 @@ class _SwiperImage extends StatelessWidget {
               ),
             ),
           ),
-          _SwiperIcon(widget: widget),
+          _SwiperIcon(
+            widget: widget,
+            receta: receta,
+            index: index,
+            onRecipeChanged: onRecipeChanged,
+            isSelectionMode: isSelectionMode,
+            onRecipeSelect: onRecipeSelect,
+          ),
         ],
       ),
     );
@@ -133,9 +164,19 @@ class _SwiperIcon extends StatelessWidget {
   const _SwiperIcon({
     super.key,
     required this.widget,
+    required this.receta,
+    required this.index,
+    required this.onRecipeChanged,
+    required this.isSelectionMode,
+    this.onRecipeSelect,
   });
 
   final SwiperFood widget;
+  final Recipe receta;
+  final int index;
+  final Function(Recipe) onRecipeChanged;
+  final bool isSelectionMode;
+  final Function(Recipe)? onRecipeSelect;
 
   @override
   Widget build(BuildContext context) {
@@ -147,13 +188,22 @@ class _SwiperIcon extends StatelessWidget {
         radius: 18,
         child: IconButton(
           icon: Icon(widget.icon, color: Colors.white, size: 18),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const CambioRecetaScreen(),
-              ),
-            );
+          onPressed: () async {
+            if (isSelectionMode && onRecipeSelect != null) {
+              onRecipeSelect!(receta);
+            } else {
+              final recetaSeleccionada = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CambioRecetaScreen(
+                    recetaOriginal: receta,
+                  ),
+                ),
+              );
+              if (recetaSeleccionada != null) {
+                onRecipeChanged(recetaSeleccionada);
+              }
+            }
           },
         ),
       ),

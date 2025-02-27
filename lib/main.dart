@@ -18,7 +18,6 @@ class MyApp extends StatelessWidget {
         routes: {
           'recetas-semanales': (context) => const RecetasSemanalesScreen(),
           'clientes': (context) => const ClientesScreen(),
-          'cambio-receta': (context) => const CambioRecetaScreen(),
         });
   }
 }

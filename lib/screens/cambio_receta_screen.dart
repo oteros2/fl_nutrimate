@@ -1,11 +1,14 @@
 import 'package:fl_nutrimate/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-
-import '../entities/MealData.dart';
 import '../entities/entities.dart';
 
 class CambioRecetaScreen extends StatelessWidget {
-  const CambioRecetaScreen({super.key});
+  final Recipe recetaOriginal;
+  
+  const CambioRecetaScreen({
+    super.key, 
+    required this.recetaOriginal
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +30,41 @@ class CambioRecetaScreen extends StatelessWidget {
         child: Column(
           children: [
             const SwiperFoodLabel(day: 'Equilibrado'),
-            SwiperFood(recipes: recipes, icon: Icons.add),
+            SwiperFood(
+              recipes: recipes, 
+              icon: Icons.add,
+              isSelectionMode: true,
+              onRecipeSelect: (recipe) {
+                Navigator.pop(context, recipe);
+              },
+            ),
             const SwiperFoodLabel(day: 'Bajo en calorías'),
-            SwiperFood(recipes: recipes, icon: Icons.add),
+            SwiperFood(
+              recipes: recipes, 
+              icon: Icons.add,
+              isSelectionMode: true,
+              onRecipeSelect: (recipe) {
+                Navigator.pop(context, recipe);
+              },
+            ),
             const SwiperFoodLabel(day: 'Alto en proteínas'),
-            SwiperFood(recipes: recipes, icon: Icons.add),
+            SwiperFood(
+              recipes: recipes, 
+              icon: Icons.add,
+              isSelectionMode: true,
+              onRecipeSelect: (recipe) {
+                Navigator.pop(context, recipe);
+              },
+            ),
             const SwiperFoodLabel(day: 'Bajo en grasas'),
-            SwiperFood(recipes: recipes, icon: Icons.add),
+            SwiperFood(
+              recipes: recipes, 
+              icon: Icons.add,
+              isSelectionMode: true,
+              onRecipeSelect: (recipe) {
+                Navigator.pop(context, recipe);
+              },
+            ),
           ],
         ),
       ),
