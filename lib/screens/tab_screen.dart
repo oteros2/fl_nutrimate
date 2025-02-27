@@ -1,25 +1,21 @@
 import 'package:NutriMate/models/usuario.dart';
+import 'package:NutriMate/providers/user_provider.dart';
 import 'package:NutriMate/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
+import 'package:provider/provider.dart';
 
 class TabScreen extends StatelessWidget {
   final PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
-
-  Usuario user = Usuario(
-    email: "isca@gmail.com",
-    name: 'isma',
-    lastName: 'Maq',
-    weight: 12,
-  );
 
   TabScreen({super.key});
 
   /// Para un código más legible, las listas las estoy definiendo por separado, en este caso screens pide una lista de Widgets
   /// que serán nuestras screens por lo tanto he creado una lista de tipo Widget y he metido las screen a usar
 
-  List<Widget> _buildScreens() {
+  List<Widget> _buildScreens(BuildContext context) {
+    final Usuario user = Provider.of<UserProvider>(context).usuario!;
     return [
       HomeScreen(
           user:
@@ -73,7 +69,7 @@ class TabScreen extends StatelessWidget {
     return PersistentTabView(
       context,
       controller: _controller,
-      screens: _buildScreens(), // y aquí metemos las listas
+      screens: _buildScreens(context), // y aquí metemos las listas
       items: _navBarItems(),
       handleAndroidBackButtonPress: false,
       resizeToAvoidBottomInset: true,

@@ -50,8 +50,8 @@ class AuthService {
 
       //Guarda los datos del usuario en la base de datos
       await _firestore.collection('usuarios').doc(uid).set({
-        'nombre': nombre,
-        'apellidos': apellidos,
+        'nombre': capitalizeFirstLetter(nombre),
+        'apellidos': capitalizeFirstLetter(apellidos),
         'email': email,
       });
 
@@ -156,7 +156,9 @@ class AuthService {
         if (!userDoc.exists) {
           await _firestore.collection('usuarios').doc(user.uid).set({
             'nombre': user.displayName?.split(" ").first,
-            'apellidos': user.displayName?.split(" ")[1],
+            'apellidos': user.displayName!.split(" ")[1] +
+                ' ' +
+                user.displayName!.split(" ")[2],
             'email': user.email,
             'photoURL': user.photoURL,
           });
@@ -197,5 +199,11 @@ class AuthService {
       MaterialPageRoute(builder: (context) => LoginScreen()),
       (Route<dynamic> route) => false,
     );
+  }
+
+//Pasar a mayuscula la primera letra del nombre
+  String capitalizeFirstLetter(String text) {
+    if (text.isEmpty) return text;
+    return text[0].toUpperCase() + text.substring(1);
   }
 }

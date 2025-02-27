@@ -25,14 +25,14 @@ class CardUser extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const CircleAvatar(
-                  child: Text("JP"),
+                CircleAvatar(
+                  child: Text(user.name[0] + user.lastName[0]),
                   backgroundColor: AppTheme.primary,
                   radius: 50,
                 ),
                 const SizedBox(height: 15),
                 Text(
-                  user.name,
+                  user.name + " " + user.lastName,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

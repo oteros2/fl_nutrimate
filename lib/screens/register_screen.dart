@@ -142,6 +142,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     width: screenWidth / 1.2,
                     child: SignInButton(
                       Buttons.google,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
                       text: "Iniciar sesión con Google",
                       onPressed: () {
                         _authService.signInWithGoogle(context);

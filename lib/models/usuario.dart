@@ -10,4 +10,13 @@ class Usuario {
     required this.lastName,
     required this.weight,
   });
+
+  factory Usuario.fromMap(Map<String, dynamic> map) {
+    return Usuario(
+      email: map['email'] ?? '',
+      name: map['nombre'] ?? '',
+      lastName: map['apellidos'] ?? '',
+      weight: map['peso']?.toDouble() ?? 0.0,
+    );
+  }
 }

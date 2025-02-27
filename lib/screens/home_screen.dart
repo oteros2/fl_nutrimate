@@ -2,7 +2,6 @@ import 'package:NutriMate/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/entities.dart';
-import '../models/usuario.dart';
 import '../widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -12,16 +11,16 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userData = Provider.of<UserProvider>(context).userData;
-    String nombre = userData?['nombre'];
-    String apellidos = userData?['apellidos'];
+    final Usuario usuario = Provider.of<UserProvider>(context).usuario!;
+    final String nombre = usuario.name;
+    final String apellido = usuario.lastName.split(" ")[0];
 
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           CustomAppbar(
-              title: "Hola " + " " + nombre + " " + apellidos,
-              user: user), // Asegúrate de que este sea un SliverAppBar
+              title: "Hola" + " " + nombre + " " + apellido,
+              user: usuario), // Asegúrate de que este sea un SliverAppBar
         ],
         body: SingleChildScrollView(
           child: Wrap(
