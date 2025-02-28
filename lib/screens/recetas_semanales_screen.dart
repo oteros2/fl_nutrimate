@@ -10,8 +10,7 @@ class RecetasSemanalesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Usuario usuario = Provider.of<UserProvider>(context).usuario!;
-    final String nombre = usuario.name;
-    final String apellido = usuario.lastName.split(" ")[0];
+    final List<Recipe> recetas = usuario.recetas;
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -22,7 +21,7 @@ class RecetasSemanalesScreen extends StatelessWidget {
           child: Column(
             children: [
               const SwiperFoodLabel(day: 'Lunes', label: "Dieta del día"),
-              SwiperFood(recipes: recipes, icon: Icons.edit),
+              SwiperFood(recipes: recetas, icon: Icons.edit),
               const SwiperFoodLabel(day: 'Martes', label: "Dieta del día"),
               SwiperFood(recipes: recipes, icon: Icons.edit),
               const SwiperFoodLabel(day: 'Miércoles', label: "Dieta del día"),

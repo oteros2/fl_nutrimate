@@ -13,4 +13,17 @@ class Recipe {
       required this.ingredients,
       required this.instructions,
       required this.type});
+
+  factory Recipe.fromMap(Map<String, dynamic> map) {
+    return Recipe(
+      name: map['name'] ?? '',
+      imageUrl: map['imageUrl'] ?? '',
+      instructions: List<String>.from(map['instructions'] ?? []),
+      type: MealType.values.firstWhere(
+        (e) => e.toString() == 'MealType.${map['type']}',
+        orElse: () => MealType.breakfast,
+      ),
+      ingredients: List<Map<String, dynamic>>.from(map['ingredients'] ?? []),
+    );
+  }
 }

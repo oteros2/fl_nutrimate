@@ -17,8 +17,6 @@ class _RecetaDiariaScreenState extends State<RecetaDiariaScreen> {
   @override
   Widget build(BuildContext context) {
     final Usuario usuario = Provider.of<UserProvider>(context).usuario!;
-    final String nombre = usuario.name;
-    final String apellido = usuario.lastName.split(" ")[0];
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -44,8 +42,8 @@ class _RecetaDiariaScreenState extends State<RecetaDiariaScreen> {
                       children: widget.receta.ingredients.map((ingrediente) {
                         return CheckboxListTile(
                           activeColor: const Color(0xFF00B894),
-                          title: Text(ingrediente["nombre"] as String),
-                          value: ingrediente["seleccionado"],
+                          title: Text(ingrediente["ingredientName"]),
+                          value: ingrediente["isSelected"],
                           onChanged: (bool? nuevoValor) {
                             setState(() {
                               ingrediente["seleccionado"] = nuevoValor!;
@@ -90,6 +88,8 @@ class _RecipePreparation extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: List.generate(instructions.length, (index) {
+              print("Ingrediente: ${instructions[index]}");
+
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),
                 child: Row(
@@ -130,7 +130,7 @@ class _FoodImage extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(25),
         child: FadeInImage(
-          placeholder: const AssetImage('assets/loading.gif'),
+          placeholder: const AssetImage('assets/images/loading.gif'),
           image: NetworkImage(imageUrl),
           width: double.infinity,
           height: 260,
