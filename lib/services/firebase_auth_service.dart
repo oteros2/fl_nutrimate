@@ -1,4 +1,5 @@
 import 'package:NutriMate/main.dart';
+import 'package:NutriMate/models/entities.dart';
 import 'package:NutriMate/providers/user_provider.dart';
 import 'package:NutriMate/theme/app_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -54,7 +55,7 @@ class AuthService {
         'nombre': capitalizeFirstLetter(nombre),
         'apellidos': capitalizeFirstLetter(apellidos),
         'email': email,
-        'recetas': recetas
+        'recetas': recipes.map((recipe) => recipe.toMap()).toList(),
       });
 
       //Muestra una ventana si todo ha salido correctamente en el registro
@@ -175,6 +176,7 @@ class AuthService {
                 user.displayName!.split(" ")[2],
             'email': user.email,
             'photoURL': user.photoURL,
+            'recetas': recipes.map((recipe) => recipe.toMap()).toList(),
           });
         }
 
