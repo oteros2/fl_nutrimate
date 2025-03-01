@@ -6,11 +6,11 @@ final List<Recipe> recipes = [
     imageUrl:
         "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.rionegro.com.ar%2Fwp-content%2Fuploads%2F2022%2F02%2FPanqueques-de-avena-tres-recetas.jpg&f=1&nofb=1&ipt=e51822a1f52fc193020b20ef7c594d843e11afab4500a392ca8ea3c8f78a8859&ipo=images",
     ingredients: [
-      {"nombre": "1 taza de avena", "seleccionado": false},
-      {"nombre": "1 huevo", "seleccionado": false},
-      {"nombre": "1/2 taza de leche", "seleccionado": false},
-      {"nombre": "1 cucharadita de polvo de hornear", "seleccionado": false},
-      {"nombre": "1 cucharadita de miel", "seleccionado": false},
+      {"ingredientName": "1 taza de avena", "isSelected": false},
+      {"ingredientName": "1 huevo", "isSelected": false},
+      {"ingredientName": "1/2 taza de leche", "isSelected": false},
+      {"ingredientName": "1 cucharadita de polvo de hornear", "isSelected": false},
+      {"ingredientName": "1 cucharadita de miel", "isSelected": false},
     ],
     instructions: [
       "Mezclar todos los ingredientes en una licuadora hasta obtener una mezcla homogénea.",
@@ -25,11 +25,11 @@ final List<Recipe> recipes = [
     imageUrl:
         "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.haceloconhuevos.com%2Fwp-content%2Fuploads%2F2022%2F02%2FTOSTADA-DE-AGUACATE-Y-HUEVO-FRITO.jpg&f=1&nofb=1&ipt=aeb0a3157305fe610a3d4cbdbfe5acb4492052f749eaaeb0e3a0536350c68023&ipo=images",
     ingredients: [
-      {"nombre": "2 rebanadas de pan integral", "seleccionado": false},
-      {"nombre": "1 aguacate maduro", "seleccionado": false},
-      {"nombre": "2 huevos", "seleccionado": false},
-      {"nombre": "Sal y pimienta al gusto", "seleccionado": false},
-      {"nombre": "Aceite de oliva", "seleccionado": false}
+      {"ingredientName": "2 rebanadas de pan integral", "isSelected": false},
+      {"ingredientName": "1 aguacate maduro", "isSelected": false},
+      {"ingredientName": "2 huevos", "isSelected": false},
+      {"ingredientName": "Sal y pimienta al gusto", "isSelected": false},
+      {"ingredientName": "Aceite de oliva", "isSelected": false}
     ],
     instructions: [
       "Tostar el pan hasta que esté dorado.",
@@ -44,11 +44,11 @@ final List<Recipe> recipes = [
     imageUrl:
         "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frecetasdepollo.online%2Fwp-content%2Fuploads%2F2017%2F09%2Fensalada-cesar-con-pollo.jpg&f=1&nofb=1&ipt=e9c63aab2eb5e9c95757e23d4e37f085f1ee3c454dd54850cd4c08e596f7a0d4&ipo=images",
     ingredients: [
-      {"nombre": "1 pechuga de pollo a la parrilla", "seleccionado": false},
-      {"nombre": "1 lechuga romana", "seleccionado": false},
-      {"nombre": "Crutones", "seleccionado": false},
-      {"nombre": "Queso parmesano", "seleccionado": false},
-      {"nombre": "Aderezo César", "seleccionado": false}
+      {"ingredientName": "1 pechuga de pollo a la parrilla", "isSelected": false},
+      {"ingredientName": "1 lechuga romana", "isSelected": false},
+      {"ingredientName": "Crutones", "isSelected": false},
+      {"ingredientName": "Queso parmesano", "isSelected": false},
+      {"ingredientName": "Aderezo César", "isSelected": false}
     ],
     instructions: [
       "Cortar la lechuga y colocarla en un bol.",

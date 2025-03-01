@@ -5,17 +5,16 @@ import 'package:provider/provider.dart';
 import 'package:NutriMate/providers/user_provider.dart';
 
 class RecetasSemanalesScreen extends StatelessWidget {
-  const RecetasSemanalesScreen({super.key});
+  final List<Recipe> recetas;
+  const RecetasSemanalesScreen({super.key, required this.recetas});
 
   @override
   Widget build(BuildContext context) {
     final Usuario usuario = Provider.of<UserProvider>(context).usuario!;
-    final List<Recipe> recetas = usuario.recetas;
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          CustomAppbar(
-              title: 'Recetas semanales', user: usuario),
+          CustomAppbar(title: 'Recetas semanales', user: usuario),
         ],
         body: SingleChildScrollView(
           child: Column(

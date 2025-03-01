@@ -51,7 +51,8 @@ class _ClientesScreenState extends State<ClientesScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const RecetasSemanalesScreen(),
+                    builder: (context) =>
+                        RecetasSemanalesScreen(recetas: cliente.recetas),
                   ),
                 );
               },
