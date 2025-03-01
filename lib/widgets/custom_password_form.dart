@@ -39,6 +39,14 @@ class _CustomPasswordFormFieldState extends State<CustomPasswordFormField> {
           return 'Este campo es obligatorio';
         }
 
+        if (!RegExp(r'[A-Z]').hasMatch(value)) {
+          return 'Debe contener al menos una mayúscula';
+        }
+
+        if (!RegExp(r'[0-9]').hasMatch(value)) {
+          return 'Debe contener al menos un número';
+        }
+
         if (value.length < 8) {
           return 'Mínimo 8 caracteres';
         }

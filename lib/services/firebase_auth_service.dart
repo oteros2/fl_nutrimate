@@ -59,22 +59,17 @@ class AuthService {
 
       //Muestra una ventana si todo ha salido correctamente en el registro
       QuickAlert.show(
-        context: context,
-        type: QuickAlertType.success,
-        title: "Usuario registrado correctamente",
-        showConfirmBtn: false,
-      );
-
-      Future.delayed(Duration(seconds: 3), () {
-        Navigator.of(context).pop();
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => const LoginScreen(),
-          ),
-        );
-      });
-
-      return null;
+          context: context,
+          type: QuickAlertType.success,
+          title: "Usuario registrado correctamente",
+          confirmBtnText: "Iniciar sesion",
+          confirmBtnColor: AppTheme.primary,
+          onConfirmBtnTap: () {
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => LoginScreen()),
+              (route) => false,
+            );
+          });
     }
     //Si se da alguna excepcion a la hora de registrar el usuario se muestra una ventana con el error.
     on FirebaseAuthException catch (e) {
