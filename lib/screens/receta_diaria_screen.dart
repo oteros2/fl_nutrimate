@@ -88,8 +88,6 @@ class _RecipePreparation extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: List.generate(instructions.length, (index) {
-              print("Ingrediente: ${instructions[index]}");
-
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),
                 child: Row(
