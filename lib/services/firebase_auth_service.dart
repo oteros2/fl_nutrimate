@@ -34,6 +34,7 @@ class AuthService {
     required String email,
     required String password,
     required BuildContext context,
+    required List<Map<String, dynamic>> recetas,
   }) async {
     //Cierra el teclado una vez que se envian los datos
     FocusScope.of(context).unfocus();
@@ -53,6 +54,7 @@ class AuthService {
         'nombre': capitalizeFirstLetter(nombre),
         'apellidos': capitalizeFirstLetter(apellidos),
         'email': email,
+        'recetas': recetas
       });
 
       //Muestra una ventana si todo ha salido correctamente en el registro

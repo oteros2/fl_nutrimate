@@ -1,3 +1,4 @@
+import 'package:NutriMate/models/entities.dart';
 import 'package:NutriMate/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -123,6 +124,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           password:
                                               formValues['password']!.trim(),
                                           context: context,
+                                          recetas: recipes.map((recipe) => recipe.toMap()).toList(),
                                         );
                                         setState(() {
                                           _isRegistering = false;

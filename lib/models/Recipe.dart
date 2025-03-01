@@ -14,6 +14,16 @@ class Recipe {
       required this.instructions,
       required this.type});
 
+Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'imageUrl': imageUrl,
+      'instructions': instructions,
+      'type': type.toString().split('.').last,
+      'ingredients': ingredients,
+    };
+  }
+
   factory Recipe.fromMap(Map<String, dynamic> map) {
     return Recipe(
       name: map['name'] ?? '',
