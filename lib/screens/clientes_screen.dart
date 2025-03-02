@@ -1,3 +1,4 @@
+import 'package:NutriMate/screens/crear_receta_screen.dart';
 import 'package:flutter/material.dart';
 import '../models/entities.dart';
 import '../services/services.dart';
@@ -68,13 +69,34 @@ class _ClientesScreenState extends State<ClientesScreen> {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(
-          Icons.logout,
-          color: Colors.white,
-        ),
-        backgroundColor: Colors.red,
-        onPressed: () async => await _auth.signOut(context),
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            backgroundColor: Color.fromRGBO(0, 184, 148, 1),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CrearRecetaScreen(),
+                ),
+              );
+            },
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+          ),
+          SizedBox(height: 10),
+          FloatingActionButton(
+            backgroundColor: Color.fromRGBO(200, 30, 50, 1),
+            onPressed: () async => await _auth.signOut(context),
+            child: const Icon(
+              Icons.logout,
+              color: Colors.white,
+            ),
+          ),
+        ],
       ),
     );
   }
