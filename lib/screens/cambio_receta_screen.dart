@@ -15,6 +15,10 @@ class CambioRecetaScreen extends StatefulWidget {
 }
 
 class _CambioRecetaScreenState extends State<CambioRecetaScreen> {
+  void onRecipeSelect(Recipe recipe) {
+    Navigator.pop(context, recipe);
+  }
+
   Future<List<Recipe>> loadEquilibradas() async {
     final recetas = await getRecetasPorCategoria('Equilibrado');
     return recetas;
@@ -63,9 +67,7 @@ class _CambioRecetaScreenState extends State<CambioRecetaScreen> {
                     recipes: equilibradas,
                     icon: Icons.add,
                     isSelectionMode: true,
-                    onRecipeSelect: (recipe) {
-                      Navigator.pop(context, recipe);
-                    },
+                    onRecipeSelect: onRecipeSelect,
                   );
                 },
               ),
@@ -85,9 +87,7 @@ class _CambioRecetaScreenState extends State<CambioRecetaScreen> {
                     recipes: proteinas,
                     icon: Icons.add,
                     isSelectionMode: true,
-                    onRecipeSelect: (recipe) {
-                      Navigator.pop(context, recipe);
-                    },
+                    onRecipeSelect: onRecipeSelect,
                   );
                 },
               ),
@@ -107,9 +107,7 @@ class _CambioRecetaScreenState extends State<CambioRecetaScreen> {
                     recipes: grasas,
                     icon: Icons.add,
                     isSelectionMode: true,
-                    onRecipeSelect: (recipe) {
-                      Navigator.pop(context, recipe);
-                    },
+                    onRecipeSelect: onRecipeSelect,
                   );
                 },
               ),
@@ -129,9 +127,7 @@ class _CambioRecetaScreenState extends State<CambioRecetaScreen> {
                     recipes: aumentoMusculo,
                     icon: Icons.add,
                     isSelectionMode: true,
-                    onRecipeSelect: (recipe) {
-                      Navigator.pop(context, recipe);
-                    },
+                    onRecipeSelect: onRecipeSelect,
                   );
                 },
               ),
