@@ -6,21 +6,25 @@ class Recipe {
   final List<String> instructions;
   final MealType type;
   final List<Map<String, dynamic>> ingredients;
+  final String category;
 
-  Recipe(
-      {required this.name,
-      required this.imageUrl,
-      required this.ingredients,
-      required this.instructions,
-      required this.type});
+  Recipe({
+    required this.name,
+    required this.imageUrl,
+    required this.ingredients,
+    required this.instructions,
+    required this.type,
+    required this.category,
+  });
 
-Map<String, dynamic> toMap() {
+  Map<String, dynamic> toMap() {
     return {
       'name': name,
       'imageUrl': imageUrl,
       'instructions': instructions,
       'type': type.toString().split('.').last,
       'ingredients': ingredients,
+      'category': category,
     };
   }
 
@@ -34,6 +38,7 @@ Map<String, dynamic> toMap() {
         orElse: () => MealType.breakfast,
       ),
       ingredients: List<Map<String, dynamic>>.from(map['ingredients'] ?? []),
+      category: map['category'] ?? '',
     );
   }
 }

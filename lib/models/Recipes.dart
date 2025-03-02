@@ -19,6 +19,7 @@ final List<Recipe> recipes = [
       "Servir con frutas o miel al gusto."
     ],
     type: MealType.breakfast,
+    category: 'Bajo en grasas',
   ),
   Recipe(
     name: "Tostadas con aguacate y huevo",
@@ -38,6 +39,7 @@ final List<Recipe> recipes = [
       "Agregar sal, pimienta y un chorrito de aceite de oliva."
     ],
     type: MealType.breakfast,
+    category: 'Equilibrado',
   ),
   Recipe(
     name: "Ensalada César con pollo",
@@ -57,6 +59,7 @@ final List<Recipe> recipes = [
       "Servir de inmediato."
     ],
     type: MealType.lunch,
+    category: 'Equilibrado',
   ),
   /*
   Recipe(
