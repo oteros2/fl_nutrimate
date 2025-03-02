@@ -30,3 +30,25 @@ Future<List<Usuario>> getAllUsers() async {
       .where((usuario) => usuario.email != "admin@nutrimate.com")
       .toList();
 }
+
+//Obtener todas las recetas equilibradas
+Future<List<Recipe>> getRecetasPorCategoria(String category) async {
+  final QuerySnapshot snapshot = await db
+      .collection('recetas')
+      .where('category', isEqualTo: category)
+      .get();
+  return snapshot.docs.map((doc) {
+    final data = doc.data() as Map<String, dynamic>;
+    return Recipe(
+      name: data['name'],
+      imageUrl: data['imageUrl'],
+      ingredients: List<Map<String, dynamic>>.from(data['ingredients']),
+      instructions: List<String>.from(data['instructions']),
+      type: MealType.values.firstWhere(
+        (e) => e.toString().split('.').last == data['type'],
+        orElse: () => MealType.breakfast,
+      ),
+      category: data['category'],
+    );
+  }).toList();
+}
