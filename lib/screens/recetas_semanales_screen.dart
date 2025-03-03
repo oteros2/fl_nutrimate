@@ -1,3 +1,4 @@
+import 'package:NutriMate/screens/menus_semanales_screen.dart';
 import 'package:flutter/material.dart';
 import '../models/entities.dart';
 import '../widgets/widgets.dart';
@@ -25,7 +26,12 @@ class RecetasSemanalesScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     onPressed: () {
-                      print('Botón especial presionado');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MenusSemanalesScreen(),
+                        ),
+                      );
                     },
                     child: const Text('Cambiar menú'),
                   ),

@@ -25,6 +25,16 @@ Future<List<Usuario>> getAllUsers() async {
       .toList();
 }
 
+//Obtener todos los menús semanales de la base de datos
+Future<List<MenuSemanal>> gatMenusSemanales() async {
+  final QuerySnapshot snapshot = await db.collection('menu_semanal').get();
+  return snapshot.docs.map((doc) {
+    final data = doc.data() as Map<String, dynamic>;
+    data['id'] = doc.id;
+    return MenuSemanal.fromMap(data);
+  }).toList();
+}
+
 //Obtener todas las recetas equilibradas
 Future<List<Recipe>> getRecetasPorCategoria(String category) async {
   final QuerySnapshot snapshot = await db
