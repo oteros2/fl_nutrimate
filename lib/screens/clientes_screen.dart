@@ -19,6 +19,7 @@ class ClientesScreen extends StatefulWidget {
 class _ClientesScreenState extends State<ClientesScreen> {
   final AuthService _auth = AuthService();
   List<Usuario> _usuarios = [];
+  bool _isLoading = true;
 
   @override
   void initState() {

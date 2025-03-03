@@ -107,11 +107,15 @@ class AuthService {
                   {
                     if (value.user?.email == "admin@nutrimate.com")
                       {
-                        Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) => ClientesScreen()),
-                          (route) => false,
-                        )
+                        Provider.of<UserProvider>(context, listen: false)
+                            .loadUser()
+                            .then((_) {
+                          Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => ClientesScreen()),
+                            (route) => false,
+                          );
+                        })
                       }
                     else
                       {
