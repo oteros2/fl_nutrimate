@@ -41,7 +41,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         ),
         Expanded(
           child: SfCalendar(
-            view: CalendarView.schedule,
+            view: CalendarView.month,
             dataSource: MeetingDataSource(widget.meetings),
             monthViewSettings: const MonthViewSettings(
               appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,

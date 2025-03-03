@@ -75,14 +75,6 @@ class SettingsScreen extends StatelessWidget {
           ),
         ])),
       ]),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(
-          Icons.logout,
-          color: Colors.white,
-        ),
-        backgroundColor: Colors.red,
-        onPressed: () async => await _auth.signOut(context),
-      ),
     );
   }
 }

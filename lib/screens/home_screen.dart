@@ -113,22 +113,28 @@ class _HomeScreenState extends State<HomeScreen> {
     final String apellido = usuario.lastName.split(" ")[0];
 
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: CustomAppbar(
+          title: "Hola $nombre $apellido",
+          user: usuario,
+        ),
+      ),
       body: Column(
         children: [
-          // Custom AppBar en la parte superior
-          CustomAppbar(
-            title: "Hola $nombre $apellido",
-            user: usuario,
-          ),
-
           // Contenido principal con NestedScrollView
           Expanded(
             child: NestedScrollView(
-              headerSliverBuilder: (context, innerBoxIsScrolled) => [],
+              headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                SliverToBoxAdapter(
+                    child: SizedBox
+                        .shrink()), // Header vacío si no necesitas algo aquí
+              ],
               body: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 16.0, vertical: 10.0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SwiperFoodLabel(day: 'Lunes', label: "Dieta del día"),
                     SwiperFood(cliente: usuario, icon: Icons.edit),
