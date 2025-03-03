@@ -46,6 +46,7 @@ final menuDiario = MenuDiario(
       ],
       type: MealType.breakfast,
       category: 'Bajo en grasas',
+      calories: 330,
     ),
     Recipe(
       name: "Ensalada de quinoa",
@@ -65,6 +66,7 @@ final menuDiario = MenuDiario(
       ],
       type: MealType.lunch,
       category: 'Saludable',
+      calories: 760,
     ),
     Recipe(
       name: "Pechuga de pollo a la plancha",
@@ -83,6 +85,7 @@ final menuDiario = MenuDiario(
       ],
       type: MealType.dinner,
       category: 'Proteico',
+      calories: 450,
     ),
   ],
 );

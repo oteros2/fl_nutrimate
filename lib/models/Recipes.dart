@@ -22,6 +22,7 @@ final Recipe cena = Recipe(
     ],
     type: MealType.breakfast,
     category: 'Bajo en grasas',
+    calories: 207
 );
 
 final List<Recipe> recipes = [
@@ -47,6 +48,7 @@ final List<Recipe> recipes = [
     ],
     type: MealType.breakfast,
     category: 'Bajo en grasas',
+    calories: 330
   ),
   Recipe(
     name: "Tostadas con aguacate y huevo",
@@ -67,6 +69,7 @@ final List<Recipe> recipes = [
     ],
     type: MealType.breakfast,
     category: 'Equilibrado',
+    calories: 490
   ),
   Recipe(
     name: "Ensalada César con pollo",
@@ -90,6 +93,7 @@ final List<Recipe> recipes = [
     ],
     type: MealType.lunch,
     category: 'Equilibrado',
+    calories: 210
   ),
 ];
 
@@ -114,6 +118,7 @@ final List<Recipe> recipes2 = [
     ],
     type: MealType.lunch,
     category: 'Aumento masa muscular',
+    calories: 860
   ),
   Recipe(
       name: "Salmón a la plancha con espárragos",
@@ -132,6 +137,7 @@ final List<Recipe> recipes2 = [
         "Servir con rodajas de limón al gusto."
       ],
       type: MealType.dinner,
+      calories: 790,
       category: 'Bajo en grasas'),
   Recipe(
     name:
@@ -153,6 +159,7 @@ final List<Recipe> recipes2 = [
     ],
     type: MealType.dinner,
     category: 'Equilibrado',
+    calories: 839
   ),
   Recipe(
       name: "Sopa de lentejas",
@@ -171,5 +178,6 @@ final List<Recipe> recipes2 = [
         "Sazonar al gusto y servir caliente."
       ],
       type: MealType.dinner,
+      calories: 780,
       category: 'Aumento masa muscular'),
 ];

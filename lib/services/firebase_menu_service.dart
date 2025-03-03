@@ -70,6 +70,7 @@ Future<List<Recipe>> getRecetasPorCategoria(String category) async {
         orElse: () => MealType.breakfast,
       ),
       category: data['category'],
+      calories: data['calories'],
     );
   }).toList();
 }

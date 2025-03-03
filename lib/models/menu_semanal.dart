@@ -49,6 +49,7 @@ final menu = MenuSemanal(
         ],
         type: MealType.breakfast,
         category: 'Bajo en grasas',
+        calories: 207
       ),
       Recipe(
         name: "Ajos con sal",
@@ -68,6 +69,7 @@ final menu = MenuSemanal(
         ],
         type: MealType.lunch,
         category: 'Saludable',
+        calories: 10,
       ),
       Recipe(
         name: "Pizza de cilantro",
@@ -86,6 +88,7 @@ final menu = MenuSemanal(
         ],
         type: MealType.dinner,
         category: 'Proteico',
+        calories: 1000,
       ),
     ]);
   }),

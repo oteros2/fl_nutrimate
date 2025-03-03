@@ -19,6 +19,7 @@ class CrearRecetaScreenState extends State<CrearRecetaScreen> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController imageUrlController = TextEditingController();
+  final TextEditingController caloriesController = TextEditingController();
 
   final List<String> recipeCategories = [
     "Aumento masa muscular",
@@ -64,6 +65,9 @@ class CrearRecetaScreenState extends State<CrearRecetaScreen> {
         instructions: instructions,
         type: selectedMealType!,
         category: selectedCategory!,
+        calories: caloriesController.text.isNotEmpty
+            ? double.parse(caloriesController.text)
+            : 0.0,
       );
 
       try {
@@ -130,6 +134,14 @@ class CrearRecetaScreenState extends State<CrearRecetaScreen> {
                   decoration: InputDecoration(labelText: "URL de la imagen"),
                   validator: (value) =>
                       value!.isEmpty ? "Ingresa una URL" : null,
+                ),
+                SizedBox(height: 10),
+                TextFormField(
+                  controller: caloriesController,
+                  decoration: InputDecoration(labelText: "Calorías"),
+                  keyboardType: TextInputType.number,
+                  validator: (value) =>
+                      value!.isEmpty ? "Ingresa un número" : null,
                 ),
                 SizedBox(height: 10),
                 DropdownButtonFormField<String>(

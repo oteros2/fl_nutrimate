@@ -26,7 +26,7 @@ class TabScreen extends StatelessWidget {
       RecetasSemanalesScreen(
         cliente: usuario,
       ),
-      const ChartScreen(),
+      ChartScreen(),
       SettingsScreen(user: user),
       //aquí iría el config screen
     ];

@@ -7,6 +7,7 @@ class Recipe {
   final MealType type;
   final List<Map<String, dynamic>> ingredients;
   final String category;
+  final double calories;
 
   Recipe({
     required this.name,
@@ -15,6 +16,7 @@ class Recipe {
     required this.instructions,
     required this.type,
     required this.category,
+    required this.calories,
   });
 
   Map<String, dynamic> toMap() {
@@ -25,6 +27,7 @@ class Recipe {
       'type': type.toString().split('.').last,
       'ingredients': ingredients,
       'category': category,
+      'calories': calories,
     };
   }
 
@@ -39,6 +42,7 @@ class Recipe {
       ),
       ingredients: List<Map<String, dynamic>>.from(map['ingredients'] ?? []),
       category: map['category'] ?? '',
+      calories: map['calories'] ?? 0.0,
     );
   }
 }
