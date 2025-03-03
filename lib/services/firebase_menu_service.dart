@@ -31,3 +31,65 @@ Future<void> updateMenuForUser(Usuario usuario, MenuSemanal newMenu) async {
     throw e;
   }
 }
+
+//Obtener todos los menús semanales de la base de datos
+Future<List<MenuSemanal>> gatMenusSemanales() async {
+  final QuerySnapshot snapshot = await db.collection('menu_semanal').get();
+  return snapshot.docs.map((doc) {
+    final data = doc.data() as Map<String, dynamic>;
+    data['id'] = doc.id;
+    return MenuSemanal.fromMap(data);
+  }).toList();
+}
+
+//Obtener todos los menús diarios de la base de datos
+Future<List<MenuSemanal>> getMenusDiarios() async {
+  final QuerySnapshot snapshot = await db.collection('menu_semanal').get();
+  return snapshot.docs.map((doc) {
+    final data = doc.data() as Map<String, dynamic>;
+    data['id'] = doc.id;
+    return MenuSemanal.fromMap(data);
+  }).toList();
+}
+
+//Obtener todas las recetas equilibradas
+Future<List<Recipe>> getRecetasPorCategoria(String category) async {
+  final QuerySnapshot snapshot = await db
+      .collection('recetas')
+      .where('category', isEqualTo: category)
+      .get();
+  return snapshot.docs.map((doc) {
+    final data = doc.data() as Map<String, dynamic>;
+    return Recipe(
+      name: data['name'],
+      imageUrl: data['imageUrl'],
+      ingredients: List<Map<String, dynamic>>.from(data['ingredients']),
+      instructions: List<String>.from(data['instructions']),
+      type: MealType.values.firstWhere(
+        (e) => e.toString().split('.').last == data['type'],
+        orElse: () => MealType.breakfast,
+      ),
+      category: data['category'],
+    );
+  }).toList();
+}
+
+Future<List<Recipe>> loadEquilibradas() async {
+  final recetas = await getRecetasPorCategoria('Equilibrado');
+  return recetas;
+}
+
+Future<List<Recipe>> loadProteinas() async {
+  final recetas = await getRecetasPorCategoria('Alta en proteínas');
+  return recetas;
+}
+
+Future<List<Recipe>> loadGrasas() async {
+  final recetas = await getRecetasPorCategoria('Bajo en grasas');
+  return recetas;
+}
+
+Future<List<Recipe>> loadAumentoMusculo() async {
+  final recetas = await getRecetasPorCategoria('Aumento masa muscular');
+  return recetas;
+}

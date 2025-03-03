@@ -1,9 +1,9 @@
-import 'package:NutriMate/services/firebase_service.dart';
 import 'package:NutriMate/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:NutriMate/providers/user_provider.dart';
 import '../models/entities.dart';
+import '../services/services.dart';
 
 class CambioRecetaScreen extends StatefulWidget {
   final Usuario cliente;
