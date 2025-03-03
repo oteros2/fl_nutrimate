@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 
-import '../models/entities.dart';
-
 class TabScreen extends StatelessWidget {
   final PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
@@ -26,7 +24,7 @@ class TabScreen extends StatelessWidget {
       RecetasSemanalesScreen(
         cliente: usuario,
       ),
-      ChartScreen(),
+      CaloriasChart(),
       SettingsScreen(user: user),
       //aquí iría el config screen
     ];
