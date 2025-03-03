@@ -5,14 +5,14 @@ class Usuario {
   final String name;
   final String lastName;
   final double weight;
-  final List<Recipe> recetas;
+  final MenuSemanal menu;
 
   Usuario({
     required this.email,
     required this.name,
     required this.lastName,
     required this.weight,
-    required this.recetas,
+    required this.menu,
   });
 
   factory Usuario.fromMap(Map<String, dynamic> map) {
@@ -21,10 +21,7 @@ class Usuario {
       name: map['nombre'] ?? '',
       lastName: map['apellidos'] ?? '',
       weight: map['peso']?.toDouble() ?? 0.0,
-      recetas: (map['recetas'] as List<dynamic>?)
-              ?.map((recipeMap) => Recipe.fromMap(recipeMap))
-              .toList() ??
-          [],
+      menu: MenuSemanal.fromMap(map['menu']),
     );
   }
 }

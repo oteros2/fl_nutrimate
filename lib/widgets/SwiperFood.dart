@@ -4,17 +4,19 @@ import '../models/entities.dart';
 import '../screens/screens.dart';
 
 class SwiperFood extends StatefulWidget {
-  final List<Recipe> recipes;
+  final Usuario cliente;
   final IconData icon;
   final bool isSelectionMode;
   final Function(Recipe)? onRecipeSelect;
+  final int? day;
 
   const SwiperFood({
     super.key,
-    required this.recipes,
     required this.icon,
     this.isSelectionMode = false,
     this.onRecipeSelect,
+    required this.cliente,
+    this.day,
   });
 
   @override
@@ -26,12 +28,15 @@ class _SwiperFoodState extends State<SwiperFood> {
 
   void updateRecipe(Recipe newRecipe) {
     setState(() {
-      widget.recipes[currentIndex] = newRecipe;
+      widget.cliente.menu.menusDiarios[currentIndex].recetas[currentIndex] =
+          newRecipe;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final List<Recipe> recetas =
+        widget.cliente.menu.menusDiarios[widget.day ?? 0].recetas;
     return Column(
       children: [
         Padding(
@@ -44,7 +49,7 @@ class _SwiperFoodState extends State<SwiperFood> {
           child: SizedBox(
             height: 200,
             child: Swiper(
-              itemCount: widget.recipes.length,
+              itemCount: recetas.length,
               onIndexChanged: (index) {
                 setState(() {
                   currentIndex = index;
@@ -53,11 +58,12 @@ class _SwiperFoodState extends State<SwiperFood> {
               itemBuilder: (BuildContext context, int index) {
                 return _SwiperImage(
                   widget: widget,
-                  receta: widget.recipes[index],
+                  receta: recetas[index],
                   index: index,
                   onRecipeChanged: updateRecipe,
                   isSelectionMode: widget.isSelectionMode,
                   onRecipeSelect: widget.onRecipeSelect,
+                  cliente: widget.cliente,
                 );
               },
               pagination: SwiperPagination(
@@ -71,7 +77,7 @@ class _SwiperFoodState extends State<SwiperFood> {
           ),
         ),
         Text(
-          widget.recipes[currentIndex].name,
+          recetas[currentIndex].name,
           style: TextStyle(
             fontSize: 18,
             letterSpacing: 1.2,
@@ -99,7 +105,8 @@ class _SwiperTimeFoodLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      widget.recipes[currentIndex].type.name.toUpperCase(),
+      widget.cliente.menu.menusDiarios[currentIndex].recetas[currentIndex].name
+          .toUpperCase(),
       style: const TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.bold,
@@ -115,16 +122,17 @@ class _SwiperImage extends StatelessWidget {
   final Function(Recipe) onRecipeChanged;
   final bool isSelectionMode;
   final Function(Recipe)? onRecipeSelect;
+  final Usuario cliente;
 
-  const _SwiperImage({
-    super.key,
-    required this.widget,
-    required this.receta,
-    required this.index,
-    required this.onRecipeChanged,
-    this.isSelectionMode = false,
-    this.onRecipeSelect,
-  });
+  const _SwiperImage(
+      {super.key,
+      required this.widget,
+      required this.receta,
+      required this.index,
+      required this.onRecipeChanged,
+      this.isSelectionMode = false,
+      this.onRecipeSelect,
+      required this.cliente});
 
   final SwiperFood widget;
 
@@ -159,6 +167,7 @@ class _SwiperImage extends StatelessWidget {
             onRecipeChanged: onRecipeChanged,
             isSelectionMode: isSelectionMode,
             onRecipeSelect: onRecipeSelect,
+            cliente: cliente,
           ),
         ],
       ),
@@ -175,6 +184,7 @@ class _SwiperIcon extends StatelessWidget {
     required this.onRecipeChanged,
     required this.isSelectionMode,
     this.onRecipeSelect,
+    required this.cliente,
   });
 
   final SwiperFood widget;
@@ -183,6 +193,7 @@ class _SwiperIcon extends StatelessWidget {
   final Function(Recipe) onRecipeChanged;
   final bool isSelectionMode;
   final Function(Recipe)? onRecipeSelect;
+  final Usuario cliente;
 
   @override
   Widget build(BuildContext context) {
@@ -202,7 +213,7 @@ class _SwiperIcon extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => CambioRecetaScreen(
-                    recetaOriginal: receta,
+                    cliente: cliente,
                   ),
                 ),
               );

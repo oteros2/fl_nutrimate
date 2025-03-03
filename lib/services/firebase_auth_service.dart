@@ -35,7 +35,7 @@ class AuthService {
     required String email,
     required String password,
     required BuildContext context,
-    required List<Map<String, dynamic>> recetas,
+    required Map<String, dynamic> menu,
   }) async {
     //Cierra el teclado una vez que se envian los datos
     FocusScope.of(context).unfocus();
@@ -55,7 +55,7 @@ class AuthService {
         'nombre': capitalizeFirstLetter(nombre),
         'apellidos': capitalizeFirstLetter(apellidos),
         'email': email,
-        'recetas': recipes.map((recipe) => recipe.toMap()).toList(),
+        'menu': menu
       });
 
       //Muestra una ventana si todo ha salido correctamente en el registro
@@ -147,6 +147,7 @@ class AuthService {
 
   //Iniciar sesión con Google
   Future<void> signInWithGoogle(BuildContext context) async {
+    final Map<String, dynamic> menuSemanal = menu.toMap();
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
@@ -176,7 +177,7 @@ class AuthService {
                 user.displayName!.split(" ")[2],
             'email': user.email,
             'photoURL': user.photoURL,
-            'recetas': recipes.map((recipe) => recipe.toMap()).toList(),
+            'menu': menuSemanal,
           });
         }
 

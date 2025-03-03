@@ -123,8 +123,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           email: formValues['email']!.trim(),
                                           password:
                                               formValues['password']!.trim(),
+                                          menu: menu.toMap(),
                                           context: context,
-                                          recetas: recipes.map((recipe) => recipe.toMap()).toList(),
                                         );
                                         setState(() {
                                           _isRegistering = false;

@@ -1,15 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../models/entities.dart';
 
 FirebaseFirestore db = FirebaseFirestore.instance;
-
-// Registra los datos de un usuario en la base de datos
-Future<void> insertUser(String nombre, String apellido, String email) async {
-  await db
-      .collection("usuarios")
-      .add({"nombre": nombre, "apellido": apellido, "email": email});
-}
 
 // Obtener los datos de un usuario
 Future<Map<String, dynamic>?> getUserData(String uid) async {
@@ -51,4 +45,31 @@ Future<List<Recipe>> getRecetasPorCategoria(String category) async {
       category: data['category'],
     );
   }).toList();
+}
+
+Future<List<Recipe>> loadEquilibradas() async {
+  final recetas = await getRecetasPorCategoria('Equilibrado');
+  return recetas;
+}
+
+Future<List<Recipe>> loadProteinas() async {
+  final recetas = await getRecetasPorCategoria('Alta en proteínas');
+  return recetas;
+}
+
+Future<List<Recipe>> loadGrasas() async {
+  final recetas = await getRecetasPorCategoria('Bajo en grasas');
+  return recetas;
+}
+
+Future<List<Recipe>> loadAumentoMusculo() async {
+  final recetas = await getRecetasPorCategoria('Aumento masa muscular');
+  return recetas;
+}
+
+void onRecipeSelect(Recipe recipe, User? usuario) async {
+  final QuerySnapshot snapshot = (await db
+      .collection('usuarios')
+      .doc(usuario?.uid)
+      .get()) as QuerySnapshot<Object?>;
 }

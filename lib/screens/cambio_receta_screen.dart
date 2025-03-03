@@ -6,39 +6,15 @@ import 'package:NutriMate/providers/user_provider.dart';
 import '../models/entities.dart';
 
 class CambioRecetaScreen extends StatefulWidget {
-  final Recipe recetaOriginal;
+  final Usuario cliente;
 
-  CambioRecetaScreen({super.key, required this.recetaOriginal});
+  CambioRecetaScreen({super.key, required this.cliente});
 
   @override
   State<CambioRecetaScreen> createState() => _CambioRecetaScreenState();
 }
 
 class _CambioRecetaScreenState extends State<CambioRecetaScreen> {
-  void onRecipeSelect(Recipe recipe) {
-    Navigator.pop(context, recipe);
-  }
-
-  Future<List<Recipe>> loadEquilibradas() async {
-    final recetas = await getRecetasPorCategoria('Equilibrado');
-    return recetas;
-  }
-
-  Future<List<Recipe>> loadProteinas() async {
-    final recetas = await getRecetasPorCategoria('Alta en proteínas');
-    return recetas;
-  }
-
-  Future<List<Recipe>> loadGrasas() async {
-    final recetas = await getRecetasPorCategoria('Bajo en grasas');
-    return recetas;
-  }
-
-  Future<List<Recipe>> loadAumentoMusculo() async {
-    final recetas = await getRecetasPorCategoria('Aumento masa muscular');
-    return recetas;
-  }
-
   @override
   Widget build(BuildContext context) {
     final Usuario usuario = Provider.of<UserProvider>(context).usuario!;
@@ -64,10 +40,9 @@ class _CambioRecetaScreenState extends State<CambioRecetaScreen> {
                   }
                   final equilibradas = snapshot.data!;
                   return SwiperFood(
-                    recipes: equilibradas,
+                    cliente: widget.cliente,
                     icon: Icons.add,
                     isSelectionMode: true,
-                    onRecipeSelect: onRecipeSelect,
                   );
                 },
               ),
@@ -84,10 +59,9 @@ class _CambioRecetaScreenState extends State<CambioRecetaScreen> {
                   }
                   final proteinas = snapshot.data!;
                   return SwiperFood(
-                    recipes: proteinas,
+                    cliente: widget.cliente,
                     icon: Icons.add,
                     isSelectionMode: true,
-                    onRecipeSelect: onRecipeSelect,
                   );
                 },
               ),
@@ -104,10 +78,9 @@ class _CambioRecetaScreenState extends State<CambioRecetaScreen> {
                   }
                   final grasas = snapshot.data!;
                   return SwiperFood(
-                    recipes: grasas,
+                    cliente: widget.cliente,
                     icon: Icons.add,
                     isSelectionMode: true,
-                    onRecipeSelect: onRecipeSelect,
                   );
                 },
               ),
@@ -124,10 +97,9 @@ class _CambioRecetaScreenState extends State<CambioRecetaScreen> {
                   }
                   final aumentoMusculo = snapshot.data!;
                   return SwiperFood(
-                    recipes: aumentoMusculo,
+                    cliente: widget.cliente,
                     icon: Icons.add,
                     isSelectionMode: true,
-                    onRecipeSelect: onRecipeSelect,
                   );
                 },
               ),

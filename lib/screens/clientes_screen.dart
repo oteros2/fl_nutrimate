@@ -53,7 +53,7 @@ class _ClientesScreenState extends State<ClientesScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        RecetasSemanalesScreen(recetas: cliente.recetas),
+                        RecetasSemanalesScreen(cliente: cliente),
                   ),
                 );
               },
