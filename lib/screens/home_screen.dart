@@ -1,13 +1,110 @@
+import 'package:NutriMate/models/meeting.dart';
 import 'package:NutriMate/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/entities.dart';
 import '../widgets/widgets.dart';
+import 'package:intl/intl.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, required this.user});
 
   final Usuario user;
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final List<Meeting> _meetings = [];
+  String _selectedEvent = "";
+
+  void _addEvent(String eventName, DateTime dateTime) {
+    final Meeting newMeeting = Meeting(
+      eventName,
+      dateTime,
+      dateTime.add(const Duration(hours: 1)),
+      Colors.blue,
+      false,
+    );
+    setState(() {
+      _meetings.add(newMeeting);
+    });
+  }
+
+  void _showAddEventDialog() {
+    final TextEditingController eventController = TextEditingController();
+    DateTime selectedDate = DateTime.now();
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setStateDialog) {
+            return AlertDialog(
+              title: const Text("Añadir Evento"),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextField(
+                    controller: eventController,
+                    decoration:
+                        const InputDecoration(hintText: "Nombre del evento"),
+                  ),
+                  const SizedBox(height: 10),
+                  TextButton(
+                    onPressed: () async {
+                      DateTime? pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: selectedDate,
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2100),
+                      );
+                      if (pickedDate != null) {
+                        TimeOfDay? pickedTime = await showTimePicker(
+                          context: context,
+                          initialTime: TimeOfDay.fromDateTime(selectedDate),
+                        );
+                        if (pickedTime != null) {
+                          setStateDialog(() {
+                            selectedDate = DateTime(
+                              pickedDate.year,
+                              pickedDate.month,
+                              pickedDate.day,
+                              pickedTime.hour,
+                              pickedTime.minute,
+                            );
+                          });
+                        }
+                      }
+                    },
+                    child: Text(
+                      "Seleccionar fecha: ${DateFormat('dd/MM/yyyy HH:mm').format(selectedDate)}",
+                    ),
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text("Cancelar"),
+                ),
+                TextButton(
+                  onPressed: () {
+                    if (eventController.text.isNotEmpty) {
+                      _addEvent(eventController.text, selectedDate);
+                    }
+                    Navigator.pop(context);
+                  },
+                  child: const Text("Añadir"),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,155 +113,55 @@ class HomeScreen extends StatelessWidget {
     final String apellido = usuario.lastName.split(" ")[0];
 
     return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+      body: Column(
+        children: [
+          // Custom AppBar en la parte superior
           CustomAppbar(
-            title: "Hola" + " " + nombre + " " + apellido,
+            title: "Hola $nombre $apellido",
             user: usuario,
           ),
-        ],
-        body: SingleChildScrollView(
-          child: Wrap(
-            children: [
-              const SwiperFoodLabel(day: 'Lunes', label: "Dieta del día"),
-              SwiperFood(cliente: usuario, icon: Icons.edit),
-              Container(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  height: 200,
-                  child: Column(
-                    children: [
-                      CalendarioWidget(),
-                    ],
-                  ))
-            ],
+
+          // Contenido principal con NestedScrollView
+          Expanded(
+            child: NestedScrollView(
+              headerSliverBuilder: (context, innerBoxIsScrolled) => [],
+              body: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0, vertical: 10.0),
+                child: Column(
+                  children: [
+                    const SwiperFoodLabel(day: 'Lunes', label: "Dieta del día"),
+                    SwiperFood(cliente: usuario, icon: Icons.edit),
+
+                    // Widget de información del evento seleccionado
+                    if (_selectedEvent.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10.0),
+                        child: EventInfoWidget(selectedEvent: _selectedEvent),
+                      ),
+
+                    // Calendario con reuniones
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.5,
+                      child: CalendarWidget(
+                        meetings: _meetings,
+                        onEventSelected: (event) {
+                          setState(() {
+                            _selectedEvent = event;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
-        ),
+        ],
       ),
-    );
-  }
-}
-
-class Category {
-  final String title;
-  bool isSelected;
-  Category(this.title, this.isSelected);
-}
-
-List<Category> categoryList = [
-  Category("Desayuno", true),
-  Category("Almuerzo", false),
-  Category("Merienda", false),
-  Category("Cena", false),
-];
-
-class HorizontalCategoriesView extends StatefulWidget {
-  const HorizontalCategoriesView({Key? key}) : super(key: key);
-
-  @override
-  State<HorizontalCategoriesView> createState() =>
-      _HorizontalCategoriesViewState();
-}
-
-class _HorizontalCategoriesViewState extends State<HorizontalCategoriesView> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 45,
-          width: MediaQuery.of(context).size.width,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: categoryList.length,
-            itemBuilder: (context, index) {
-              return CategoryCard(
-                category: categoryList[index],
-                onPressed: (b) {
-                  categoryList.forEach((category) {
-                    category.isSelected = false;
-                  });
-                  setState(() {
-                    categoryList[index].isSelected = true;
-                  });
-                },
-              );
-            },
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class CategoryCard extends StatefulWidget {
-  final Category category;
-  final Function(bool) onPressed;
-
-  const CategoryCard(
-      {required this.category, required this.onPressed, Key? key})
-      : super(key: key);
-
-  @override
-  State<CategoryCard> createState() => _CategoryCardState();
-}
-
-class _CategoryCardState extends State<CategoryCard> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(5.0),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5.0),
-          color:
-              widget.category.isSelected ? Colors.white : Colors.transparent),
-      child: TextButton(
-          style: ButtonStyle(
-            overlayColor: WidgetStateProperty.all(Colors.transparent),
-          ),
-          onPressed: () {
-            widget.onPressed(true);
-          },
-          child: Text(widget.category.title,
-              style: TextStyle(
-                  color: widget.category.isSelected
-                      ? Colors.black
-                      : Colors.grey))),
-    );
-  }
-}
-
-class food extends StatelessWidget {
-  const food({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 300,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ListView(
-            scrollDirection: Axis.horizontal,
-            children: [
-              Container(
-                width: 300,
-                height: 300,
-                color: Colors.red,
-              ),
-              Container(
-                width: 300,
-                height: 300,
-                color: Colors.yellow,
-              ),
-              Container(
-                width: 300,
-                height: 300,
-                color: Colors.green,
-              ),
-            ],
-          )
-        ],
+      floatingActionButton: FloatingActionButton(
+        onPressed: _showAddEventDialog,
+        child: const Icon(Icons.add),
       ),
     );
   }

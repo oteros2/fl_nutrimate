@@ -9,5 +9,6 @@ export 'package:NutriMate/widgets/food_slider.dart';
 export 'package:NutriMate/widgets/comidasList.dart';
 export 'package:NutriMate/widgets/food_carousel.dart';
 export 'package:NutriMate/widgets/SwiperFoodLabel.dart';
-export 'package:NutriMate/widgets/workfine.dart';
-export 'package:NutriMate/widgets/flutter-calendar-widget.dart';
+export 'package:NutriMate/widgets/calendar_widget.dart';
+export 'package:NutriMate/widgets/event_info_widget.dart';
+export 'package:NutriMate/widgets/meeting_form.dart';

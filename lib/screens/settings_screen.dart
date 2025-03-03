@@ -3,6 +3,7 @@ import 'package:NutriMate/services/firebase_auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:NutriMate/widgets/widgets.dart';
 import '../models/usuario.dart';
+import 'screens.dart';
 
 class SettingsScreen extends StatelessWidget {
   SettingsScreen({super.key, required this.user});
@@ -34,22 +35,43 @@ class SettingsScreen extends StatelessWidget {
           const SizedBox(
             width: 10,
           ),
-          ListView.separated(
-            itemCount: SettingsRoutes.SettingsOptions.length,
-            separatorBuilder: (context, index) => Divider(),
-            itemBuilder: (context, index) {
-              return ListTile(
-                leading: Icon(SettingsRoutes.SettingsOptions[index].icon),
-                title: Text(SettingsRoutes.SettingsOptions[index].name),
-                onTap: () {
-                  final route = MaterialPageRoute(
-                    builder: (context) => Container(),
-                  );
-                  Navigator.pushNamed(
-                      context, SettingsRoutes.SettingsOptions[index].route);
-                },
-              );
-            },
+          Column(
+            children: List.generate(
+              SettingsRoutes.SettingsOptions.length,
+              (index) {
+                final option = SettingsRoutes.SettingsOptions[index];
+                final isLastItem =
+                    index == SettingsRoutes.SettingsOptions.length - 1;
+                return Column(
+                  children: [
+                    ListTile(
+                      leading: Icon(option.icon,
+                          color: isLastItem ? Colors.red : null),
+                      title: Text(
+                        option.name,
+                        style: TextStyle(
+                          color: isLastItem ? Colors.red : null,
+                          fontWeight:
+                              isLastItem ? FontWeight.bold : FontWeight.normal,
+                        ),
+                      ),
+                      onTap: () async {
+                        if (isLastItem) {
+                          await _auth.signOut(context);
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginScreen()));
+                        } else {
+                          Navigator.pushNamed(context, option.route);
+                        }
+                      },
+                    ),
+                    if (!isLastItem) Divider(),
+                  ],
+                );
+              },
+            ),
           ),
         ])),
       ]),
