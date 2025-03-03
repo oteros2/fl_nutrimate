@@ -11,6 +11,7 @@ class RecetasSemanalesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Usuario usuario = Provider.of<UserProvider>(context).usuario!;
+    bool isSpecialUser = usuario.email == 'admin@nutrimate.com';
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -19,6 +20,16 @@ class RecetasSemanalesScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              if (isSpecialUser)
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      print('Botón especial presionado');
+                    },
+                    child: const Text('Cambiar menú'),
+                  ),
+                ),
               const SwiperFoodLabel(day: 'Lunes', label: "Dieta del día"),
               SwiperFood(cliente: cliente, icon: Icons.edit, day: 0),
               const SwiperFoodLabel(day: 'Martes', label: "Dieta del día"),

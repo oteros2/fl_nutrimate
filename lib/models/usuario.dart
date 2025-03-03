@@ -21,7 +21,9 @@ class Usuario {
       name: map['nombre'] ?? '',
       lastName: map['apellidos'] ?? '',
       weight: map['peso']?.toDouble() ?? 0.0,
-      menu: MenuSemanal.fromMap(map['menu']),
+      menu: map['menu'] != null
+          ? MenuSemanal.fromMap(map['menu'])
+          : MenuSemanal(menusDiarios: [], nombreMenuSemanal: ''),
     );
   }
 }

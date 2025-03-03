@@ -105,7 +105,8 @@ class _SwiperTimeFoodLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      widget.cliente.menu.menusDiarios[currentIndex].recetas[currentIndex].name
+      widget.cliente.menu.menusDiarios[currentIndex].recetas[currentIndex].type
+          .name
           .toUpperCase(),
       style: const TextStyle(
         fontSize: 18,
@@ -160,69 +161,7 @@ class _SwiperImage extends StatelessWidget {
               ),
             ),
           ),
-          _SwiperIcon(
-            widget: widget,
-            receta: receta,
-            index: index,
-            onRecipeChanged: onRecipeChanged,
-            isSelectionMode: isSelectionMode,
-            onRecipeSelect: onRecipeSelect,
-            cliente: cliente,
-          ),
         ],
-      ),
-    );
-  }
-}
-
-class _SwiperIcon extends StatelessWidget {
-  const _SwiperIcon({
-    super.key,
-    required this.widget,
-    required this.receta,
-    required this.index,
-    required this.onRecipeChanged,
-    required this.isSelectionMode,
-    this.onRecipeSelect,
-    required this.cliente,
-  });
-
-  final SwiperFood widget;
-  final Recipe receta;
-  final int index;
-  final Function(Recipe) onRecipeChanged;
-  final bool isSelectionMode;
-  final Function(Recipe)? onRecipeSelect;
-  final Usuario cliente;
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      top: 8,
-      right: 8,
-      child: CircleAvatar(
-        backgroundColor: Colors.white,
-        radius: 18,
-        child: IconButton(
-          icon: Icon(widget.icon, color: Color(0xFF00B894), size: 18),
-          onPressed: () async {
-            if (isSelectionMode && onRecipeSelect != null) {
-              onRecipeSelect!(receta);
-            } else {
-              final recetaSeleccionada = await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CambioRecetaScreen(
-                    cliente: cliente,
-                  ),
-                ),
-              );
-              if (recetaSeleccionada != null) {
-                onRecipeChanged(recetaSeleccionada);
-              }
-            }
-          },
-        ),
       ),
     );
   }
