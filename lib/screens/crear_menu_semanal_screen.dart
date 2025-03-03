@@ -50,7 +50,8 @@ class _CrearMenuSemanalScreenState extends State<CrearMenuSemanalScreen> {
         context: context,
         type: QuickAlertType.error,
         title: "Por favor, introduzca el nombre del menú",
-        showConfirmBtn: false,
+        showConfirmBtn: true,
+        confirmBtnText: "Entendido",
       );
       return;
     }
@@ -67,30 +68,44 @@ class _CrearMenuSemanalScreenState extends State<CrearMenuSemanalScreen> {
         context: context,
         type: QuickAlertType.error,
         title: "Faltan menús para: ${diasFaltantes.join(", ")}",
-        showConfirmBtn: false,
+        showConfirmBtn: true,
+        confirmBtnText: "Entendido",
       );
       return;
     }
 
     setState(() {});
 
-    final menuSemanal = MenuSemanal(
-      nombreMenuSemanal: nombreController.text,
-      menusDiarios: menusDiarios.cast<MenuDiario>(),
-    );
+    try {
+      final menuSemanal = MenuSemanal(
+        nombreMenuSemanal: nombreController.text,
+        menusDiarios: menusDiarios.cast<MenuDiario>(),
+      );
 
-    await insertMenuSemanal(menuSemanal);
+      await insertMenuSemanal(menuSemanal);
 
-    setState(() {});
+      bool? result = await QuickAlert.show(
+        context: context,
+        type: QuickAlertType.success,
+        title: "Menú semanal creado con éxito",
+        showConfirmBtn: true,
+        confirmBtnText: "Aceptar",
+        barrierDismissible: false,
+      );
 
-    QuickAlert.show(
-      context: context,
-      type: QuickAlertType.success,
-      title: "Menú semanal creado con éxito",
-      showConfirmBtn: false,
-    );
-
-    Navigator.pop(context);
+      Navigator.pop(context);
+    } catch (e) {
+      QuickAlert.show(
+        context: context,
+        type: QuickAlertType.error,
+        title: "Error al guardar",
+        text: "Ha ocurrido un error al guardar el menú: $e",
+        showConfirmBtn: true,
+        confirmBtnText: "Entendido",
+      );
+    } finally {
+      setState(() {});
+    }
   }
 
   @override

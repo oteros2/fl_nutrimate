@@ -66,28 +66,40 @@ class _CrearMenuDiarioScreenState extends State<CrearMenuDiarioScreen> {
     }
 
     setState(() {});
-
-    final menuDiario = MenuDiario(
-      nombreMenuDiario: nombreController.text,
-      recetas: [
-        desayunoSeleccionado!,
-        almuerzoSeleccionado!,
-        cenaSeleccionada!
-      ],
-    );
-
-    await insertMenuDiario(menuDiario);
-
-    setState(() {});
-
-    QuickAlert.show(
-        context: context,
-        type: QuickAlertType.success,
-        title: "Menú diario insertado correctamente",
-        showConfirmBtn: false,
+    try {
+      final menuDiario = MenuDiario(
+        nombreMenuDiario: nombreController.text,
+        recetas: [
+          desayunoSeleccionado!,
+          almuerzoSeleccionado!,
+          cenaSeleccionada!
+        ],
       );
 
-    Navigator.pop(context);
+      await insertMenuDiario(menuDiario);
+
+      bool? result = await QuickAlert.show(
+        context: context,
+        type: QuickAlertType.success,
+        title: "Menú diario creado con éxito",
+        showConfirmBtn: true,
+        confirmBtnText: "Aceptar",
+        barrierDismissible: false,
+      );
+
+      Navigator.pop(context);
+    } catch (e) {
+      QuickAlert.show(
+        context: context,
+        type: QuickAlertType.error,
+        title: "Error al guardar",
+        text: "Ha ocurrido un error al guardar el menú: $e",
+        showConfirmBtn: true,
+        confirmBtnText: "Entendido",
+      );
+    } finally {
+      setState(() {});
+    }
   }
 
   @override
