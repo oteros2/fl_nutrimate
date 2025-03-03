@@ -1,3 +1,5 @@
+import 'package:NutriMate/screens/crear_menu_diario_screen.dart';
+import 'package:NutriMate/screens/crear_menu_semanal_screen.dart';
 import 'package:NutriMate/screens/crear_receta_screen.dart';
 import 'package:flutter/material.dart';
 import '../models/entities.dart';
@@ -73,7 +75,39 @@ class _ClientesScreenState extends State<ClientesScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           FloatingActionButton(
+            backgroundColor: Color.fromRGBO(0, 168, 136, 1),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CrearMenuSemanalScreen(),
+                ),
+              );
+            },
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+          ),
+          SizedBox(height: 10),
+          FloatingActionButton(
             backgroundColor: Color.fromRGBO(0, 184, 148, 1),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CrearMenuDiarioScreen(),
+                ),
+              );
+            },
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+          ),
+          SizedBox(height: 10),
+          FloatingActionButton(
+            backgroundColor: Color.fromRGBO(0, 200, 160, 1),
             onPressed: () {
               Navigator.push(
                 context,

@@ -5,16 +5,16 @@ import 'package:NutriMate/providers/user_provider.dart';
 import '../models/entities.dart';
 import '../services/services.dart';
 
-class CambioRecetaScreen extends StatefulWidget {
+class RecetasScreen extends StatefulWidget {
   final Usuario cliente;
 
-  CambioRecetaScreen({super.key, required this.cliente});
+  RecetasScreen({super.key, required this.cliente});
 
   @override
-  State<CambioRecetaScreen> createState() => _CambioRecetaScreenState();
+  State<RecetasScreen> createState() => _RecetasScreenState();
 }
 
-class _CambioRecetaScreenState extends State<CambioRecetaScreen> {
+class _RecetasScreenState extends State<RecetasScreen> {
   @override
   Widget build(BuildContext context) {
     final Usuario usuario = Provider.of<UserProvider>(context).usuario!;

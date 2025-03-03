@@ -43,12 +43,12 @@ Future<List<MenuSemanal>> gatMenusSemanales() async {
 }
 
 //Obtener todos los menús diarios de la base de datos
-Future<List<MenuSemanal>> getMenusDiarios() async {
-  final QuerySnapshot snapshot = await db.collection('menu_semanal').get();
+Future<List<MenuDiario>> getMenusDiarios() async {
+  final QuerySnapshot snapshot = await db.collection('menu_diario').get();
   return snapshot.docs.map((doc) {
     final data = doc.data() as Map<String, dynamic>;
     data['id'] = doc.id;
-    return MenuSemanal.fromMap(data);
+    return MenuDiario.fromMap(data);
   }).toList();
 }
 
