@@ -94,7 +94,6 @@ class _SwiperFoodState extends State<SwiperFood> {
 
 class _SwiperTimeFoodLabel extends StatelessWidget {
   const _SwiperTimeFoodLabel({
-    super.key,
     required this.widget,
     required this.currentIndex,
   });
@@ -126,8 +125,7 @@ class _SwiperImage extends StatelessWidget {
   final Usuario cliente;
 
   const _SwiperImage(
-      {super.key,
-      required this.widget,
+      {required this.widget,
       required this.receta,
       required this.index,
       required this.onRecipeChanged,

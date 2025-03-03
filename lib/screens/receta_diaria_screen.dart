@@ -72,7 +72,6 @@ class _RecipePreparation extends StatelessWidget {
   final List<String> instructions;
 
   const _RecipePreparation({
-    super.key,
     required this.instructions,
   });
 
@@ -117,7 +116,6 @@ class _RecipePreparation extends StatelessWidget {
 class _FoodImage extends StatelessWidget {
   final String imageUrl;
   const _FoodImage({
-    super.key,
     required this.imageUrl,
   });
 

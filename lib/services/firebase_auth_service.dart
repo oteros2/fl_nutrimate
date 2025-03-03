@@ -90,6 +90,7 @@ class AuthService {
       );
       return e.message;
     }
+    return null;
   }
 
   // Iniciar sesión con email y contraseña

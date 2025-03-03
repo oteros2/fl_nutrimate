@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/settings_option.dart';
 
-
 class SettingsRoutes {
   static final SettingsOptions = <SettingOption>[
     SettingOption(
@@ -11,9 +10,9 @@ class SettingsRoutes {
       screen: Container(),
     ),
     SettingOption(
-      route: 'preferancias',
+      route: 'preferencias',
       icon: Icons.settings,
-      name: 'Preferancias',
+      name: 'Preferencias',
       screen: Container(),
     ),
     SettingOption(
