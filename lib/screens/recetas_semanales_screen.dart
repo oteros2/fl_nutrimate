@@ -29,7 +29,8 @@ class RecetasSemanalesScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MenusSemanalesScreen(),
+                          builder: (context) =>
+                              MenusSemanalesScreen(cliente: cliente),
                         ),
                       );
                     },

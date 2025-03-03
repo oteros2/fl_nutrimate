@@ -1,3 +1,4 @@
+import 'package:NutriMate/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:NutriMate/providers/user_provider.dart';
@@ -7,7 +8,8 @@ import '../services/services.dart';
 import '../widgets/widgets.dart';
 
 class MenusSemanalesScreen extends StatefulWidget {
-  const MenusSemanalesScreen({super.key});
+  final Usuario cliente;
+  const MenusSemanalesScreen({super.key, required this.cliente});
 
   @override
   State<MenusSemanalesScreen> createState() => _MenusSemanalesScreenState();
@@ -44,7 +46,15 @@ class _MenusSemanalesScreenState extends State<MenusSemanalesScreen> {
         itemBuilder: (context, index) {
           final main = _menusSemanales[index];
           return InkWell(
-            onTap: () {},
+            onTap: () {
+              updateMenuForUser(widget.cliente, main);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ClientesScreen(),
+                ),
+              );
+            },
             child: ListTile(
               title: Text(main.nombreMenuSemanal),
             ),
