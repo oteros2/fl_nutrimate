@@ -1,5 +1,6 @@
-import 'package:NutriMate/models/entities.dart';
 import 'package:flutter/material.dart';
+import '../models/settings_option.dart';
+
 
 class SettingsRoutes {
   static final SettingsOptions = <SettingOption>[

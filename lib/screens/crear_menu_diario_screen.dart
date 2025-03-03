@@ -112,7 +112,7 @@ class _CrearMenuDiarioScreenState extends State<CrearMenuDiarioScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              ComidaSection(
+              _ComidaSection(
                 title: 'Desayuno',
                 mealType: MealType.breakfast,
                 selectedRecipe: desayunoSeleccionado,
@@ -121,7 +121,7 @@ class _CrearMenuDiarioScreenState extends State<CrearMenuDiarioScreen> {
                 recetas: _recetas,
               ),
               const SizedBox(height: 20),
-              ComidaSection(
+              _ComidaSection(
                 title: 'Comida',
                 mealType: MealType.lunch,
                 selectedRecipe: almuerzoSeleccionado,
@@ -130,7 +130,7 @@ class _CrearMenuDiarioScreenState extends State<CrearMenuDiarioScreen> {
                 recetas: _recetas,
               ),
               const SizedBox(height: 20),
-              ComidaSection(
+              _ComidaSection(
                 title: 'Cena',
                 mealType: MealType.dinner,
                 selectedRecipe: cenaSeleccionada,
@@ -156,14 +156,14 @@ class _CrearMenuDiarioScreenState extends State<CrearMenuDiarioScreen> {
   }
 }
 
-class ComidaSection extends StatelessWidget {
+class _ComidaSection extends StatelessWidget {
   final String title;
   final MealType mealType;
   final Recipe? selectedRecipe;
   final Function(Recipe) onSelect;
   final List<Recipe> recetas;
 
-  ComidaSection({
+  _ComidaSection({
     required this.title,
     required this.mealType,
     required this.selectedRecipe,
@@ -189,7 +189,7 @@ class ComidaSection extends StatelessWidget {
         if (selectedRecipe != null)
           Stack(
             children: [
-              RecipeCard(recipe: selectedRecipe!),
+              _RecipeCard(recipe: selectedRecipe!),
               Positioned(
                 top: 5,
                 right: 5,
@@ -274,10 +274,10 @@ class ComidaSection extends StatelessWidget {
   }
 }
 
-class RecipeCard extends StatelessWidget {
+class _RecipeCard extends StatelessWidget {
   final Recipe recipe;
 
-  RecipeCard({required this.recipe});
+  _RecipeCard({required this.recipe});
 
   @override
   Widget build(BuildContext context) {
