@@ -76,14 +76,19 @@ class CrearRecetaScreenState extends State<CrearRecetaScreen> {
           'category': nuevaReceta.category,
         });
 
-        QuickAlert.show(
+        await QuickAlert.show(
           context: context,
           type: QuickAlertType.success,
           title: "Receta creada correctamente",
-          showConfirmBtn: false,
+          showConfirmBtn: true,
+          confirmBtnText: "OK",
+          confirmBtnColor: AppTheme.primary,
+          barrierDismissible: false,
+          onConfirmBtnTap: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pop();
+          },
         );
-
-        Navigator.pop(context);
       } catch (e) {
         QuickAlert.show(
           context: context,
