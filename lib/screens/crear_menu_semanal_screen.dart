@@ -85,7 +85,7 @@ class _CrearMenuSemanalScreenState extends State<CrearMenuSemanalScreen> {
 
     QuickAlert.show(
       context: context,
-      type: QuickAlertType.error,
+      type: QuickAlertType.success,
       title: "Menú semanal creado con éxito",
       showConfirmBtn: false,
     );

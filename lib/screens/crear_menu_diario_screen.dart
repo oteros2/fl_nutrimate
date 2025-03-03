@@ -44,9 +44,11 @@ class _CrearMenuDiarioScreenState extends State<CrearMenuDiarioScreen> {
 
   Future<void> guardarMenuDiario() async {
     if (nombreController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('Por favor, ingresa un nombre para el menú')),
+      QuickAlert.show(
+        context: context,
+        type: QuickAlertType.error,
+        title: "Por favor, introduzca el nombre del menú",
+        showConfirmBtn: false,
       );
       return;
     }
@@ -57,7 +59,7 @@ class _CrearMenuDiarioScreenState extends State<CrearMenuDiarioScreen> {
       QuickAlert.show(
         context: context,
         type: QuickAlertType.error,
-        title: "Receta creada correctamente",
+        title: "Por favor, seleccione tres recetas",
         showConfirmBtn: false,
       );
       return;
@@ -78,9 +80,12 @@ class _CrearMenuDiarioScreenState extends State<CrearMenuDiarioScreen> {
 
     setState(() {});
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Menú diario creado con éxito')),
-    );
+    QuickAlert.show(
+        context: context,
+        type: QuickAlertType.success,
+        title: "Menú diario insertado correctamente",
+        showConfirmBtn: false,
+      );
 
     Navigator.pop(context);
   }
