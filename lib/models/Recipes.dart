@@ -1,5 +1,29 @@
 import 'entities.dart';
 
+final Recipe cena = Recipe(
+    name: "Pizza de cacahuetes",
+    imageUrl:
+        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.rionegro.com.ar%2Fwp-content%2Fuploads%2F2022%2F02%2FPanqueques-de-avena-tres-recetas.jpg&f=1&nofb=1&ipt=e51822a1f52fc193020b20ef7c594d843e11afab4500a392ca8ea3c8f78a8859&ipo=images",
+    ingredients: [
+      {"ingredientName": "1 taza de avena", "isSelected": false},
+      {"ingredientName": "1 huevo", "isSelected": false},
+      {"ingredientName": "1/2 taza de leche", "isSelected": false},
+      {
+        "ingredientName": "1 cucharadita de polvo de hornear",
+        "isSelected": false
+      },
+      {"ingredientName": "1 cucharadita de miel", "isSelected": false},
+    ],
+    instructions: [
+      "Mezclar todos los ingredientes en una licuadora hasta obtener una mezcla homogénea.",
+      "Calentar una sartén y verter porciones de la mezcla.",
+      "Cocinar hasta que aparezcan burbujas en la superficie, luego voltear.",
+      "Servir con frutas o miel al gusto."
+    ],
+    type: MealType.breakfast,
+    category: 'Bajo en grasas',
+);
+
 final List<Recipe> recipes = [
   Recipe(
     name: "Panqueques de avena",

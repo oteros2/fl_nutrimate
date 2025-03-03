@@ -82,6 +82,8 @@ class CrearRecetaScreenState extends State<CrearRecetaScreen> {
           title: "Receta creada correctamente",
           showConfirmBtn: false,
         );
+
+        Navigator.pop(context);
       } catch (e) {
         QuickAlert.show(
           context: context,
