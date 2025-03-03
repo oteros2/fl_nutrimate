@@ -1,3 +1,4 @@
+import 'package:NutriMate/models/entities.dart';
 import 'package:NutriMate/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -122,6 +123,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           email: formValues['email']!.trim(),
                                           password:
                                               formValues['password']!.trim(),
+                                          menu: menu.toMap(),
                                           context: context,
                                         );
                                         setState(() {

@@ -1,110 +1,137 @@
+import 'package:NutriMate/screens/crear_menu_diario_screen.dart';
+import 'package:NutriMate/screens/crear_menu_semanal_screen.dart';
+import 'package:NutriMate/screens/crear_receta_screen.dart';
 import 'package:flutter/material.dart';
+import '../models/entities.dart';
 import '../services/services.dart';
+import '../widgets/widgets.dart';
 import 'screens.dart';
+import 'package:provider/provider.dart';
+import 'package:NutriMate/providers/user_provider.dart';
 
-class ClientesScreen extends StatelessWidget {
+class ClientesScreen extends StatefulWidget {
   ClientesScreen({super.key});
+
+  @override
+  State<ClientesScreen> createState() => _ClientesScreenState();
+}
+
+class _ClientesScreenState extends State<ClientesScreen> {
   final AuthService _auth = AuthService();
+  List<Usuario> _usuarios = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUsers();
+  }
+
+  Future<void> _loadUsers() async {
+    final usuarios = await getAllUsers();
+    setState(() {
+      _usuarios = usuarios;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    List<Cliente> clientes = [
-      Cliente(
-        nombre: "Juan",
-        apellidos: "Miranda Pérez",
-        avatar: const CircleAvatar(
-          backgroundColor: Colors.green,
-          child: Text("J"),
-        ),
-      ),
-      Cliente(
-        nombre: "María",
-        apellidos: "Villar González",
-        avatar: const CircleAvatar(
-          backgroundColor: Colors.green,
-          child: Text("M"),
-        ),
-      ),
-      Cliente(
-        nombre: "Carlos",
-        apellidos: "Martos Ramírez",
-        avatar: const CircleAvatar(
-          backgroundColor: Colors.green,
-          child: Text("C"),
-        ),
-      ),
-      Cliente(
-        nombre: "Ana",
-        apellidos: "Fernández Costas",
-        avatar: const CircleAvatar(
-          backgroundColor: Colors.green,
-          child: Text("A"),
-        ),
-      ),
-      Cliente(
-        nombre: "Luis",
-        apellidos: "Martínez Abigail",
-        avatar: const CircleAvatar(
-          backgroundColor: Colors.green,
-          child: Text("L"),
-        ),
-      ),
-    ];
+    final Usuario usuario = Provider.of<UserProvider>(context).usuario!;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF00B894).withAlpha(100),
-        title: const Text('Clientes Screen'),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.all(5.0),
-            child: CircleAvatar(
-              child: Text("A16"),
-              backgroundColor: Colors.green,
-            ),
-          )
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          CustomAppbar(title: 'Mis clientes', user: usuario),
         ],
+        body: ListView.separated(
+          padding: EdgeInsets.zero,
+          itemCount: _usuarios.length,
+          separatorBuilder: (context, index) => const Divider(),
+          itemBuilder: (context, index) {
+            final cliente = _usuarios[index];
+            final inicialNombre = cliente.name[0];
+            final inicialApellidos = cliente.lastName[0];
+            return InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        RecetasSemanalesScreen(cliente: cliente),
+                  ),
+                );
+              },
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.green,
+                  child: Text(inicialNombre + inicialApellidos),
+                ),
+                title: Text('${cliente.name} ${cliente.lastName}'),
+                subtitle: Text(cliente.email),
+              ),
+            );
+          },
+        ),
       ),
-      body: ListView.separated(
-        itemCount: clientes.length,
-        separatorBuilder: (context, index) => const Divider(),
-        itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            backgroundColor: Color.fromRGBO(0, 168, 136, 1),
+            onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const RecetasSemanalesScreen(),
+                  builder: (context) => CrearMenuSemanalScreen(),
                 ),
               );
             },
-            child: ListTile(
-              leading: clientes[index].avatar,
-              title: Text(
-                  '${clientes[index].nombre} ${clientes[index].apellidos}'),
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
             ),
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(
-          Icons.logout,
-          color: Colors.white,
-        ),
-        backgroundColor: Colors.red,
-        onPressed: () async => await _auth.signOut(context),
+          ),
+          SizedBox(height: 10),
+          FloatingActionButton(
+            backgroundColor: Color.fromRGBO(0, 184, 148, 1),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CrearMenuDiarioScreen(),
+                ),
+              );
+            },
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+          ),
+          SizedBox(height: 10),
+          FloatingActionButton(
+            backgroundColor: Color.fromRGBO(0, 200, 160, 1),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CrearRecetaScreen(),
+                ),
+              );
+            },
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+          ),
+          SizedBox(height: 10),
+          FloatingActionButton(
+            backgroundColor: Color.fromRGBO(200, 30, 50, 1),
+            onPressed: () async => await _auth.signOut(context),
+            child: const Icon(
+              Icons.logout,
+              color: Colors.white,
+            ),
+          ),
+        ],
       ),
     );
   }
-}
-
-class Cliente {
-  final String nombre;
-  final String apellidos;
-  final CircleAvatar avatar;
-
-  Cliente({
-    required this.nombre,
-    required this.apellidos,
-    required this.avatar,
-  });
 }

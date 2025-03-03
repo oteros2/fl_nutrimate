@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import '../models/entities.dart';
+import 'package:provider/provider.dart';
+import 'package:NutriMate/providers/user_provider.dart';
+
+import '../widgets/widgets.dart';
 
 class RecetaDiariaScreen extends StatefulWidget {
   const RecetaDiariaScreen({super.key, required this.receta});
@@ -12,59 +16,52 @@ class RecetaDiariaScreen extends StatefulWidget {
 class _RecetaDiariaScreenState extends State<RecetaDiariaScreen> {
   @override
   Widget build(BuildContext context) {
+    final Usuario usuario = Provider.of<UserProvider>(context).usuario!;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF00B894).withAlpha(100),
-        title: Text(widget.receta.name),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.all(5.0),
-            child: CircleAvatar(
-              child: Text("A16"),
-              backgroundColor: Colors.green,
-            ),
-          )
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          CustomAppbar(title: widget.receta.name, user: usuario),
         ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _FoodImage(imageUrl: widget.receta.imageUrl),
-            const Text(
-              'Prepara estos ingredientes',
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(25),
-                child: Container(
-                  color: const Color(0xFF00B894).withAlpha(50),
-                  child: ListView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    children: widget.receta.ingredients.map((ingrediente) {
-                      return CheckboxListTile(
-                        activeColor: const Color(0xFF00B894),
-                        title: Text(ingrediente["nombre"] as String),
-                        value: ingrediente["seleccionado"],
-                        onChanged: (bool? nuevoValor) {
-                          setState(() {
-                            ingrediente["seleccionado"] = nuevoValor!;
-                          });
-                        },
-                      );
-                    }).toList(),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              _FoodImage(imageUrl: widget.receta.imageUrl),
+              const Text(
+                'Prepara estos ingredientes',
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(25),
+                  child: Container(
+                    color: const Color(0xFF00B894).withAlpha(50),
+                    child: ListView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      children: widget.receta.ingredients.map((ingrediente) {
+                        return CheckboxListTile(
+                          activeColor: const Color(0xFF00B894),
+                          title: Text(ingrediente["ingredientName"]),
+                          value: ingrediente["isSelected"],
+                          onChanged: (bool? nuevoValor) {
+                            setState(() {
+                              ingrediente["seleccionado"] = nuevoValor!;
+                            });
+                          },
+                        );
+                      }).toList(),
+                    ),
                   ),
                 ),
               ),
-            ),
-            const Text(
-              'Preparación',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            _RecipePreparation(instructions: widget.receta.instructions),
-          ],
+              const Text(
+                'Preparación',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              _RecipePreparation(instructions: widget.receta.instructions),
+            ],
+          ),
         ),
       ),
     );
@@ -131,7 +128,7 @@ class _FoodImage extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(25),
         child: FadeInImage(
-          placeholder: const AssetImage('assets/loading.gif'),
+          placeholder: const AssetImage('assets/images/loading.gif'),
           image: NetworkImage(imageUrl),
           width: double.infinity,
           height: 260,

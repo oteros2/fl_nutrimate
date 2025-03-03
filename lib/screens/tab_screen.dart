@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 
+import '../models/entities.dart';
+
 class TabScreen extends StatelessWidget {
   final PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
@@ -15,12 +17,15 @@ class TabScreen extends StatelessWidget {
   /// que serán nuestras screens por lo tanto he creado una lista de tipo Widget y he metido las screen a usar
 
   List<Widget> _buildScreens(BuildContext context) {
+    final Usuario usuario = Provider.of<UserProvider>(context).usuario!;
     final Usuario user = Provider.of<UserProvider>(context).usuario!;
     return [
       HomeScreen(
           user:
               user), // Si llamo a esta misma screen explota (Por experiencia) por lo que reemplazad esto por la main screen
-      RecetasSemanalesScreen(),
+      RecetasSemanalesScreen(
+        cliente: usuario,
+      ),
       const ChartScreen(),
       SettingsScreen(user: user),
       //aquí iría el config screen

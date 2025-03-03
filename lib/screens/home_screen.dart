@@ -19,14 +19,15 @@ class HomeScreen extends StatelessWidget {
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           CustomAppbar(
-              title: "Hola" + " " + nombre + " " + apellido,
-              user: usuario),
+            title: "Hola" + " " + nombre + " " + apellido,
+            user: usuario,
+          ),
         ],
         body: SingleChildScrollView(
           child: Wrap(
             children: [
               const SwiperFoodLabel(day: 'Lunes', label: "Dieta del día"),
-              SwiperFood(recipes: recipes, icon: Icons.edit),
+              SwiperFood(cliente: usuario, icon: Icons.edit),
               Container(
                   width: MediaQuery.of(context).size.width * 0.8,
                   height: 200,
