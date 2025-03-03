@@ -1,3 +1,4 @@
+import 'package:NutriMate/routes/settings_routes.dart';
 import 'package:NutriMate/services/firebase_auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:NutriMate/widgets/widgets.dart';
@@ -34,19 +35,22 @@ class SettingsScreen extends StatelessWidget {
             width: 10,
           ),
           ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () {},
-                  child: ListTile(
-                    leading: const Icon(Icons.account_circle),
-                    title: Text(settings[index]),
-                  ),
-                );
-              },
-              separatorBuilder: (context, index) => const Divider(),
-              itemCount: settings.length),
+            itemCount: SettingsRoutes.SettingsOptions.length,
+            separatorBuilder: (context, index) => Divider(),
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: Icon(SettingsRoutes.SettingsOptions[index].icon),
+                title: Text(SettingsRoutes.SettingsOptions[index].name),
+                onTap: () {
+                  final route = MaterialPageRoute(
+                    builder: (context) => Container(),
+                  );
+                  Navigator.pushNamed(
+                      context, SettingsRoutes.SettingsOptions[index].route);
+                },
+              );
+            },
+          ),
         ])),
       ]),
       floatingActionButton: FloatingActionButton(

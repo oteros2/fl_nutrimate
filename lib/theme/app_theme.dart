@@ -42,28 +42,28 @@ class AppTheme {
         borderRadius: BorderRadius.circular(6),
         borderSide: const BorderSide(
           color: primary,
-          width: 1.5,
+          width: 1,
         ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(6),
         borderSide: const BorderSide(
           color: primary,
-          width: 2.5,
+          width: 1.5,
         ),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(6),
         borderSide: const BorderSide(
           color: error,
-          width: 2,
+          width: 1.5,
         ),
       ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(6),
         borderSide: const BorderSide(
           color: Colors.grey,
-          width: 1,
+          width: 1.5,
         ),
       ),
       contentPadding: const EdgeInsets.symmetric(
@@ -74,22 +74,5 @@ class AppTheme {
     // textButtonTheme
     textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(foregroundColor: primary)),
-    //alertDialogTheme
-    dialogTheme: DialogThemeData(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      elevation: 24,
-      backgroundColor: Colors.white,
-      titleTextStyle: TextStyle(
-        color: primary,
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-      ),
-      contentTextStyle: TextStyle(
-        color: Colors.grey[700],
-        fontSize: 16,
-      ),
-    ),
   );
 }

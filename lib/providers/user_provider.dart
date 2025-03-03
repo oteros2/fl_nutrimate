@@ -27,7 +27,6 @@ class UserProvider with ChangeNotifier {
   }
 
   User? get user => _user;
-  Map<String, dynamic>? get userData => _userData;
   Usuario? get usuario => _usuario;
 
   Future<User?> getUser() async {
