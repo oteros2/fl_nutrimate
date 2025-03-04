@@ -7,9 +7,8 @@ import '../widgets/widgets.dart';
 import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, required this.user});
-
   final Usuario user;
+  const HomeScreen({super.key, required this.user});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -114,7 +113,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
+        preferredSize:
+            Size.fromHeight(MediaQuery.of(context).size.height * 0.1),
         child: CustomAppbar(
           title: "Hola $nombre $apellido",
           user: usuario,

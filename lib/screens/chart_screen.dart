@@ -8,20 +8,19 @@ import 'package:provider/provider.dart';
 import '../providers/user_provider.dart';
 
 class CaloriasChart extends StatefulWidget {
-  
   @override
   _CaloriasChartState createState() => _CaloriasChartState();
-  
 }
 
 class _CaloriasChartState extends State<CaloriasChart> {
-
-  List<BarChartGroupData> _chartData = []; // lista para los barchart de las recetas
-  List<String> _recipeNames = []; // lista para los nombres de las recetas 
+  List<BarChartGroupData> _chartData =
+      []; // lista para los barchart de las recetas
+  List<String> _recipeNames = []; // lista para los nombres de las recetas
   int? _selectedIndex; // indice seleccionado en el barchart de las recetas
-  List<PieChartSectionData> _pieSections = []; // lista para los piechart de las recetas 
-  int? _hoveredIndex; // indice seleccionado en el piechart de las recetas 
-  
+  List<PieChartSectionData> _pieSections =
+      []; // lista para los piechart de las recetas
+  int? _hoveredIndex; // indice seleccionado en el piechart de las recetas
+
   get usuario => null;
 /**
  * Estado inicial del widget en el cual vamos a llamar a la función _fetchData que nos va a cargar los datos de la base de datos
@@ -31,6 +30,7 @@ class _CaloriasChartState extends State<CaloriasChart> {
     super.initState();
     _fetchData();
   }
+
 /**
  * Función que nos va a cargar los datos de la base de datos en la lista _chartData y _recipeNames para poder mostrarlos en el gráfico de barras
  * Buscamos una colección llamada recetas en la base de datos y obtenemos los datos de cada receta para mostrarlos en el gráfico
@@ -43,7 +43,8 @@ class _CaloriasChartState extends State<CaloriasChart> {
     final List<BarChartGroupData> chartData = [];
     final List<PieChartSectionData> pieData = [];
     final List<String> names = [];
-    final List<Color> colors = [ // lista de colores para los piechart de las recetas
+    final List<Color> colors = [
+      // lista de colores para los piechart de las recetas
       Colors.blue,
       Colors.red,
       Colors.green,
@@ -51,7 +52,8 @@ class _CaloriasChartState extends State<CaloriasChart> {
       Colors.purple
     ];
 
-    for (int i = 0; i < snapshot.docs.length; i++) { // recorremos cada receta para obtener los datos y guardarlos en las listas barData y pieData
+    for (int i = 0; i < snapshot.docs.length; i++) {
+      // recorremos cada receta para obtener los datos y guardarlos en las listas barData y pieData
       final doc = snapshot.docs[i];
       final data = doc.data() as Map<String, dynamic>;
       final String name = data['name'] ?? 'Desconocido';
@@ -98,18 +100,18 @@ class _CaloriasChartState extends State<CaloriasChart> {
 
   @override
   Widget build(BuildContext context) {
-        final Usuario usuario = Provider.of<UserProvider>(context).usuario!;
+    final Usuario usuario = Provider.of<UserProvider>(context).usuario!;
 
     return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          CustomAppbar(title: 'Recetas semanales', user: usuario),
-        ],
-        body: Column(
-        
+        body: NestedScrollView(
+      headerSliverBuilder: (context, innerBoxIsScrolled) => [
+        CustomAppbar(title: 'Progreso', user: usuario),
+      ],
+      body: Column(
         children: [
           SizedBox(height: 20),
-          Text("Calorías por Receta", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          Text("Calorías por Receta",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           SizedBox(height: 10),
           Expanded(
             child: Padding(
@@ -119,24 +121,29 @@ class _CaloriasChartState extends State<CaloriasChart> {
                   barGroups: _chartData,
                   titlesData: FlTitlesData(
                     leftTitles: AxisTitles(
-                      sideTitles: SideTitles(showTitles: true, reservedSize: 40),
+                      sideTitles:
+                          SideTitles(showTitles: true, reservedSize: 40),
                     ),
                     bottomTitles: AxisTitles(
                       sideTitles: SideTitles(
                         showTitles: true,
-                        getTitlesWidget: (value, meta) { // función para mostrar los nombres de las recetas en el barchart
+                        getTitlesWidget: (value, meta) {
+                          // función para mostrar los nombres de las recetas en el barchart
                           int index = value.toInt();
-                          return GestureDetector( // widget para mostrar los nombres de las recetas en el barchart
+                          return GestureDetector(
+                            // widget para mostrar los nombres de las recetas en el barchart
                             onTap: () {
                               setState(() {
                                 _selectedIndex = index;
                               });
                             },
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4.0),
                               child: Text(
                                 _recipeNames[index].substring(0, 3),
-                                style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 10, fontWeight: FontWeight.bold),
                               ),
                             ),
                           );
@@ -148,9 +155,12 @@ class _CaloriasChartState extends State<CaloriasChart> {
                     touchTooltipData: BarTouchTooltipData(
                       getTooltipItem: (group, groupIndex, rod, rodIndex) {
                         if (_selectedIndex == groupIndex) {
-                          return BarTooltipItem( // widget para mostrar las calorías de las recetas en el barchart al seleccionar una receta
-                            '${_recipeNames[groupIndex]}: ${rod.toY.toInt()} cal', // texto que se va a mostrar al seleccionar una receta en el barchart 
-                            TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                          return BarTooltipItem(
+                            // widget para mostrar las calorías de las recetas en el barchart al seleccionar una receta
+                            '${_recipeNames[groupIndex]}: ${rod.toY.toInt()} cal', // texto que se va a mostrar al seleccionar una receta en el barchart
+                            TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
                           );
                         }
                         return null;
@@ -169,7 +179,8 @@ class _CaloriasChartState extends State<CaloriasChart> {
             ),
           ),
           Divider(),
-          Text("Distribución de Calorías", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          Text("Distribución de Calorías",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           SizedBox(height: 10),
           Expanded(
             child: Row(
@@ -178,10 +189,14 @@ class _CaloriasChartState extends State<CaloriasChart> {
                   child: PieChart(
                     PieChartData(
                       sections: _pieSections,
-                      pieTouchData: PieTouchData( // widget para mostrar las calorías de las recetas en el piechart
-                        touchCallback: (event, response) { // función para mostrar las calorías de las recetas en el piechart
-                          setState(() { // widget para mostrar las calorías de las recetas en el piechart al seleccionar una receta
-                            _hoveredIndex = response?.touchedSection?.touchedSectionIndex;
+                      pieTouchData: PieTouchData(
+                        // widget para mostrar las calorías de las recetas en el piechart
+                        touchCallback: (event, response) {
+                          // función para mostrar las calorías de las recetas en el piechart
+                          setState(() {
+                            // widget para mostrar las calorías de las recetas en el piechart al seleccionar una receta
+                            _hoveredIndex =
+                                response?.touchedSection?.touchedSectionIndex;
                           });
                         },
                       ),
@@ -204,7 +219,8 @@ class _CaloriasChartState extends State<CaloriasChart> {
                             ),
                           ),
                           SizedBox(width: 8),
-                          Text(_recipeNames[index], style: TextStyle(fontSize: 14)),
+                          Text(_recipeNames[index],
+                              style: TextStyle(fontSize: 14)),
                         ],
                       ),
                     );

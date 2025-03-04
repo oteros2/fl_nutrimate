@@ -1,36 +1,51 @@
 import 'package:NutriMate/routes/settings_routes.dart';
 import 'package:NutriMate/services/firebase_auth_service.dart';
+import 'package:NutriMate/services/firebase_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:NutriMate/widgets/widgets.dart';
 import '../models/usuario.dart';
 import 'screens.dart';
 
-class SettingsScreen extends StatelessWidget {
-  SettingsScreen({super.key, required this.user});
+class SettingsScreen extends StatefulWidget {
+  final Usuario usuario;
+  SettingsScreen({Key? key, required this.usuario}) : super(key: key);
+
+  @override
+  _SettingsScreenState createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
   final AuthService _auth = AuthService();
-  final Usuario user;
+  final FirebaseAuth _auth2 = FirebaseAuth.instance;
+  late Usuario _usuario;
+
+  @override
+  void initState() {
+    super.initState();
+    _usuario = widget.usuario; // Inicializamos el usuario
+  }
+
+  void _updateUser(Usuario updatedUser) {
+    setState(() async {
+      _usuario = updatedUser;
+      await updateUser(_auth2.currentUser!.uid, updatedUser.email,
+          updatedUser.name, updatedUser.lastName, updatedUser.weight);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    List<String> settings = [
-      'Mi cuenta',
-      'Preferencias',
-      'Contacto',
-      'Ayuda',
-      'Acerca de',
-      'Cerrar sesión'
-    ];
-
     return Scaffold(
       body: CustomScrollView(slivers: [
         CustomAppbar(
           title: 'Inicio',
-          user: user,
+          user: widget.usuario,
         ),
         SliverList(
             delegate: SliverChildListDelegate([
           CardUser(
-            user: user,
+            user: widget.usuario, // Usamos widget.user en lugar de user
           ),
           const SizedBox(
             width: 10,
@@ -56,7 +71,14 @@ class SettingsScreen extends StatelessWidget {
                         ),
                       ),
                       onTap: () async {
-                        if (isLastItem) {
+                        if (index == 0) {
+                          // Llamada al popup para editar usuario
+                          showUserEditDialog(
+                            context,
+                            _usuario,
+                            _updateUser, // Pasamos la función que actualizará el usuario
+                          );
+                        } else if (isLastItem) {
                           await _auth.signOut(context);
                           Navigator.pushReplacement(
                               context,

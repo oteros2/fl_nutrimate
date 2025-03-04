@@ -16,16 +16,15 @@ class TabScreen extends StatelessWidget {
 
   List<Widget> _buildScreens(BuildContext context) {
     final Usuario usuario = Provider.of<UserProvider>(context).usuario!;
-    final Usuario user = Provider.of<UserProvider>(context).usuario!;
     return [
       HomeScreen(
           user:
-              user), // Si llamo a esta misma screen explota (Por experiencia) por lo que reemplazad esto por la main screen
+              usuario), // Si llamo a esta misma screen explota (Por experiencia) por lo que reemplazad esto por la main screen
       RecetasSemanalesScreen(
         cliente: usuario,
       ),
       CaloriasChart(),
-      SettingsScreen(user: user),
+      SettingsScreen(usuario: usuario),
       //aquí iría el config screen
     ];
   }
