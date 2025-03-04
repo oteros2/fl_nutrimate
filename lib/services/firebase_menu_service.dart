@@ -37,7 +37,6 @@ Future<List<MenuSemanal>> gatMenusSemanales() async {
   final QuerySnapshot snapshot = await db.collection('menu_semanal').get();
   return snapshot.docs.map((doc) {
     final data = doc.data() as Map<String, dynamic>;
-    data['id'] = doc.id;
     return MenuSemanal.fromMap(data);
   }).toList();
 }
@@ -61,17 +60,16 @@ Future<List<Recipe>> getRecetasPorCategoria(String category) async {
   return snapshot.docs.map((doc) {
     final data = doc.data() as Map<String, dynamic>;
     return Recipe(
-      name: data['name'],
-      imageUrl: data['imageUrl'],
-      ingredients: List<Map<String, dynamic>>.from(data['ingredients']),
-      instructions: List<String>.from(data['instructions']),
-      type: MealType.values.firstWhere(
-        (e) => e.toString().split('.').last == data['type'],
-        orElse: () => MealType.breakfast,
-      ),
-      category: data['category'],
-      calories: data['calories'],
-    );
+        name: data['name'],
+        imageUrl: data['imageUrl'],
+        ingredients: List<Map<String, dynamic>>.from(data['ingredients']),
+        instructions: List<String>.from(data['instructions']),
+        type: MealType.values.firstWhere(
+          (e) => e.toString().split('.').last == data['type'],
+          orElse: () => MealType.breakfast,
+        ),
+        category: data['category'],
+        calories: data['calories'].toDouble());
   }).toList();
 }
 
