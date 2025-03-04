@@ -10,6 +10,8 @@ class CaloriasChart extends StatefulWidget {
 class _CaloriasChartState extends State<CaloriasChart> {
   List<BarChartGroupData> _chartData = [];
   List<String> _recipeNames = [];
+  int? _selectedIndex;
+  int? _hoveredIndex;
 
 /**
  * Estado inicial del widget en el cual vamos a llamar a la función _fetchData que nos va a cargar los datos de la base de datos
@@ -19,6 +21,7 @@ class _CaloriasChartState extends State<CaloriasChart> {
     super.initState();
     _fetchData();
   }
+
 /**
  * Función que nos va a cargar los datos de la base de datos en la lista _chartData y _recipeNames para poder mostrarlos en el gráfico de barras
  * Buscamos una colección llamada recetas en la base de datos y obtenemos los datos de cada receta para mostrarlos en el gráfico
@@ -26,20 +29,30 @@ class _CaloriasChartState extends State<CaloriasChart> {
  * y recorremos cada receta para obtener los datos y guardarlos en las listas
  */
   Future<void> _fetchData() async {
-    final QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('recetas').get();
+    final QuerySnapshot snapshot =
+        await FirebaseFirestore.instance.collection('recetas').get();
     final List<BarChartGroupData> chartData = [];
+    final List<String> names = [];
+    final List<Color> colors = [Colors.blue, Colors.red, Colors.green, Colors.orange, Colors.purple];
+
     for (int i = 0; i < snapshot.docs.length; i++) {
       final doc = snapshot.docs[i];
       final data = doc.data() as Map<String, dynamic>;
-      final String name = data['name'] ?? 'Desconocido';
-      final int calories = data['calories'] ?? 0;
-      _recipeNames.add(name);
-
+      final String name = data['name'] ?? 'Desconocido'; // si no se encuentra un nombre se pone Desconocido
+      final int calories = data['calories'] ?? 0; // si no se encuentra un número de calorías se pone 0
+      names.add(name);
+      
       chartData.add(
         BarChartGroupData(
           x: i,
-          barRods: [BarChartRodData(toY: calories.toDouble(), color: Colors.blue)],
-          showingTooltipIndicators: [0],
+          barRods: [
+            BarChartRodData(
+              toY: calories.toDouble(),
+              color: Colors.blue,
+              width: 16,
+              borderRadius: BorderRadius.circular(4),
+            )
+          ],
         ),
       );
     }
@@ -48,42 +61,77 @@ class _CaloriasChartState extends State<CaloriasChart> {
  */
     setState(() {
       _chartData = chartData;
+      _recipeNames = names;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Calorías por Receta")),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: _chartData.isEmpty
-            ? Center(child: CircularProgressIndicator()) // Si _chartData está vacío, mostramos un indicador de carga infinito :)
-            : BarChart(
+      appBar: AppBar(title: Text("Análisis de Calorías")),
+      body: Column(
+        children: [
+          SizedBox(height: 20),
+          Text("Calorías por Receta", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          SizedBox(height: 10),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: BarChart(
                 BarChartData(
                   barGroups: _chartData,
                   titlesData: FlTitlesData(
                     leftTitles: AxisTitles(
-                      sideTitles: SideTitles(
-                        showTitles: true,
-                        reservedSize: 40,
-                      ),
+                      sideTitles: SideTitles(showTitles: true, reservedSize: 40),
                     ),
                     bottomTitles: AxisTitles(
                       sideTitles: SideTitles(
                         showTitles: true,
                         getTitlesWidget: (value, meta) {
                           int index = value.toInt();
-                          if (index >= 0 && index < _recipeNames.length) {
-                            return Text(_recipeNames[index].substring(0, 3));
-                          }
-                          return const Text('');
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _selectedIndex = index;
+                              });
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                              child: Text(
+                                _recipeNames[index].substring(0, 3),
+                                style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          );
                         },
                       ),
                     ),
                   ),
+                  barTouchData: BarTouchData( // esto hace posible que se muestre un tooltip al tocar una barra del gráfico de barras con el dedo o el mouse
+                    touchTooltipData: BarTouchTooltipData(
+                      getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                        if (_selectedIndex == groupIndex) { 
+                          return BarTooltipItem(
+                            '${_recipeNames[groupIndex]}: ${rod.toY.toInt()} cal',
+                            TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                          );
+                        }
+                        return null;
+                      },
+                    ),
+                    touchCallback: (event, response) { 
+                      if (response != null && response.spot != null) {
+                        setState(() {
+                          _selectedIndex = response.spot!.touchedBarGroupIndex;
+                        });
+                      }
+                    },
+                  ),
                 ),
               ),
+            ),
+          ),
+        ],
       ),
     );
   }
