@@ -113,8 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize:
-            Size.fromHeight(MediaQuery.of(context).size.height * 0.1),
+        preferredSize: Size.fromHeight(kToolbarHeight),
         child: CustomAppbar(
           title: "Hola $nombre $apellido",
           user: usuario,
