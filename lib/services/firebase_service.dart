@@ -17,6 +17,10 @@ Future<Map<String, dynamic>?> getUserData(String uid) async {
   return doc.data();
 }
 
+Future<void> updateUserWeigth(String uid, double newWeight) async {
+  await db.collection('usuarios').doc(uid).update({'peso': newWeight});
+}
+
 //Obtener todos los usuarios de la base de datos
 Future<List<Usuario>> getAllUsers() async {
   final QuerySnapshot snapshot = await db.collection('usuarios').get();

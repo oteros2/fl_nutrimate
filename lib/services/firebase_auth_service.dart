@@ -236,7 +236,7 @@ class AuthService {
       QuickAlert.show(
         context: context,
         type: QuickAlertType.success,
-        title: "Email enviado correctamente",
+        title: "Email enviado correctamente a \n $email",
         text: "Revisa tu bandeja de entrada para restablecer tu contraseña.",
         confirmBtnText: "OK",
         confirmBtnColor: AppTheme.primary,
