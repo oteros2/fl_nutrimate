@@ -82,7 +82,7 @@ class TabScreen extends StatelessWidget {
       isVisible: true,
       animationSettings: const NavBarAnimationSettings(
           navBarItemAnimation: ItemAnimationSettings(
-        duration: Duration(milliseconds: 750),
+        duration: Duration(milliseconds: 550),
         curve: Curves.ease,
       )),
       navBarStyle: NavBarStyle.style9,
