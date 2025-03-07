@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreenDefensa> {
                               formValues: formValues,
                             ),
                             const SizedBox(height: 15),
-                            CustomPasswordFormField(
+                            CustomPasswordLogin(
                               hintText: 'Contraseña',
                               labelText: 'Contraseña',
                               formProperty: 'password',

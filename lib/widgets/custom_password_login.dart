@@ -32,6 +32,7 @@ class _CustomPasswordLoginState extends State<CustomPasswordLogin> {
     return TextFormField(
       keyboardType: widget.keyboardType,
       obscureText: _obscureText,
+      onChanged: (value) => widget.formValues[widget.formProperty] = value,
       decoration: InputDecoration(
         hintText: widget.hintText,
         labelText: widget.labelText,
