@@ -64,7 +64,7 @@ class AuthService {
           confirmBtnColor: AppTheme.primary,
           onConfirmBtnTap: () {
             Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => LoginScreen()),
+              MaterialPageRoute(builder: (context) => LoginScreenDefensa()),
               (route) => false,
             );
           });

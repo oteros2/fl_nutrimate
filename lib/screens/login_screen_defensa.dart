@@ -67,12 +67,10 @@ class _LoginScreenState extends State<LoginScreenDefensa> {
                         child: ElevatedButton(
                           child: const Text('Iniciar sesión'),
                           onPressed: () async {
-                            if (_loginFormKey.currentState!.validate()) {
-                              _authService.iniciarSesion(
-                                  formValues['email']!.trim(),
-                                  formValues['password']!.trim(),
-                                  context);
-                            }
+                            _authService.iniciarSesion(
+                                formValues['email']!.trim(),
+                                formValues['password']!.trim(),
+                                context);
                           },
                         ),
                       ),
