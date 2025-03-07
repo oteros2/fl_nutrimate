@@ -210,7 +210,7 @@ class AuthService {
     await _auth.signOut();
     await _googleSignIn.signOut();
     navigatorKey.currentState?.pushAndRemoveUntil(
-      MaterialPageRoute(builder: (context) => LoginScreen()),
+      MaterialPageRoute(builder: (context) => LoginScreenDefensa()),
       (Route<dynamic> route) => false,
     );
   }

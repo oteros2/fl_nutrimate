@@ -12,3 +12,4 @@ export 'package:NutriMate/widgets/SwiperFoodLabel.dart';
 export 'package:NutriMate/widgets/calendar_widget.dart';
 export 'package:NutriMate/widgets/event_info_widget.dart';
 export 'package:NutriMate/widgets/meeting_form.dart';
+export 'package:NutriMate/widgets/custom_password_login.dart';
