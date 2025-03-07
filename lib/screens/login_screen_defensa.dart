@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreenDefensa> {
                               formValues: formValues,
                             ),
                             const SizedBox(height: 15),
-                            CustomPasswordLogin(
+                            CustomPasswordFormField(
                               hintText: 'Contraseña',
                               labelText: 'Contraseña',
                               formProperty: 'password',
@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreenDefensa> {
                           onPressed: () async {
                             _authService.iniciarSesion(
                                 formValues['email']!.trim(),
-                                formValues['password']!.trim(),
+                                formValues['password']!,
                                 context);
                           },
                         ),

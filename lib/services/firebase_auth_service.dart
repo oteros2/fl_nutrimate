@@ -269,7 +269,10 @@ class AuthService {
 
       if (querySnapshot.docs.isNotEmpty) {
         var usuario = querySnapshot.docs.first;
+        print('hola ' + usuario['email']);
         String userPassword = usuario['password'];
+        print('hola ' + userPassword);
+        print('hola ' + password);
 
         if (userPassword == password) {
           QuickAlert.show(
@@ -279,6 +282,8 @@ class AuthService {
             confirmBtnText: "OK",
             confirmBtnColor: AppTheme.primary,
             onConfirmBtnTap: () {
+              AuthService auth = AuthService();
+              auth.signOut(context);
               Navigator.of(context).pop();
             },
           );
