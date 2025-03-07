@@ -43,6 +43,10 @@ class _CustomPasswordFormFieldState extends State<CustomPasswordFormField> {
           return 'Debe contener al menos una mayúscula';
         }
 
+        if (!RegExp(r'[a-z]').hasMatch(value)) {
+          return 'Debe contener al menos una minúscula';
+        }
+
         if (!RegExp(r'[0-9]').hasMatch(value)) {
           return 'Debe contener al menos un número';
         }
