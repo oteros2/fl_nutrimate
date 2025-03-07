@@ -175,7 +175,6 @@ class AuthService {
                 user.displayName!.split(" ")[2],
             'email': user.email,
             'photoURL': user.photoURL,
-            'menu': menuSemanal,
           });
         }
 
@@ -260,9 +259,64 @@ class AuthService {
     }
   }
 
-  //comprobar usuario y contraseña en base de datos
   void iniciarSesion(
       String email, String password, BuildContext context) async {
-    FocusScope.of(context).unfocus();
+    try {
+      CollectionReference usuarios =
+          FirebaseFirestore.instance.collection('nuevosusuarios');
+      QuerySnapshot querySnapshot =
+          await usuarios.where('email', isEqualTo: email).limit(1).get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        var usuario = querySnapshot.docs.first;
+        String userPassword = usuario['password'];
+
+        if (userPassword == password) {
+          QuickAlert.show(
+            context: context,
+            type: QuickAlertType.success,
+            title: "Inicio de sesion correcto \n bienvenido $email",
+            confirmBtnText: "OK",
+            confirmBtnColor: AppTheme.primary,
+            onConfirmBtnTap: () {
+              Navigator.of(context).pop();
+            },
+          );
+        } else {
+          QuickAlert.show(
+            context: context,
+            type: QuickAlertType.error,
+            title: "Error contraseña incorrecta",
+            confirmBtnText: "OK",
+            confirmBtnColor: AppTheme.primary,
+            onConfirmBtnTap: () {
+              Navigator.of(context).pop();
+            },
+          );
+        }
+      } else {
+        QuickAlert.show(
+          context: context,
+          type: QuickAlertType.error,
+          title: "Usuario no encontrado",
+          confirmBtnText: "OK",
+          confirmBtnColor: AppTheme.primary,
+          onConfirmBtnTap: () {
+            Navigator.of(context).pop();
+          },
+        );
+      }
+    } catch (e) {
+      QuickAlert.show(
+        context: context,
+        type: QuickAlertType.error,
+        title: "Error al iniciar sesion",
+        confirmBtnText: "OK",
+        confirmBtnColor: AppTheme.primary,
+        onConfirmBtnTap: () {
+          Navigator.of(context).pop();
+        },
+      );
+    }
   }
 }

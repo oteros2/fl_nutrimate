@@ -10,9 +10,11 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  AuthService get auth => AuthService();
   final SessionManager _sessionManager = SessionManager();
   @override
   void initState() {
+    auth.signOut(context);
     super.initState();
     Future.delayed(const Duration(seconds: 2), () {
       if (mounted) {
