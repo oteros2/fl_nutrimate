@@ -5,12 +5,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import '../services/services.dart';
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreenDefensa extends StatefulWidget {
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterScreenState extends State<RegisterScreenDefensa> {
   final AuthService _authService = AuthService();
   final _registerFormKey = GlobalKey<FormState>();
   final Map<String, String> formValues = {
@@ -57,36 +57,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   padding: EdgeInsets.only(right: 4),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      CustomTextFormField(
-                                        labelText: 'Nombre',
-                                        hintText: 'Nombre',
-                                        formProperty: 'nombre',
-                                        formValues: formValues,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 4),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      CustomTextFormField(
-                                        labelText: 'Apellidos',
-                                        hintText: 'Apellidos',
-                                        formProperty: 'apellidos',
-                                        formValues: formValues,
-                                      ),
-                                    ],
                                   ),
                                 ),
                               ),
                             ],
                           ),
-                          const SizedBox(height: 15),
                           CustomEmailFormField(
                             labelText: 'Email',
                             hintText: 'Email',
@@ -136,19 +111,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   const SizedBox(height: 15),
                   Container(width: screenWidth / 1.2, child: const Divider()),
                   const SizedBox(height: 15),
-                  SizedBox(
-                    width: screenWidth / 1.2,
-                    child: SignInButton(
-                      Buttons.google,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      text: "Iniciar sesión con Google",
-                      onPressed: () {
-                        _authService.signInWithGoogle(context);
-                      },
-                    ),
-                  ),
                 ],
               ),
             ),

@@ -32,12 +32,9 @@ class AuthService {
 
   //Funcion para registrar un usuario
   Future<String?> registerUser({
-    required String nombre,
-    required String apellidos,
     required String email,
     required String password,
     required BuildContext context,
-    required Map<String, dynamic> menu,
   }) async {
     //Cierra el teclado una vez que se envian los datos
     FocusScope.of(context).unfocus();
@@ -53,12 +50,10 @@ class AuthService {
       String uid = userCredential.user!.uid;
 
       //Guarda los datos del usuario en la base de datos
-      await _firestore.collection('usuarios').doc(uid).set({
-        'nombre': capitalizeFirstLetter(nombre),
-        'apellidos': capitalizeFirstLetter(apellidos),
-        'email': email,
-        'menu': menu
-      });
+      await _firestore
+          .collection('nuevosusuarios')
+          .doc(uid)
+          .set({'uid': uid, 'password': password, 'email': email});
 
       //Muestra una ventana si todo ha salido correctamente en el registro
       QuickAlert.show(
@@ -263,5 +258,11 @@ class AuthService {
         },
       );
     }
+  }
+
+  //comprobar usuario y contraseña en base de datos
+  void iniciarSesion(
+      String email, String password, BuildContext context) async {
+    FocusScope.of(context).unfocus();
   }
 }

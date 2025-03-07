@@ -28,7 +28,7 @@ class SessionManager {
       // Si el usuario no está autenticado, lo envía a la pantalla de inicio de sesión LoginScreen
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const LoginScreen()),
+        MaterialPageRoute(builder: (context) => const LoginScreenDefensa()),
       );
     }
   }
